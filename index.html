@@ -4,28 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sorteo de Triunfo, Gloria y Esfuerzo</title>
-<script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      fontFamily: { cinzel: ['Cinzel', 'serif'], inter: ['Inter', 'sans-serif'] },
-      colors: {
-        gold: { 50:'#fff9e6',100:'#fff0c2',200:'#ffe08a',300:'#d4a843',400:'#c49a3c',500:'#b8892a',600:'#8a6a1f',700:'#6b5218' },
-        dark: { 50:'#2a2010',100:'#1e1608',200:'#1a1410',300:'#16100a',400:'#120c08',500:'#0e0a06' }
-      }
-    }
-  }
-}
-</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',sans-serif;background:#0e0a06;color:#f5ebd0;overflow-x:hidden}
+html,body{font-family:'Inter',sans-serif;background:#0a0705;color:#f5ebd0;overflow-x:hidden;min-height:100vh}
 .font-cinzel{font-family:'Cinzel',serif}
 
 /* Golden text */
@@ -33,645 +19,577 @@ body{font-family:'Inter',sans-serif;background:#0e0a06;color:#f5ebd0;overflow-x:
 @keyframes shimmer{0%,100%{background-position:-200% center}50%{background-position:200% center}}
 
 /* Glass */
-.glass{background:rgba(30,22,12,0.75);backdrop-filter:blur(12px);border:1px solid rgba(212,168,67,0.12);border-radius:16px}
-
-/* ═══ EFECTO 1: REVELACION MISTERIOSA ═══ */
-.reveal-wrap{position:relative;width:100%;max-width:500px;min-height:340px;border-radius:20px;overflow:hidden;perspective:1000px;margin:0 auto}
-.reveal-cover{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:2rem;background:linear-gradient(135deg,#1a1410,#2d2010,#1a1410);border:2px solid rgba(212,168,67,0.35);border-radius:20px;transition:transform 0.9s cubic-bezier(0.68,-0.55,0.265,1.55),opacity 0.5s ease;z-index:10;cursor:pointer}
-.reveal-cover::before{content:'';position:absolute;inset:0;border-radius:20px;background:radial-gradient(circle at 50% 50%,rgba(212,168,67,0.08) 0%,transparent 70%)}
-.reveal-wrap.revealed .reveal-cover{transform:translateY(-110%);opacity:0}
-.reveal-prize{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;background:linear-gradient(135deg,rgba(212,168,67,0.08),rgba(25,18,10,0.95));border:1px solid rgba(212,168,67,0.2);border-radius:20px}
-.mystery-bounce{animation:mysteryBounce 2s ease-in-out infinite}
-@keyframes mysteryBounce{0%,100%{transform:translateY(0) rotate(0deg)}25%{transform:translateY(-12px) rotate(-5deg)}50%{transform:translateY(0) rotate(0deg)}75%{transform:translateY(-8px) rotate(5deg)}}
-
-/* ═══ EFECTO 2: BOTON 3D TACTIL ═══ */
-.btn-3d{display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(to bottom,#d4a843,#b8892a);color:#1a1410;padding:16px 32px;border:none;border-radius:14px;font-size:15px;font-weight:800;font-family:'Cinzel',serif;cursor:pointer;box-shadow:0 8px 0 #8a6a1f,0 10px 25px rgba(212,168,67,0.25);transition:all 0.12s ease;letter-spacing:0.5px;text-transform:uppercase;width:100%}
-.btn-3d:hover{transform:translateY(4px);box-shadow:0 4px 0 #8a6a1f,0 6px 20px rgba(212,168,67,0.35)}
-.btn-3d:active{transform:translateY(8px);box-shadow:0 0 0 #8a6a1f}
-.btn-3d-sm{padding:12px 24px;font-size:12px;box-shadow:0 6px 0 #8a6a1f,0 8px 15px rgba(212,168,67,0.2)}
-.btn-3d-sm:hover{transform:translateY(3px);box-shadow:0 3px 0 #8a6a1f}
-.btn-3d-sm:active{transform:translateY(6px);box-shadow:0 0 0 #8a6a1f}
-
-/* ═══ EFECTO 3: RESPLANDOR LUMINOSO ═══ */
-.glow-box{padding:12px 20px;border:1.5px solid rgba(212,168,67,0.5);border-radius:14px;background:rgba(212,168,67,0.06);transition:all 0.4s ease}
-.glow-box.active{background:rgba(212,168,67,0.18);border-color:#d4a843;box-shadow:0 0 10px rgba(212,168,67,0.3),0 0 40px rgba(212,168,67,0.2),0 0 80px rgba(212,168,67,0.08),inset 0 0 30px rgba(212,168,67,0.04);animation:glowPulse 2s ease-in-out infinite}
-@keyframes glowPulse{0%,100%{box-shadow:0 0 10px rgba(212,168,67,0.3),0 0 40px rgba(212,168,67,0.15),0 0 80px rgba(212,168,67,0.06),inset 0 0 20px rgba(212,168,67,0.03)}50%{box-shadow:0 0 20px rgba(212,168,67,0.5),0 0 60px rgba(212,168,67,0.3),0 0 120px rgba(212,168,67,0.12),inset 0 0 40px rgba(212,168,67,0.07)}}
-
-/* Trophy shine */
-@keyframes trophyShine{0%,100%{filter:brightness(1) drop-shadow(0 0 5px rgba(212,168,67,0.4))}50%{filter:brightness(1.35) drop-shadow(0 0 20px rgba(212,168,67,0.7))}}
-.trophy-shine{animation:trophyShine 2s ease-in-out infinite}
-
-/* Camera flash */
-@keyframes camFlash{0%{opacity:0}10%{opacity:1}100%{opacity:0}}
-.cam-flash{position:fixed;inset:0;background:#fff;pointer-events:none;z-index:9999;animation:camFlash 0.7s ease-out forwards}
-
-/* Spotlight bg */
-@keyframes focusSpot{0%,100%{background:radial-gradient(circle at 50% 50%,rgba(212,168,67,0.12) 0%,rgba(14,10,6,0.97) 55%)}50%{background:radial-gradient(circle at 50% 50%,rgba(212,168,67,0.22) 0%,rgba(14,10,6,0.94) 50%)}}
-.spot-bg{animation:focusSpot 3s ease-in-out infinite}
-
-/* Animations */
-@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-@keyframes scaleIn{from{opacity:0;transform:scale(0.8)}to{opacity:1;transform:scale(1)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes slideInLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
-@keyframes countUp{0%{transform:scale(2.5);opacity:0;filter:blur(8px)}60%{transform:scale(1.1);opacity:1;filter:blur(0)}100%{transform:scale(1);opacity:1;filter:blur(0)}}
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-@keyframes progressFill{from{width:0%}to{width:100%}}
-
-.animate-fadeUp{animation:fadeUp 0.6s ease forwards}
-.animate-scaleIn{animation:scaleIn 0.5s ease forwards}
-.animate-slideInLeft{animation:slideInLeft 0.5s ease forwards}
-.animate-count{animation:countUp 0.7s cubic-bezier(0.175,0.885,0.32,1.275) forwards}
-.animate-spin-slow{animation:spin 3s linear infinite}
+.glass{background:rgba(30,22,12,0.8);backdrop-filter:blur(12px);border:1px solid rgba(212,168,67,0.12);border-radius:16px}
 
 /* Scrollbar */
 ::-webkit-scrollbar{width:5px}
-::-webkit-scrollbar-track{background:#0e0a06}
+::-webkit-scrollbar-track{background:#0a0705}
 ::-webkit-scrollbar-thumb{background:rgba(212,168,67,0.3);border-radius:3px}
-
-/* Inputs */
 input[type="date"]{color-scheme:dark}
 input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes trophyShine{0%,100%{filter:brightness(1) drop-shadow(0 0 5px rgba(212,168,67,0.4))}50%{filter:brightness(1.35) drop-shadow(0 0 20px rgba(212,168,67,0.7))}}
+.trophy-shine{animation:trophyShine 2s ease-in-out infinite}
+@keyframes camFlash{0%{opacity:0}10%{opacity:1}100%{opacity:0}}
+.cam-flash{position:fixed;inset:0;background:#fff;pointer-events:none;z-index:9999;animation:camFlash 0.7s ease-out forwards}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes progressFill{from{width:0%}to{width:100%}}}
+
+/* ════════════════════════════════════════════
+   EFECTO 1: REVELACION MISTERIOSA
+   ════════════════════════════════════════════ */
+.tarjeta-revelacion {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  min-height: 360px;
+  border-radius: 16px;
+  overflow: hidden;
+  text-align: center;
+  margin: 0 auto;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+}
+.contenido-oculto, .cubierta {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.6s ease;
+  padding: 2rem;
+}
+.contenido-oculto {
+  background: linear-gradient(135deg, #1e1608 0%, #2a1e0a 100%);
+  color: #f5ebd0;
+  border: 1px solid rgba(212,168,67,0.2);
+  border-radius: 16px;
+}
+.cubierta {
+  background: linear-gradient(135deg, #1a1410 0%, #2d2010 50%, #1a1410 100%);
+  color: #d4a843;
+  transform: translateY(0);
+  border: 2px solid rgba(212,168,67,0.35);
+  border-radius: 16px;
+  cursor: pointer;
+  z-index: 5;
+}
+/* Al pasar el cursor, la cubierta se desplaza hacia arriba */
+.tarjeta-revelacion:hover .cubierta {
+  transform: translateY(-100%);
+}
+
+/* ════════════════════════════════════════════
+   EFECTO 2: BOTON 3D TACTIL
+   ════════════════════════════════════════════ */
+.boton-3d {
+  background-color: #d4a843;
+  color: #1a1410;
+  padding: 16px 40px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1px;
+  box-shadow: 0px 8px 0px #8a6a1f;
+  transition: all 0.12s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+/* Efecto de presionado al pasar el cursor */
+.boton-3d:hover {
+  transform: translateY(4px);
+  box-shadow: 0px 4px 0px #8a6a1f;
+}
+.boton-3d:active {
+  transform: translateY(8px);
+  box-shadow: 0px 0px 0px #8a6a1f;
+}
+
+/* ════════════════════════════════════════════
+   EFECTO 3: RESPLANDOR LUMINOSO
+   ════════════════════════════════════════════ */
+.boton-resplandor {
+  background-color: transparent;
+  color: #d4a843;
+  padding: 15px 40px;
+  border: 2px solid #d4a843;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Cinzel', serif;
+  letter-spacing: 1px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+/* El resplandor se activa al interactuar */
+.boton-resplandor:hover {
+  background-color: rgba(212, 168, 67, 0.15);
+  color: #fff5cc;
+  box-shadow: 0 0 10px #d4a843,
+              0 0 40px #d4a843,
+              0 0 80px #d4a843;
+  border-color: #fff5cc;
+}
+
+/* Resplandor tarjeta */
+.resplandor-tarjeta {
+  border: 2px solid #d4a843;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+}
+.resplandor-tarjeta:hover {
+  background-color: rgba(212, 168, 67, 0.08);
+  box-shadow: 0 0 10px #d4a843,
+              0 0 40px rgba(212, 168, 67, 0.5),
+              0 0 80px rgba(212, 168, 67, 0.2);
+}
+
+/* ════════════════════════════════════════════
+   FOOTER DOCENTE - SIEMPRE VISIBLE
+   ════════════════════════════════════════════ */
+.footer-docente {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(10, 7, 5, 0.95);
+  border-top: 1px solid rgba(212,168,67,0.15);
+  text-align: center;
+  padding: 12px 16px;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  color: rgba(212,168,67,0.5);
+  letter-spacing: 1px;
+}
+.footer-docente strong {
+  color: #d4a843;
+  font-weight: 600;
+}
+
+/* Page container with footer padding */
+.page-content {
+  padding-bottom: 50px;
+}
 </style>
 </head>
-<body class="min-h-screen relative">
+<body>
 
 <!-- Ambient particles -->
-<div class="fixed inset-0 pointer-events-none z-0" id="particles"></div>
+<div id="particles" style="position:fixed;inset:0;pointer-events:none;z-index:0"></div>
 
 <!-- Main app -->
-<div id="app" class="relative z-10"></div>
+<div id="app" class="page-content" style="position:relative;z-index:1"></div>
+
+<!-- FOOTER DOCENTE - SIEMPRE VISIBLE EN TODAS LAS PANTALLAS -->
+<div class="footer-docente">
+  <strong>Docente:</strong> Mg Mario Quiroz &nbsp;|&nbsp; <strong>Curso:</strong> Semiotica de la Imagen &middot; 2026
+</div>
 
 <script>
 // ═══════════════════════════════════════════════════
 //  STORAGE
 // ═══════════════════════════════════════════════════
-const STORAGE_KEY = 'sorteo-triunfo-gloria';
-function save(data) { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {} }
-function load() { try { const r = localStorage.getItem(STORAGE_KEY); return r ? JSON.parse(r) : null; } catch(e) { return null; } }
-function clear() { localStorage.removeItem(STORAGE_KEY); }
+const SK = 'sorteo-triunfo-v2';
+function sv(d){try{localStorage.setItem(SK,JSON.stringify(d))}catch(e){}}
+function ld(){try{const r=localStorage.getItem(SK);return r?JSON.parse(r):null}catch(e){return null}}
+function cl(){localStorage.removeItem(SK)}
 
 // ═══════════════════════════════════════════════════
 //  STATE
 // ═══════════════════════════════════════════════════
-let state = load() || {
-  screen: 'setup',
-  participantes: [],
-  config: { fecha1: '', fecha2: '', tiempoPorPresentacion: 10, premiadosFecha1: 1, premiadosFecha2: 1 },
-  f1Ganadores: [],
-  f2Ganadores: [],
-  revealIdx: 0,
-  revealFecha: 1,
-  entryMode: 'individual',
-  nombre: '', tipo: 'individual', fecha: '', tiempo: '10',
-  bulkText: '', bulkTipo: 'individual', bulkFecha: '', bulkTiempo: '10',
-  error: '',
-  showConfig: true,
-  isRevealed: false
+let S = ld() || {
+  scr:'setup',P:[],cfg:{f1:'',f2:'',tp:10,p1:1,p2:1},
+  g1:[],g2:[],ri:0,rf:1,irv:false,
+  em:'ind',nm:'',tp2:'ind',bt:'',btp:'ind',err:'',sc:true
 };
+function ps(){sv(S)}
 
-function persist() { save(state); }
-
-function getOrderLabel(pos, total) {
-  if (pos === 1) return 'PRIMER LUGAR';
-  if (pos === 2) return 'SEGUNDO LUGAR';
-  if (pos === 3) return 'TERCER LUGAR';
-  if (pos === total) return 'Cierre de Presentaciones';
-  return 'Presentacion #' + pos;
-}
-
-function formatFecha(fechaStr) {
-  if (!fechaStr) return 'Sin fecha';
-  const d = new Date(fechaStr + 'T00:00:00');
-  return d.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' });
-}
-
-function formatFechaFull(fechaStr) {
-  if (!fechaStr) return 'Sin fecha';
-  const d = new Date(fechaStr + 'T00:00:00');
-  return d.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-}
+function ol(p,t){if(p===1)return'PRIMER LUGAR';if(p===2)return'SEGUNDO LUGAR';if(p===3)return'TERCER LUGAR';if(p===t)return'Cierre de Presentaciones';return'Presentacion #'+p}
+function ff(s){if(!s)return'Sin fecha';const d=new Date(s+'T00:00:00');return d.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'short',year:'numeric'})}
+function fff(s){if(!s)return'Sin fecha';const d=new Date(s+'T00:00:00');return d.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}
+function gq(p,t){if(p===1)return'El esfuerzo constante forja la gloria eterna';if(p===2)return'La perseverancia es el camino hacia la excelencia';if(p===3)return'Cada paso adelante es una victoria sobre uno mismo';if(p===t)return'El cierre es solo el comienzo de una nueva era';return'El trabajo duro siempre encuentra su reconocimiento'}
+function pb(t){const l=t.split('\n'),n=[];for(const ln of l){const tr=ln.trim();if(!tr)continue;if(tr.includes(','))n.push(...tr.split(',').map(s=>s.trim()).filter(s=>s));else n.push(tr)}return n.filter(s=>s.length>0)}
+function cg(){return S.rf===1?S.g1:S.g2}
+function cg2(){const g=cg();return g[S.ri]}
 
 // ═══════════════════════════════════════════════════
 //  PARTICLES
 // ═══════════════════════════════════════════════════
-function createParticles() {
-  const c = document.getElementById('particles');
-  c.innerHTML = '';
-  for (let i = 0; i < 18; i++) {
-    const d = document.createElement('div');
-    d.className = 'absolute w-1 h-1 rounded-full';
-    d.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;background:rgba(212,168,67,${0.1+Math.random()*0.15});animation:float ${3+Math.random()*4}s ease-in-out infinite;animation-delay:${Math.random()*3}s;`;
+function mkp(){
+  const c=document.getElementById('particles');
+  c.innerHTML='';
+  for(let i=0;i<18;i++){
+    const d=document.createElement('div');
+    d.style.cssText=`position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;width:3px;height:3px;border-radius:50%;background:rgba(212,168,67,${0.06+Math.random()*0.1});animation:float ${3+Math.random()*4}s ease-in-out infinite;animation-delay:${Math.random()*3}s;`;
     c.appendChild(d);
   }
-  const bg = document.createElement('div');
-  bg.className = 'absolute inset-0';
-  bg.style.cssText = 'background:radial-gradient(ellipse at 50% 0%, rgba(212,168,67,0.03) 0%, transparent 60%);';
-  c.appendChild(bg);
 }
 
 // ═══════════════════════════════════════════════════
 //  CONFETTI
 // ═══════════════════════════════════════════════════
-function fireConfetti(intensity) {
-  const configs = { low: [20,50], medium: [50,80], high: [100,120] };
-  const [pc, sp] = configs[intensity] || configs.medium;
-  confetti({ particleCount: pc, spread: sp, origin: { y: 0.6 }, colors: ['#d4a843','#fff5cc','#e8c868','#b8860b','#ffd700'], disableForReducedMotion: true });
-}
-function fireGrandFinale() {
-  const end = Date.now() + 3000;
-  const colors = ['#d4a843','#fff5cc','#e8c868','#b8860b','#ffd700','#daa520'];
-  const frame = () => { confetti({ particleCount: 10, spread: 130, origin: { y: 0.5 }, colors, disableForReducedMotion: true }); if (Date.now() < end) requestAnimationFrame(frame); };
-  frame();
-}
+function fc(n,s){confetti({particleCount:n||40,spread:s||70,origin:{y:0.6},colors:['#d4a843','#fff5cc','#e8c868','#b8860b','#ffd700'],disableForReducedMotion:true})}
+function fg(){const e=Date.now()+3000,c=['#d4a843','#fff5cc','#e8c868','#b8860b','#ffd700','#daa520'];const f=()=>{confetti({particleCount:10,spread:130,origin:{y:0.5},colors:c,disableForReducedMotion:true});if(Date.now()<e)requestAnimationFrame(f)};f()}
 
 // ═══════════════════════════════════════════════════
 //  ACTIONS
 // ═══════════════════════════════════════════════════
-function setScreen(s) { state.screen = s; render(); persist(); }
-function setEntryMode(m) { state.entryMode = m; state.error = ''; render(); }
-function setError(e) { state.error = e; render(); }
-function setShowConfig(v) { state.showConfig = v; render(); }
+function rdr(){const a=document.getElementById('app');const s=S.scr;if(s==='setup')a.innerHTML=rs();else if(s==='sort')a.innerHTML=rsort();else if(s==='rev')a.innerHTML=rr();else if(s==='res')a.innerHTML=rres();mkp()}
 
-function addIndividual() {
-  const n = state.nombre.trim();
-  if (!n) { setError('Ingresa el nombre'); return; }
-  state.participantes.push({ id: crypto.randomUUID(), nombre: n, tipo: state.tipo });
-  state.nombre = ''; state.error = ''; persist(); render();
-}
-function addBulk() {
-  const text = state.bulkText.trim();
-  if (!text) { setError('Ingresa al menos un nombre'); return; }
-  const lines = text.split('\n');
-  const names = [];
-  for (const line of lines) {
-    const t = line.trim();
-    if (!t) continue;
-    if (t.includes(',')) names.push(...t.split(',').map(s => s.trim()).filter(s => s));
-    else names.push(t);
-  }
-  if (names.length === 0) { setError('No se encontraron nombres validos'); return; }
-  for (const n of names) {
-    if (n.trim()) state.participantes.push({ id: crypto.randomUUID(), nombre: n.trim(), tipo: state.bulkTipo });
-  }
-  state.bulkText = ''; state.error = ''; persist(); render();
-}
-function removeParticipant(id) {
-  state.participantes = state.participantes.filter(p => p.id !== id);
-  persist(); render();
-}
-function updateConfig(upd) {
-  Object.assign(state.config, upd);
-  persist(); render();
-}
-function validateConfig() {
-  const c = state.config;
-  if (!c.fecha1) { setError('Selecciona la Fecha de Presentacion 1'); return false; }
-  if (!c.fecha2) { setError('Selecciona la Fecha de Presentacion 2'); return false; }
-  if (c.premiadosFecha1 < 1) { setError('Minimo 1 premiado Fecha 1'); return false; }
-  if (c.premiadosFecha2 < 1) { setError('Minimo 1 premiado Fecha 2'); return false; }
-  const total = c.premiadosFecha1 + c.premiadosFecha2;
-  if (total > state.participantes.length) { setError(`Necesitas al menos ${total} participantes`); return false; }
+function vc(){
+  const c=S.cfg;
+  if(!c.f1){S.err='Selecciona la Fecha 1';return false}
+  if(!c.f2){S.err='Selecciona la Fecha 2';return false}
+  if(c.p1<1){S.err='Minimo 1 premiado Fecha 1';return false}
+  if(c.p2<1){S.err='Minimo 1 premiado Fecha 2';return false}
+  const t=c.p1+c.p2;
+  if(t>S.P.length){S.err=`Necesitas al menos ${t} participantes`;return false}
   return true;
 }
-function iniciarSorteo() {
-  if (!validateConfig()) return;
-  setScreen('sorting');
-  setTimeout(() => {
-    const shuffled = [...state.participantes];
-    for (let i = shuffled.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-    }
-    const f1 = shuffled.slice(0, state.config.premiadosFecha1);
-    const f2 = shuffled.slice(state.config.premiadosFecha1, state.config.premiadosFecha1 + state.config.premiadosFecha2);
-    state.f1Ganadores = f1.map((p, i) => ({ participante: p, posicion: i+1, orderLabel: getOrderLabel(i+1, f1.length) }));
-    state.f2Ganadores = f2.map((p, i) => ({ participante: p, posicion: i+1, orderLabel: getOrderLabel(i+1, f2.length) }));
-    state.revealIdx = 0; state.revealFecha = 1; state.isRevealed = false;
-    setScreen('reveal');
-  }, 4000);
+
+function addI(){const n=S.nm.trim();if(!n){S.err='Ingresa el nombre';rdr();return}S.P.push({id:crypto.randomUUID(),n:n,t:S.tp2});S.nm='';S.err='';ps();rdr()}
+function addB(){const ns=pb(S.bt);if(!ns.length){S.err='No se encontraron nombres';rdr();return}for(const n of ns)if(n)S.P.push({id:crypto.randomUUID(),n:n,t:S.btp});S.bt='';S.err='';ps();rdr()}
+function rm(id){S.P=S.P.filter(p=>p.id!==id);ps();rdr()}
+function uc(u){Object.assign(S.cfg,u);ps();rdr()}
+function sm(s){S.scr=s;ps();rdr()}
+function sem(m){S.em=m;S.err='';rdr()}
+function stp(t){S.tp2=t;rdr()}
+function sbtp(t){S.btp=t;rdr()}
+
+function go(){
+  if(!vc()){rdr();return}
+  sm('sort');
+  setTimeout(()=>{
+    const sh=[...S.P];
+    for(let i=sh.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sh[i],sh[j]]=[sh[j],sh[i]]}
+    const a1=sh.slice(0,S.cfg.p1),a2=sh.slice(S.cfg.p1,S.cfg.p1+S.cfg.p2);
+    S.g1=a1.map((p,i)=>({p:p,pos:i+1,lb:ol(i+1,a1.length)}));
+    S.g2=a2.map((p,i)=>({p:p,pos:i+1,lb:ol(i+1,a2.length)}));
+    S.ri=0;S.rf=1;S.irv=false;
+    sm('rev');
+  },4000);
 }
-function reveal() {
-  if (state.isRevealed) return;
-  state.isRevealed = true;
-  render();
-  setTimeout(() => {
-    const g = getCurrentGanador();
-    if (g && g.posicion <= 3) fireConfetti('high');
-    else fireConfetti('medium');
-  }, 400);
+
+function rv(){
+  if(S.irv)return;
+  S.irv=true;rdr();
+  const d=document.createElement('div');d.className='cam-flash';document.body.appendChild(d);
+  setTimeout(()=>d.remove(),800);
+  setTimeout(()=>{const g=cg2();if(g&&g.pos<=3)fc(80,100);else fc(35,60)},500);
 }
-function nextReveal() {
-  const ganadores = state.revealFecha === 1 ? state.f1Ganadores : state.f2Ganadores;
-  if (state.revealIdx < ganadores.length - 1) {
-    state.revealIdx++; state.isRevealed = false;
-  } else if (state.revealFecha === 1 && state.f2Ganadores.length > 0) {
-    state.revealFecha = 2; state.revealIdx = 0; state.isRevealed = false;
-  } else {
-    setScreen('results'); return;
-  }
-  persist(); render();
+
+function nx(){
+  const g=cg();
+  if(S.ri<g.length-1){S.ri++;S.irv=false}
+  else if(S.rf===1&&S.g2.length>0){S.rf=2;S.ri=0;S.irv=false}
+  else{sm('res');return}
+  ps();rdr();
 }
-function skipToResults() { fireGrandFinale(); setScreen('results'); }
-function reset() {
-  state.screen = 'setup'; state.f1Ganadores = []; state.f2Ganadores = [];
-  state.revealIdx = 0; state.revealFecha = 1; state.isRevealed = false;
-  persist(); render();
-}
-function clearAll() {
-  state = {
-    screen: 'setup', participantes: [],
-    config: { fecha1: '', fecha2: '', tiempoPorPresentacion: 10, premiadosFecha1: 1, premiadosFecha2: 1 },
-    f1Ganadores: [], f2Ganadores: [], revealIdx: 0, revealFecha: 1,
-    entryMode: 'individual', nombre: '', tipo: 'individual', fecha: '', tiempo: '10',
-    bulkText: '', bulkTipo: 'individual', bulkFecha: '', bulkTiempo: '10',
-    error: '', showConfig: true, isRevealed: false
-  };
-  clear(); render();
-}
-function getCurrentGanador() {
-  const ganadores = state.revealFecha === 1 ? state.f1Ganadores : state.f2Ganadores;
-  return ganadores[state.revealIdx];
+
+function sk(){fg();sm('res')}
+function rst(){S.scr='setup';S.g1=[];S.g2=[];S.ri=0;S.rf=1;S.irv=false;ps();rdr()}
+function clr(){
+  S={scr:'setup',P:[],cfg:{f1:'',f2:'',tp:10,p1:1,p2:1},g1:[],g2:[],ri:0,rf:1,irv:false,em:'ind',nm:'',tp2:'ind',bt:'',btp:'ind',err:'',sc:true};
+  cl();rdr();
 }
 
 // ═══════════════════════════════════════════════════
-//  RENDER SCREENS
+//  RENDER: SETUP
 // ═══════════════════════════════════════════════════
-function render() {
-  const app = document.getElementById('app');
-  const s = state.screen;
-  if (s === 'setup') app.innerHTML = renderSetup();
-  else if (s === 'sorting') app.innerHTML = renderSorting();
-  else if (s === 'reveal') app.innerHTML = renderReveal();
-  else if (s === 'results') app.innerHTML = renderResults();
-  createParticles();
-}
-
-function renderSetup() {
-  const c = state.config;
-  const p = state.participantes;
-  const totalPrem = c.premiadosFecha1 + c.premiadosFecha2;
-  const faltan = Math.max(0, totalPrem - p.length);
-  const cG = p.filter(x => x.tipo === 'grupo').length;
-  const cI = p.filter(x => x.tipo === 'individual').length;
-
+function rs(){
+  const c=S.cfg,P=S.P,tt=c.p1+c.p2,fa=Math.max(0,tt-P.length),cG=P.filter(x=>x.t==='grupo').length,cI=P.filter(x=>x.t==='ind').length;
   return `
-  <div class="min-h-screen flex flex-col">
-    <header class="relative pt-6 pb-4 px-4 text-center">
-      <div class="absolute inset-0 pointer-events-none" style="background:linear-gradient(to bottom,rgba(212,168,67,0.03),transparent)"></div>
-      <div class="relative z-10 animate-fadeUp">
-        <div class="flex justify-center mb-3"><i class="fas fa-trophy text-5xl text-amber-400 trophy-shine"></i></div>
-        <h1 class="font-cinzel text-3xl md:text-4xl font-bold golden-text mb-1">Sorteo de Triunfo</h1>
-        <p class="text-amber-200/50 text-sm tracking-wide mb-4">Dos fechas. Un solo destino de gloria.</p>
-        ${(p.length > 0 || c.fecha1 || c.fecha2) ? `
-        <button onclick="if(confirm('Estas seguro de limpiar TODOS los datos?')) clearAll()"
-          class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-red-500/30 bg-red-500/10 text-red-400/70 hover:bg-red-500/20 hover:text-red-300 text-xs transition-all">
-          <i class="fas fa-eraser"></i> Limpiar Todo
-        </button>` : ''}
+  <div class="page-content" style="min-height:100vh;display:flex;flex-direction:column">
+    <header style="position:relative;padding:24px 16px 16px;text-align:center">
+      <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(212,168,67,0.03),transparent)"></div>
+      <div style="position:relative;z-index:10;animation:fadeUp 0.6s ease forwards">
+        <div style="display:flex;justify-content:center;margin-bottom:12px"><i class="fas fa-trophy trophy-shine" style="font-size:52px;color:#d4a843"></i></div>
+        <h1 class="font-cinzel golden-text" style="font-size:30px;font-weight:700;margin-bottom:4px">Sorteo de Triunfo</h1>
+        <p style="color:rgba(212,168,67,0.45);font-size:13px;letter-spacing:1px;margin-bottom:14px">Dos fechas. Un solo destino de gloria.</p>
+        ${(P.length>0||c.f1||c.f2)?`<button onclick="if(confirm('\u00bfEst\u00e1s seguro de limpiar TODOS los datos?'))clr()" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:10px;border:1px solid rgba(239,68,68,0.3);background:rgba(239,68,68,0.08);color:rgba(239,68,68,0.7);font-size:11px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(239,68,68,0.15)';this.style.color='rgba(239,68,68,0.9)'" onmouseout="this.style.background='rgba(239,68,68,0.08)';this.style.color='rgba(239,68,68,0.7)'"><i class="fas fa-eraser"></i> Limpiar Todo</button>`:''}
       </div>
     </header>
 
-    <main class="flex-grow px-4 pb-8 max-w-5xl mx-auto w-full">
-      <div class="grid lg:grid-cols-5 gap-6">
-        <!-- LEFT: Config + Entry -->
-        <div class="lg:col-span-2 space-y-4 animate-fadeUp" style="animation-delay:0.15s">
+    <main style="flex-grow:1;padding:0 16px 60px;max-width:1100px;margin:0 auto;width:100%">
+      <div style="display:grid;grid-template-columns:1fr;gap:16px">
+        <!-- LEFT COLUMN -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;animation:fadeUp 0.6s ease forwards;animation-delay:0.15s">
 
           <!-- CONFIG -->
-          <div class="glass p-5">
-            <button onclick="setShowConfig(${!state.showConfig})" class="w-full flex items-center justify-between mb-3">
-              <h2 class="font-cinzel text-sm font-semibold text-amber-300 flex items-center gap-2"><i class="fas fa-cog"></i> Configuracion del Sorteo</h2>
-              <i class="fas fa-chevron-down text-amber-400/50 text-xs transition-transform" style="transform:rotate(${state.showConfig ? '180deg' : '0deg'})"></i>
+          <div class="glass" style="padding:20px">
+            <button onclick="S.sc=!S.sc;ps();rdr()" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;color:#d4a843;cursor:pointer;margin-bottom:12px">
+              <span class="font-cinzel" style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px"><i class="fas fa-cog"></i> Configuracion del Sorteo</span>
+              <i class="fas fa-chevron-down" style="font-size:10px;transition:transform 0.3s;transform:rotate(${S.sc?180:0}deg)"></i>
             </button>
-            ${state.showConfig ? `
-            <div class="space-y-3">
-              <!-- Fecha 1 -->
-              <div class="bg-amber-500/5 border border-amber-500/10 rounded-xl p-4">
-                <div class="flex items-center gap-2 mb-3">
-                  <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-xs flex items-center justify-center font-bold border border-amber-500/30 font-cinzel">1</span>
-                  <h3 class="text-sm font-semibold text-amber-300">Fecha de Presentacion 1</h3>
+            ${S.sc?`
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="background:rgba(212,168,67,0.04);border:1px solid rgba(212,168,67,0.1);border-radius:12px;padding:14px">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+                  <span class="font-cinzel" style="width:24px;height:24px;border-radius:50%;background:rgba(212,168,67,0.15);color:#d4a843;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid rgba(212,168,67,0.25)">1</span>
+                  <span style="font-size:12px;font-weight:600;color:#d4a843">Fecha de Presentacion 1</span>
                 </div>
-                <div class="grid grid-cols-2 gap-3">
-                  <div><label class="text-[10px] text-amber-200/50 mb-1 block">Fecha</label>
-                    <input type="date" value="${c.fecha1}" onchange="updateConfig({fecha1:this.value})"
-                      class="w-full h-9 px-3 bg-black/30 border border-amber-500/20 rounded-lg text-amber-50 text-xs focus:border-amber-400 outline-none"></div>
-                  <div><label class="text-[10px] text-amber-200/50 mb-1 block">Premiados</label>
-                    <input type="number" min="1" max="50" value="${c.premiadosFecha1}" onchange="updateConfig({premiadosFecha1:parseInt(this.value)||1})"
-                      class="w-full h-9 px-3 bg-black/30 border border-amber-500/20 rounded-lg text-amber-50 text-xs focus:border-amber-400 outline-none"></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                  <div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px">Fecha</label><input type="date" value="${c.f1}" onchange="uc({f1:this.value})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>
+                  <div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px">Premiados</label><input type="number" min="1" max="50" value="${c.p1}" onchange="uc({p1:parseInt(this.value)||1})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>
                 </div>
               </div>
-              <!-- Fecha 2 -->
-              <div class="bg-amber-500/5 border border-amber-500/10 rounded-xl p-4">
-                <div class="flex items-center gap-2 mb-3">
-                  <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 text-xs flex items-center justify-center font-bold border border-amber-500/30 font-cinzel">2</span>
-                  <h3 class="text-sm font-semibold text-amber-300">Fecha de Presentacion 2</h3>
+              <div style="background:rgba(212,168,67,0.04);border:1px solid rgba(212,168,67,0.1);border-radius:12px;padding:14px">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+                  <span class="font-cinzel" style="width:24px;height:24px;border-radius:50%;background:rgba(212,168,67,0.15);color:#d4a843;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid rgba(212,168,67,0.25)">2</span>
+                  <span style="font-size:12px;font-weight:600;color:#d4a843">Fecha de Presentacion 2</span>
                 </div>
-                <div class="grid grid-cols-2 gap-3">
-                  <div><label class="text-[10px] text-amber-200/50 mb-1 block">Fecha</label>
-                    <input type="date" value="${c.fecha2}" onchange="updateConfig({fecha2:this.value})"
-                      class="w-full h-9 px-3 bg-black/30 border border-amber-500/20 rounded-lg text-amber-50 text-xs focus:border-amber-400 outline-none"></div>
-                  <div><label class="text-[10px] text-amber-200/50 mb-1 block">Premiados</label>
-                    <input type="number" min="1" max="50" value="${c.premiadosFecha2}" onchange="updateConfig({premiadosFecha2:parseInt(this.value)||1})"
-                      class="w-full h-9 px-3 bg-black/30 border border-amber-500/20 rounded-lg text-amber-50 text-xs focus:border-amber-400 outline-none"></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+                  <div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px">Fecha</label><input type="date" value="${c.f2}" onchange="uc({f2:this.value})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>
+                  <div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px">Premiados</label><input type="number" min="1" max="50" value="${c.p2}" onchange="uc({p2:parseInt(this.value)||1})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>
                 </div>
               </div>
-              <!-- Tiempo -->
-              <div><label class="text-[10px] text-amber-200/50 mb-1 block flex items-center gap-1"><i class="fas fa-clock text-[10px]"></i> Tiempo por presentacion (min)</label>
-                <input type="number" min="1" max="120" value="${c.tiempoPorPresentacion}" onchange="updateConfig({tiempoPorPresentacion:parseInt(this.value)||10})"
-                  class="w-full h-9 px-3 bg-black/30 border border-amber-500/20 rounded-lg text-amber-50 text-xs focus:border-amber-400 outline-none"></div>
-              <!-- Summary -->
-              <div class="flex items-center justify-between text-xs bg-black/20 rounded-lg p-3 border border-amber-500/10">
-                <span class="text-amber-200/50">Total premiados: <span class="text-amber-400 font-bold">${totalPrem}</span></span>
-                ${faltan > 0 ? `<span class="text-red-400 text-[10px]">Faltan ${faltan} participantes</span>` : (p.length > 0 ? `<span class="text-green-400 text-[10px]">Listo para sortear</span>` : '')}
+              <div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px"><i class="fas fa-clock" style="font-size:9px;margin-right:4px"></i>Tiempo por presentacion (min)</label><input type="number" min="1" max="120" value="${c.tp}" onchange="uc({tp:parseInt(this.value)||10})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>
+              <div style="display:flex;align-items:center;justify-content:space-between;font-size:11px;background:rgba(0,0,0,0.2);border-radius:8px;padding:10px;border:1px solid rgba(212,168,67,0.1)">
+                <span style="color:rgba(212,168,67,0.5)">Total premiados: <strong style="color:#d4a843">${tt}</strong></span>
+                ${fa>0?`<span style="color:#ef4444;font-size:10px">Faltan ${fa} participantes</span>`:(P.length>0?`<span style="color:#22c55e;font-size:10px">Listo para sortear</span>`:'')}
               </div>
-            </div>` : ''}
+            </div>`:''}
           </div>
 
           <!-- ADD PARTICIPANTS -->
-          <div class="glass p-5">
-            <!-- Mode Toggle -->
-            <div class="flex bg-black/30 rounded-xl p-1 mb-4 border border-amber-500/10">
-              <button onclick="setEntryMode('individual')" class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-semibold transition-all ${state.entryMode === 'individual' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' : 'text-amber-200/40 hover:text-amber-200/60'}">
-                <i class="fas fa-user"></i> Individual
-              </button>
-              <button onclick="setEntryMode('bulk')" class="flex-1 flex items-center justify-center gap-2 py-2.5 rounded-lg text-xs font-semibold transition-all ${state.entryMode === 'bulk' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30' : 'text-amber-200/40 hover:text-amber-200/60'}">
-                <i class="fas fa-file-lines"></i> Lista Completa
-              </button>
+          <div class="glass" style="padding:20px">
+            <div style="display:flex;background:rgba(0,0,0,0.3);border-radius:10px;padding:4px;border:1px solid rgba(212,168,67,0.1);margin-bottom:16px">
+              <button onclick="sem('ind')" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:8px;font-size:11px;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;${S.em==='ind'?'background:rgba(212,168,67,0.15);color:#d4a843;border:1px solid rgba(212,168,67,0.25)':'background:transparent;color:rgba(212,168,67,0.4);border:1px solid transparent'}"><i class="fas fa-user"></i> Individual</button>
+              <button onclick="sem('bulk')" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:8px;font-size:11px;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;${S.em==='bulk'?'background:rgba(212,168,67,0.15);color:#d4a843;border:1px solid rgba(212,168,67,0.25)':'background:transparent;color:rgba(212,168,67,0.4);border:1px solid transparent'}"><i class="fas fa-file-lines"></i> Lista Completa</button>
             </div>
 
-            ${state.error ? `<div class="flex items-center gap-2 text-red-400 text-xs bg-red-500/10 p-2.5 rounded-lg border border-red-500/20 mb-4"><i class="fas fa-exclamation-circle"></i>${state.error}</div>` : ''}
+            ${S.err?`<div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#ef4444;background:rgba(239,68,68,0.08);padding:10px;border-radius:8px;border:1px solid rgba(239,68,68,0.2);margin-bottom:12px"><i class="fas fa-exclamation-circle"></i>${S.err}</div>`:''}
 
-            ${state.entryMode === 'individual' ? `
-            <div class="space-y-3">
-              <div class="flex gap-2">
-                <button onclick="state.tipo='individual';render()" class="flex-1 py-2 rounded-lg text-xs border transition-all flex items-center justify-center gap-1 ${state.tipo==='individual'?'border-amber-400/50 bg-amber-500/15 text-amber-300':'border-amber-500/10 bg-black/20 text-amber-200/40'}">
-                  <i class="fas fa-user"></i> Individual
-                </button>
-                <button onclick="state.tipo='grupo';render()" class="flex-1 py-2 rounded-lg text-xs border transition-all flex items-center justify-center gap-1 ${state.tipo==='grupo'?'border-amber-400/50 bg-amber-500/15 text-amber-300':'border-amber-500/10 bg-black/20 text-amber-200/40'}">
-                  <i class="fas fa-users"></i> Grupo
-                </button>
+            ${S.em==='ind'?`
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;gap:8px">
+                <button onclick="stp('ind')" style="flex:1;padding:8px;border-radius:8px;font-size:11px;border:none;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:4px;${S.tp2==='ind'?'border:1px solid rgba(212,168,67,0.4);background:rgba(212,168,67,0.1);color:#d4a843':'border:1px solid rgba(212,168,67,0.08);background:rgba(0,0,0,0.2);color:rgba(212,168,67,0.35)'}"><i class="fas fa-user"></i> Individual</button>
+                <button onclick="stp('grupo')" style="flex:1;padding:8px;border-radius:8px;font-size:11px;border:none;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:4px;${S.tp2==='grupo'?'border:1px solid rgba(212,168,67,0.4);background:rgba(212,168,67,0.1);color:#d4a843':'border:1px solid rgba(212,168,67,0.08);background:rgba(0,0,0,0.2);color:rgba(212,168,67,0.35)'}"><i class="fas fa-users"></i> Grupo</button>
               </div>
-              <input type="text" placeholder="${state.tipo==='grupo'?'Nombre del Grupo':'Nombre completo'}" value="${state.nombre}"
-                oninput="state.nombre=this.value;state.error=''" onkeydown="if(event.key==='Enter')addIndividual()"
-                class="w-full h-10 px-4 bg-black/30 border border-amber-500/20 rounded-xl text-amber-50 placeholder-amber-200/30 text-sm focus:border-amber-400 outline-none">
-              <button onclick="addIndividual()" class="w-full py-3 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 hover:border-amber-400/50 rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2">
-                <i class="fas fa-user-plus"></i> Agregar ${state.tipo==='grupo'?'Grupo':'Participante'}
-              </button>
-            </div>` : `
-            <div class="space-y-3">
-              <div class="flex gap-2">
-                <button onclick="state.bulkTipo='individual';render()" class="flex-1 py-2 rounded-lg text-xs border transition-all flex items-center justify-center gap-1 ${state.bulkTipo==='individual'?'border-amber-400/50 bg-amber-500/15 text-amber-300':'border-amber-500/10 bg-black/20 text-amber-200/40'}">
-                  <i class="fas fa-user"></i> Individuales
-                </button>
-                <button onclick="state.bulkTipo='grupo';render()" class="flex-1 py-2 rounded-lg text-xs border transition-all flex items-center justify-center gap-1 ${state.bulkTipo==='grupo'?'border-amber-400/50 bg-amber-500/15 text-amber-300':'border-amber-500/10 bg-black/20 text-amber-200/40'}">
-                  <i class="fas fa-users"></i> Grupos
-                </button>
+              <input type="text" placeholder="${S.tp2==='grupo'?'Nombre del Grupo':'Nombre completo'}" value="${S.nm}" oninput="S.nm=this.value;S.err=''" onkeydown="if(event.key==='Enter')addI()" style="width:100%;height:38px;padding:0 14px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:10px;color:#f5ebd0;font-size:13px;outline:none">
+              <button onclick="addI()" style="width:100%;padding:12px;background:rgba(212,168,67,0.12);color:#d4a843;border:1px solid rgba(212,168,67,0.25);border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:6px" onmouseover="this.style.background='rgba(212,168,67,0.2)'" onmouseout="this.style.background='rgba(212,168,67,0.12)'"><i class="fas fa-user-plus"></i> Agregar ${S.tp2==='grupo'?'Grupo':'Participante'}</button>
+            </div>`:`
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div style="display:flex;gap:8px">
+                <button onclick="sbtp('ind')" style="flex:1;padding:8px;border-radius:8px;font-size:11px;border:none;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:4px;${S.btp==='ind'?'border:1px solid rgba(212,168,67,0.4);background:rgba(212,168,67,0.1);color:#d4a843':'border:1px solid rgba(212,168,67,0.08);background:rgba(0,0,0,0.2);color:rgba(212,168,67,0.35)'}"><i class="fas fa-user"></i> Individuales</button>
+                <button onclick="sbtp('grupo')" style="flex:1;padding:8px;border-radius:8px;font-size:11px;border:none;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:4px;${S.btp==='grupo'?'border:1px solid rgba(212,168,67,0.4);background:rgba(212,168,67,0.1);color:#d4a843':'border:1px solid rgba(212,168,67,0.08);background:rgba(0,0,0,0.2);color:rgba(212,168,67,0.35)'}"><i class="fas fa-users"></i> Grupos</button>
               </div>
               <div>
-                <div class="flex justify-between mb-1">
-                  <label class="text-[10px] text-amber-200/60">Nombres (uno por linea o separados por coma)</label>
-                  <span class="text-[10px] text-amber-500/50" id="bulkCount">0 detectados</span>
+                <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+                  <label style="font-size:10px;color:rgba(212,168,67,0.5)">Nombres (uno por linea o separados por coma)</label>
+                  <span style="font-size:10px;color:rgba(212,168,67,0.4)">${pb(S.bt).length} detectados</span>
                 </div>
-                <textarea id="bulkArea" rows="7" placeholder="Ejemplo:\nMaria Gonzalez\nCarlos Perez\nAna Torres\n\nO separados por coma:\nMaria, Carlos, Ana, Pedro, Luisa"
-                  oninput="state.bulkText=this.value;state.error='';document.getElementById('bulkCount').textContent=parseBulkNames(this.value).length+' detectados'"
-                  class="w-full p-3 bg-black/30 border border-amber-500/20 rounded-xl text-amber-50 placeholder-amber-200/25 focus:border-amber-400 outline-none resize-none text-sm leading-relaxed">${state.bulkText}</textarea>
-                <p class="text-[10px] text-amber-200/30 mt-1.5"><i class="fas fa-info-circle mr-1"></i>Escribe cada nombre en una linea nueva, o separalos con comas.</p>
+                <textarea placeholder="Ejemplo:\nMaria Gonzalez\nCarlos Perez\nAna Torres\n\nO separados por coma:\nMaria, Carlos, Ana, Pedro, Luisa" rows="6" style="width:100%;padding:12px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:10px;color:#f5ebd0;font-size:12px;outline:none;resize:none;line-height:1.6" oninput="S.bt=this.value;S.err='';rdr()">${S.bt}</textarea>
+                <p style="font-size:10px;color:rgba(212,168,67,0.25);margin-top:4px"><i class="fas fa-info-circle" style="margin-right:4px"></i>Escribe cada nombre en una linea nueva, o separalos con comas.</p>
               </div>
-              <button onclick="addBulk()" class="w-full py-3 bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/30 hover:border-amber-400/50 rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2">
-                <i class="fas fa-users"></i> Agregar Participantes
-              </button>
+              <button onclick="addB()" style="width:100%;padding:12px;background:rgba(212,168,67,0.12);color:#d4a843;border:1px solid rgba(212,168,67,0.25);border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:6px" onmouseover="this.style.background='rgba(212,168,67,0.2)'" onmouseout="this.style.background='rgba(212,168,67,0.12)'"><i class="fas fa-users"></i> Agregar Participantes</button>
             </div>`}
           </div>
         </div>
 
-        <!-- RIGHT: Participant List -->
-        <div class="lg:col-span-3 animate-fadeUp" style="animation-delay:0.25s">
-          <div class="glass p-5 min-h-[500px]">
-            <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
-              <h2 class="font-cinzel text-lg font-semibold text-amber-300 flex items-center gap-2"><i class="fas fa-users"></i> Participantes</h2>
-              <div class="flex gap-2">
-                ${cI > 0 ? `<span class="text-xs bg-blue-500/10 text-blue-300 px-2.5 py-1 rounded-full border border-blue-500/20 flex items-center gap-1"><i class="fas fa-user"></i>${cI}</span>` : ''}
-                ${cG > 0 ? `<span class="text-xs bg-amber-500/10 text-amber-300 px-2.5 py-1 rounded-full border border-amber-500/20 flex items-center gap-1"><i class="fas fa-users"></i>${cG}</span>` : ''}
-                <span class="text-xs bg-amber-500/20 text-amber-400 px-2.5 py-1 rounded-full border border-amber-500/30 font-semibold">Total: ${p.length}</span>
-              </div>
+        <!-- RIGHT: PARTICIPANTS LIST -->
+        <div class="glass" style="padding:20px;min-height:400px;animation:fadeUp 0.6s ease forwards;animation-delay:0.25px">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
+            <h2 class="font-cinzel" style="font-size:16px;font-weight:600;color:#d4a843;display:flex;align-items:center;gap:8px"><i class="fas fa-users"></i> Participantes</h2>
+            <div style="display:flex;gap:6px">
+              ${cI>0?`<span style="font-size:11px;background:rgba(59,130,246,0.08);color:#60a5fa;padding:4px 10px;border-radius:20px;border:1px solid rgba(59,130,246,0.15);display:flex;align-items:center;gap:4px"><i class="fas fa-user" style="font-size:9px"></i>${cI}</span>`:''}
+              ${cG>0?`<span style="font-size:11px;background:rgba(212,168,67,0.08);color:#d4a843;padding:4px 10px;border-radius:20px;border:1px solid rgba(212,168,67,0.15);display:flex;align-items:center;gap:4px"><i class="fas fa-users" style="font-size:9px"></i>${cG}</span>`:''}
+              <span style="font-size:11px;background:rgba(212,168,67,0.12);color:#d4a843;padding:4px 10px;border-radius:20px;border:1px solid rgba(212,168,67,0.2);font-weight:600">Total: ${P.length}</span>
             </div>
+          </div>
 
-            ${p.length === 0 ? `
-            <div class="flex flex-col items-center justify-center py-20 text-amber-200/25">
-              <i class="fas fa-users text-6xl mb-4"></i>
-              <p class="text-sm">No hay participantes aun</p>
-              <p class="text-xs mt-1 max-w-xs text-center">Agrega participantes individuales o pega una lista completa</p>
-            </div>` : `
-            <div class="space-y-2 max-h-[400px] overflow-y-auto pr-1">
-              ${p.map((part, idx) => `
-              <div class="bg-black/20 border border-amber-500/10 rounded-xl p-3 hover:border-amber-500/25 transition-colors group flex items-center justify-between gap-3">
-                <div class="flex items-center gap-3 min-w-0 flex-grow">
-                  <span class="text-xs font-cinzel text-amber-500/50 w-6 text-center flex-shrink-0">#${idx+1}</span>
-                  <div class="min-w-0 flex-grow">
-                    <div class="flex items-center gap-2">
-                      <h3 class="font-semibold text-amber-100 text-sm truncate">${part.nombre}</h3>
-                      <span class="text-[10px] px-1.5 py-0.5 rounded border flex-shrink-0 ${part.tipo==='grupo'?'bg-amber-600/20 text-amber-300 border-amber-600/30':'bg-blue-500/10 text-blue-300 border-blue-500/20'}">${part.tipo==='grupo'?'Grupo':'Individual'}</span>
-                    </div>
+          ${P.length===0?`
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 0;color:rgba(212,168,67,0.2)">
+            <i class="fas fa-users" style="font-size:56px;margin-bottom:12px"></i>
+            <p style="font-size:14px">No hay participantes aun</p>
+            <p style="font-size:12px;margin-top:4px;text-align:center;max-width:280px">Agrega participantes individuales o pega una lista completa</p>
+          </div>`:`
+          <div style="display:flex;flex-direction:column;gap:8px;max-height:360px;overflow-y:auto;padding-right:4px">
+            ${P.map((p,i)=>`
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(0,0,0,0.2);border:1px solid rgba(212,168,67,0.08);border-radius:10px;padding:12px;transition:all 0.2s" onmouseover="this.style.borderColor='rgba(212,168,67,0.2)'" onmouseout="this.style.borderColor='rgba(212,168,67,0.08)'">
+              <div style="display:flex;align-items:center;gap:10px;min-width:0;flex:1">
+                <span class="font-cinzel" style="font-size:11px;color:rgba(212,168,67,0.4);width:24px;text-align:center;flex-shrink:0">#${i+1}</span>
+                <div style="min-width:0;flex:1">
+                  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                    <span style="font-size:13px;font-weight:600;color:#f5ebd0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.n}</span>
+                    <span style="font-size:10px;padding:2px 8px;border-radius:6px;flex-shrink:0;${p.t==='grupo'?'background:rgba(212,168,67,0.1);color:#d4a843;border:1px solid rgba(212,168,67,0.15)':'background:rgba(59,130,246,0.06);color:#60a5fa;border:1px solid rgba(59,130,246,0.12)'}">${p.t==='grupo'?'Grupo':'Individual'}</span>
                   </div>
                 </div>
-                <button onclick="removeParticipant('${part.id}')" class="text-red-400/30 hover:text-red-400 hover:bg-red-500/10 p-1.5 rounded-lg transition-all opacity-0 group-hover:opacity-100 flex-shrink-0">
-                  <i class="fas fa-trash text-sm"></i>
-                </button>
-              </div>`).join('')}
-            </div>`}
-
-            ${p.length >= totalPrem && totalPrem >= 2 ? `
-            <div class="mt-5 pt-4 border-t border-amber-500/10 animate-fadeUp">
-              <div class="flex items-center justify-between text-xs text-amber-200/40 mb-3 px-1">
-                <span>${c.premiadosFecha1} premiados Fecha 1 + ${c.premiadosFecha2} premiados Fecha 2</span>
-                <span class="text-green-400">Listo para sortear</span>
               </div>
-              <button onclick="iniciarSorteo()" class="btn-3d">
-                <i class="fas fa-wand-magic-sparkles mr-2"></i> INICIAR SORTEO <i class="fas fa-chevron-right ml-2"></i>
-              </button>
-            </div>` : ''}
-          </div>
+              <button onclick="rm('${p.id}')" style="background:none;border:none;color:rgba(239,68,68,0.3);cursor:pointer;padding:6px;border-radius:6px;transition:all 0.2s;flex-shrink:0" onmouseover="this.style.color='#ef4444';this.style.background='rgba(239,68,68,0.08)'" onmouseout="this.style.color='rgba(239,68,68,0.3)';this.style.background='none'"><i class="fas fa-trash" style="font-size:12px"></i></button>
+            </div>`).join('')}
+          </div>`}
+
+          ${P.length>=tt&&tt>=2?`
+          <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(212,168,67,0.1);animation:fadeUp 0.5s ease forwards">
+            <div style="display:flex;align-items:center;justify-content:space-between;font-size:11px;color:rgba(212,168,67,0.4);margin-bottom:12px">
+              <span>${c.p1} premiados Fecha 1 + ${c.p2} premiados Fecha 2</span>
+              <span style="color:#22c55e">Listo para sortear</span>
+            </div>
+            <button onclick="go()" class="boton-3d" style="width:100%;font-size:15px;padding:18px">
+              <i class="fas fa-wand-magic-sparkles"></i> INICIAR SORTEO <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>`:''}
         </div>
       </div>
     </main>
   </div>`;
 }
 
-function renderSorting() {
-  const msgs = [
-    'Reuniendo la energia del esfuerzo...','Cargando determinacion y pasion...',
-    'Los suenos estan a punto de ordenarse...','La gloria espera a los valientes...',
-    'Cada esfuerzo sera reconocido...','El destino se entrelaza con el trabajo...',
-    'Preparando el escenario del triunfo...','Mezclando corazones y esperanzas...'
-  ];
+// ═══════════════════════════════════════════════════
+//  RENDER: SORTING
+// ═══════════════════════════════════════════════════
+function rsort(){
+  const msgs=['Reuniendo la energia del esfuerzo...','Cargando determinacion y pasion...','Los suenos estan a punto de ordenarse...','La gloria espera a los valientes...','Cada esfuerzo sera reconocido...','El destino se entrelaza con el trabajo...','Preparando el escenario del triunfo...','Mezclando corazones y esperanzas...'];
   return `
-  <div class="min-h-screen flex flex-col items-center justify-center px-4 relative">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-amber-500/5 rounded-full blur-3xl animate-pulse"></div>
-    <div class="relative z-10 text-center max-w-md w-full">
-      <div class="animate-spin-slow mb-8 inline-block"><i class="fas fa-trophy text-6xl text-amber-400" style="filter:drop-shadow(0 0 20px rgba(212,168,67,0.5))"></i></div>
-      <h2 class="font-cinzel text-2xl font-bold golden-text mb-2">Definiendo el Orden del Triunfo</h2>
-      <p class="text-amber-200/40 text-sm mb-8 h-5" id="sortMsg">${msgs[0]}</p>
-      <div class="w-full bg-amber-500/10 rounded-full h-2 overflow-hidden border border-amber-500/10">
-        <div class="h-full rounded-full" style="background:linear-gradient(to right,#d4a843,#b8892a);width:0%;animation:progressFill 3.8s linear forwards"></div>
+  <div class="page-content" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 16px;position:relative">
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:rgba(212,168,67,0.04);border-radius:50%;filter:blur(60px);animation:pulse 3s ease-in-out infinite"></div>
+    <div style="position:relative;z-index:10;text-align:center;max-width:400px;width:100%">
+      <div style="animation:spin 3s linear infinite;margin-bottom:32px;display:inline-block"><i class="fas fa-trophy" style="font-size:60px;color:#d4a843;filter:drop-shadow(0 0 20px rgba(212,168,67,0.5))"></i></div>
+      <h2 class="font-cinzel golden-text" style="font-size:24px;font-weight:700;margin-bottom:8px">Definiendo el Orden del Triunfo</h2>
+      <p style="color:rgba(212,168,67,0.4);font-size:13px;margin-bottom:32px;height:20px" id="smg">${msgs[0]}</p>
+      <div style="width:100%;background:rgba(212,168,67,0.08);border-radius:20px;height:8px;overflow:hidden;border:1px solid rgba(212,168,67,0.1)">
+        <div style="height:100%;background:linear-gradient(to right,#d4a843,#b8892a);border-radius:20px;width:0%;animation:progressFill 3.8s linear forwards"></div>
       </div>
-      <p class="text-xs text-amber-200/30 mt-2">100%</p>
+      <p style="font-size:11px;color:rgba(212,168,67,0.3);margin-top:8px">Mezclando participantes...</p>
     </div>
-    <script>
-      (function(){const m=${JSON.stringify(msgs)};let i=0;setInterval(()=>{const el=document.getElementById('sortMsg');if(el){i=(i+1)%m.length;el.textContent=m[i];}},500);})();
-    <\/script>
+    <script>(function(){const m=${JSON.stringify(msgs)};let i=0;const el=document.getElementById('smg');const iv=setInterval(()=>{i=(i+1)%m.length;if(el)el.textContent=m[i];},450);setTimeout(()=>clearInterval(iv),4000);})();<\/script>
   </div>`;
 }
 
-function renderReveal() {
-  const g = getCurrentGanador();
-  if (!g) return '';
-  const ganadores = state.revealFecha === 1 ? state.f1Ganadores : state.f2Ganadores;
-  const isTop3 = g.posicion <= 3;
-  const isGrupo = g.participante.tipo === 'grupo';
-  const isLast = state.revealIdx === ganadores.length - 1;
-  const hasNextFecha = state.revealFecha === 1 && state.f2Ganadores.length > 0;
-  const fechaLabel = state.revealFecha === 1 ? state.config.fecha1 : state.config.fecha2;
-  const posIcons = ['fa-crown','fa-trophy','fa-award','fa-star','fa-sparkles'];
-  const posColors = ['text-amber-300','text-gray-300','text-amber-500','text-amber-400/70','text-amber-400/50'];
-  const posBgs = ['bg-amber-500/30 border-amber-400','bg-gray-400/15 border-gray-400','bg-amber-700/25 border-amber-600','bg-amber-500/10 border-amber-500/20','bg-amber-500/10 border-amber-500/20'];
-  const pi = Math.min(g.posicion - 1, 4);
+// ═══════════════════════════════════════════════════
+//  RENDER: REVEAL (EFECTO 1: Revelacion Misteriosa)
+// ═══════════════════════════════════════════════════
+function rr(){
+  const g=cg2();if(!g)return'';
+  const gs=cg();const t3=g.pos<=3;const ig=g.p.t==='grupo';
+  const ls=S.ri===gs.length-1;const nf=S.rf===1&&S.g2.length>0;
+  const fl=S.rf===1?S.cfg.f1:S.cfg.f2;
+  const icons=['fa-crown','fa-trophy','fa-award','fa-star','fa-sparkles'];
+  const cols=['#d4a843','#a0a0a0','#b8762a','rgba(212,168,67,0.6)','rgba(212,168,67,0.4)'];
+  const bgs=['rgba(212,168,67,0.15)','rgba(160,160,160,0.08)','rgba(184,118,42,0.1)','rgba(212,168,67,0.05)','rgba(212,168,67,0.05)'];
+  const pi=Math.min(g.pos-1,4);
 
   return `
-  <div class="min-h-screen flex flex-col items-center justify-center px-4 relative spot-bg">
-    ${state.isRevealed ? '<div class="cam-flash"></div>' : ''}
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-3xl"></div>
+  <div class="page-content" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 16px 100px;position:relative;background:radial-gradient(circle at 50% 50%,rgba(212,168,67,0.08) 0%,#0a0705 55%)">
+    ${S.irv?'<div class="cam-flash"></div>':''}
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:rgba(212,168,67,0.03);border-radius:50%;filter:blur(60px)"></div>
 
-    <button onclick="skipToResults()" class="absolute top-4 right-4 text-amber-200/30 hover:text-amber-200/60 transition-colors z-30 flex items-center gap-1 text-xs">
-      <i class="fas fa-forward"></i> Saltar al resumen
-    </button>
-    <div class="absolute top-4 left-4 text-amber-200/40 text-xs z-30 flex items-center gap-2">
-      <span class="bg-amber-500/10 px-2 py-1 rounded-full border border-amber-500/20 font-cinzel">Fecha ${state.revealFecha}</span>
-      <span>${state.revealIdx + 1} / ${ganadores.length}</span>
+    <button onclick="sk()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:rgba(212,168,67,0.3);cursor:pointer;font-size:11px;display:flex;align-items:center;gap:4px;z-index:20;transition:color 0.2s" onmouseover="this.style.color='rgba(212,168,67,0.6)'" onmouseout="this.style.color='rgba(212,168,67,0.3)'"><i class="fas fa-forward"></i> Saltar</button>
+    <div style="position:absolute;top:16px;left:16px;color:rgba(212,168,67,0.4);font-size:11px;z-index:20;display:flex;align-items:center;gap:8px">
+      <span style="background:rgba(212,168,67,0.08);padding:4px 10px;border-radius:20px;border:1px solid rgba(212,168,67,0.15)" class="font-cinzel">Fecha ${S.rf}</span>
+      <span>${S.ri+1} / ${gs.length}</span>
     </div>
 
-    <div class="relative z-20 text-center w-full max-w-lg animate-fadeUp">
-      <!-- Fecha badge -->
-      <div class="mb-4">
-        <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-cinzel border bg-black/30 border-amber-500/20 text-amber-300">
-          <i class="fas fa-calendar"></i> Fecha de Presentacion ${state.revealFecha}
-        </span>
+    <div style="position:relative;z-index:10;text-align:center;width:100%;max-width:520px;animation:fadeUp 0.5s ease forwards">
+      <div style="margin-bottom:16px">
+        <span style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:20px;font-size:11px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.15);color:#d4a843" class="font-cinzel"><i class="fas fa-calendar" style="font-size:10px"></i> Fecha de Presentacion ${S.rf}</span>
       </div>
 
-      <!-- ═══ REVELACION MISTERIOSA ═══ -->
-      <div class="reveal-wrap mx-auto ${state.isRevealed ? 'revealed' : ''}" onclick="reveal()">
+      <!-- EFECTO 1: REVELACION MISTERIOSA (hover desliza cubierta) -->
+      <div class="tarjeta-revelacion">
 
-        <!-- COVER -->
-        <div class="reveal-cover">
-          <div class="relative z-10">
-            <div class="mb-4"><i class="fas fa-question-circle text-6xl text-amber-400/50 mystery-bounce"></i></div>
-            <div class="inline-block px-4 py-2 rounded-full text-sm font-cinzel font-bold mb-3" style="background:linear-gradient(to right,${state.revealFecha===1?'#d4a843,#b8892a':'#8b6914,#d4a843'});color:#1a1410;">
-              ${g.orderLabel}
-            </div>
-            <h3 class="font-cinzel text-xl text-amber-100/80 mb-2">Quien sera...</h3>
-            <p class="text-amber-200/40 text-xs mb-6">Toca la carta para descubrir al premiado</p>
-            <div class="flex items-center gap-2 justify-center text-amber-400/40">
-              <i class="fas fa-eye"></i>
-              <span class="text-[10px] tracking-[3px] uppercase animate-pulse">Toca para revelar</span>
+        <!-- CONTENIDO OCULTO (premio) -->
+        <div class="contenido-oculto">
+          <div style="margin-bottom:12px">
+            <div style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:${bgs[pi]};border:2px solid ${t3?'rgba(212,168,67,0.4)':'rgba(212,168,67,0.1)'}">
+              <i class="fas ${icons[pi]}" style="font-size:28px;color:${cols[pi]}"></i>
             </div>
           </div>
-        </div>
-
-        <!-- PRIZE -->
-        <div class="reveal-prize">
-          <!-- Position -->
-          <div class="mb-3 ${state.isRevealed ? 'animate-count' : 'opacity-0'}">
-            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full ${posBgs[pi]}">
-              <i class="fas ${posIcons[pi]} text-2xl ${posColors[pi]}"></i>
-            </div>
-          </div>
-
-          <!-- Tipo -->
-          <div class="mb-2 ${state.isRevealed ? 'animate-fadeUp' : 'opacity-0'}" style="animation-delay:0.2s">
-            <span class="inline-flex items-center gap-1.5 text-[10px] px-2.5 py-0.5 rounded-full border ${isGrupo?'bg-amber-600/20 text-amber-300 border-amber-600/30':'bg-blue-500/10 text-blue-300 border-blue-500/20'}">
-              <i class="fas ${isGrupo?'fa-users':'fa-user'} text-[10px]"></i> ${isGrupo?'Grupo de Trabajo':'Participante Individual'}
+          <div style="margin-bottom:8px">
+            <span style="display:inline-flex;align-items:center;gap:6px;font-size:10px;padding:4px 12px;border-radius:20px;${ig?'background:rgba(212,168,67,0.1);color:#d4a843;border:1px solid rgba(212,168,67,0.15)':'background:rgba(59,130,246,0.06);color:#60a5fa;border:1px solid rgba(59,130,246,0.1)'}">
+              <i class="fas ${ig?'fa-users':'fa-user'}" style="font-size:9px"></i> ${ig?'Grupo de Trabajo':'Participante Individual'}
             </span>
           </div>
+          <h2 class="font-cinzel" style="font-size:26px;font-weight:700;margin-bottom:6px"><span class="golden-text">${g.p.n}</span></h2>
+          <p style="font-size:12px;color:rgba(212,168,67,0.45);font-style:italic;margin-bottom:16px">"${gq(g.pos,gs.length)}"</p>
+          <div style="padding:10px 20px;border:1px solid rgba(212,168,67,0.15);border-radius:12px;background:rgba(0,0,0,0.2);display:flex;flex-wrap:wrap;justify-content:center;gap:16px">
+            <span style="display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(212,168,67,0.6)"><i class="fas fa-calendar" style="color:#d4a843;font-size:10px"></i>${fff(fl)}</span>
+            <span style="display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(212,168,67,0.6)"><i class="fas fa-clock" style="color:#d4a843;font-size:10px"></i>${S.cfg.tp} minutos</span>
+          </div>
+        </div>
 
-          <!-- Name -->
-          <h2 class="font-cinzel text-2xl md:text-4xl font-bold golden-text mb-2 ${state.isRevealed ? 'animate-fadeUp' : 'opacity-0'}" style="animation-delay:0.3s">
-            ${g.participante.nombre}
-          </h2>
-
-          <!-- Quote -->
-          <p class="text-amber-200/50 text-xs italic mb-4 ${state.isRevealed ? 'animate-fadeUp' : 'opacity-0'}" style="animation-delay:0.45s">
-            ${getQuote(g.posicion, ganadores.length)}
-          </p>
-
-          <!-- Details with glow for top 3 -->
-          <div class="glow-box ${isTop3 && state.isRevealed ? 'active' : ''} ${state.isRevealed ? 'animate-fadeUp' : 'opacity-0'}" style="animation-delay:0.5s">
-            <div class="flex flex-wrap justify-center gap-3 text-xs">
-              <span class="flex items-center gap-1.5 text-amber-200/70"><i class="fas fa-calendar text-amber-400 text-[10px]"></i>${formatFechaFull(fechaLabel)}</span>
-              <span class="flex items-center gap-1.5 text-amber-200/70"><i class="fas fa-clock text-amber-400 text-[10px]"></i>${state.config.tiempoPorPresentacion} minutos</span>
+        <!-- CUBIERTA (se desliza al hover) -->
+        <div class="cubierta">
+          <div style="position:relative;z-index:2">
+            <div style="margin-bottom:16px"><i class="fas fa-question-circle" style="font-size:56px;color:rgba(212,168,67,0.45)"></i></div>
+            <div style="display:inline-block;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:12px;background:linear-gradient(to right,#d4a843,#b8892a);color:#1a1410" class="font-cinzel">${g.lb}</div>
+            <h3 class="font-cinzel" style="font-size:20px;color:#f5ebd0;margin-bottom:8px;opacity:0.7">Quien sera...</h3>
+            <p style="font-size:12px;color:rgba(212,168,67,0.35);margin-bottom:20px">Pasa el cursor para descubrir al premiado</p>
+            <div style="display:flex;align-items:center;gap:8px;justify-content:center;color:rgba(212,168,67,0.35)">
+              <i class="fas fa-hand-pointer" style="font-size:12px"></i>
+              <span style="font-size:10px;letter-spacing:3px;text-transform:uppercase">Pasa el cursor</span>
             </div>
           </div>
         </div>
+
       </div>
 
-      <!-- BOTON 3D TACTIL - Siguiente -->
-      <div class="mt-8 ${state.isRevealed ? 'animate-fadeUp' : 'opacity-0 pointer-events-none'}" style="animation-delay:0.3s">
-        <button onclick="nextReveal()" class="btn-3d btn-3d-sm">
-          ${isLast && hasNextFecha ? '<i class="fas fa-sparkles mr-2"></i>Siguiente Fecha<i class="fas fa-chevron-right ml-2"></i>' :
-            isLast && !hasNextFecha ? '<i class="fas fa-trophy mr-2"></i>Ver Resultados Finales' :
-            '<i class="fas fa-sparkles mr-2"></i>Siguiente Premiado<i class="fas fa-chevron-right ml-2"></i>'}
+      <!-- EFECTO 2: BOTON 3D TACTIL -->
+      ${S.irv?`
+      <div style="margin-top:32px;animation:fadeUp 0.5s ease forwards">
+        <button onclick="nx()" class="boton-3d">
+          ${ls&&nf?'<i class="fas fa-sparkles"></i> Siguiente Fecha <i class="fas fa-chevron-right"></i>':ls&&!nf?'<i class="fas fa-trophy"></i> Ver Resultados Finales':'<i class="fas fa-sparkles"></i> Siguiente Premiado <i class="fas fa-chevron-right"></i>'}
         </button>
-        ${isTop3 ? `<p class="text-amber-400/40 text-[10px] font-cinzel tracking-wider mt-3 animate-fadeUp" style="animation-delay:0.5s"><i class="fas fa-sparkles mr-1"></i>${g.posicion===1?'Gloria al primer lugar':g.posicion===2?'Honor al segundo lugar':'Reconocimiento al tercer lugar'}</p>` : ''}
-      </div>
-
-      ${!state.isRevealed ? `<p class="text-amber-200/30 text-xs mt-6 animate-pulse">Toca la carta misteriosa para revelar...</p>` : ''}
+        ${t3?`<p style="color:rgba(212,168,67,0.4);font-size:10px;margin-top:12px;letter-spacing:1px" class="font-cinzel"><i class="fas fa-sparkles" style="margin-right:4px"></i>${g.pos===1?'Gloria al primer lugar':g.pos===2?'Honor al segundo lugar':'Reconocimiento al tercer lugar'}</p>`:''}
+      </div>`:`<p style="color:rgba(212,168,67,0.25);font-size:12px;margin-top:24px;animation:pulse 2s infinite">Pasa el cursor sobre la carta para revelar...</p>`}
     </div>
-  </div>`;
+  </div>
+
+  <style>@keyframes mysteryBounce{0%,100%{transform:translateY(0)rotate(0deg)}25%{transform:translateY(-12px)rotate(-5deg)}50%{transform:translateY(0)rotate(0deg)}75%{transform:translateY(-8px)rotate(5deg)}}@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}<\/style>`;
 }
 
-function renderResults() {
-  const c = state.config;
-  const f1 = state.f1Ganadores;
-  const f2 = state.f2Ganadores;
-  const all = [...f1, ...f2];
-  const tiempoTotal = all.length * c.tiempoPorPresentacion;
-  const countGrupos = all.filter(g => g.participante.tipo === 'grupo').length;
-  const countInd = all.filter(g => g.participante.tipo === 'individual').length;
+// ═══════════════════════════════════════════════════
+//  RENDER: RESULTS
+// ═══════════════════════════════════════════════════
+function rres(){
+  const c=S.cfg,f1=S.g1,f2=S.g2,al=[...f1,...f2],ttm=al.length*c.tp,cg2=al.filter(x=>x.p.t==='grupo').length,ci=al.filter(x=>x.p.t==='ind').length;
+  const icn=['fa-crown','fa-trophy','fa-award'],bdg=['bg:#d4a843;color:#1a1410','bg:#a0a0a0;color:#1a1410','bg:#b8762a;color:#fff'],tcl=['color:#d4a843','color:#a0a0a0','color:#b8762a'];
+  setTimeout(()=>fg(),300);
 
-  const posIcons = ['fa-crown','fa-trophy','fa-award','fa-star','fa-sparkles'];
-  const posBadges = ['bg-amber-400 text-black','bg-gray-300 text-black','bg-amber-600 text-white','bg-amber-500/20 text-amber-400 border border-amber-500/20','bg-amber-500/20 text-amber-400 border border-amber-500/20'];
-  const posTextColors = ['text-amber-300','text-gray-300','text-amber-500','text-amber-200/60','text-amber-200/60'];
-
-  function renderGanadorList(ganadores, fechaNum, fechaStr) {
+  function rgl(gs,fn,fs){
     return `
-    <div class="mb-8">
-      <div class="flex items-center gap-3 mb-4 px-1">
-        <div class="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-cinzel font-bold text-sm">${fechaNum}</div>
+    <div style="margin-bottom:32px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+        <div style="width:32px;height:32px;border-radius:50%;background:rgba(212,168,67,0.1);border:1px solid rgba(212,168,67,0.2);display:flex;align-items:center;justify-content:center;color:#d4a843;font-size:12px;font-weight:700" class="font-cinzel">${fn}</div>
         <div>
-          <h3 class="font-cinzel text-sm font-semibold text-amber-300">Fecha de Presentacion ${fechaNum}</h3>
-          <p class="text-[10px] text-amber-200/40"><i class="fas fa-calendar text-[9px]"></i> ${formatFechaFull(fechaStr)} &middot; ${c.tiempoPorPresentacion}min c/u</p>
+          <h3 class="font-cinzel" style="font-size:13px;font-weight:600;color:#d4a843">Fecha de Presentacion ${fn}</h3>
+          <p style="font-size:10px;color:rgba(212,168,67,0.35)"><i class="fas fa-calendar" style="font-size:8px"></i> ${fff(fs)} &middot; ${c.tp}min c/u</p>
         </div>
-        <div class="ml-auto"><span class="text-xs bg-amber-500/10 text-amber-400 px-3 py-1 rounded-full border border-amber-500/20 font-semibold">${ganadores.length} premiados</span></div>
+        <div style="margin-left:auto"><span style="font-size:11px;background:rgba(212,168,67,0.08);color:#d4a843;padding:4px 12px;border-radius:20px;border:1px solid rgba(212,168,67,0.15);font-weight:600">${gs.length} premiados</span></div>
       </div>
-      <div class="space-y-3">
-        ${ganadores.map((g, i) => {
-          const badge = i < 3 ? posBadges[i] : posBadges[3];
-          const icon = i < 3 ? posIcons[i] : '';
-          const isGrupo = g.participante.tipo === 'grupo';
-          return `
-          <div class="relative rounded-2xl border overflow-hidden ${i<3?(i===0?'bg-amber-500/20 border-amber-400/40':i===1?'bg-gray-400/10 border-gray-400/30':'bg-amber-700/15 border-amber-600/30'):'bg-black/20 border-amber-500/10'} animate-slideInLeft" style="animation-delay:${i*0.1}s">
-            <div class="absolute top-4 left-4 w-10 h-10 rounded-full flex items-center justify-center font-cinzel font-bold text-sm ${badge}">
-              ${i < 3 ? `<i class="fas ${icon}"></i>` : i+1}
-            </div>
-            <div class="p-5 pl-16">
-              <div class="flex items-center gap-2 mb-1 flex-wrap">
-                <span class="text-xs font-cinzel font-semibold ${posTextColors[Math.min(i,4)]}">${g.orderLabel}</span>
-                <span class="text-[10px] px-1.5 py-0.5 rounded border ${isGrupo?'bg-amber-600/20 text-amber-300 border-amber-600/30':'bg-blue-500/10 text-blue-300 border-blue-500/20'}">${isGrupo?'Grupo':'Individual'}</span>
-                ${i===0 ? '<i class="fas fa-sparkles text-amber-400 text-xs"></i>' : ''}
+      <div style="display:flex;flex-direction:column;gap:10px">
+        ${gs.map((g,i)=>{
+          const ig2=g.p.t==='grupo';
+          return `<div style="position:relative;border-radius:16px;overflow:hidden;animation:slideInLeft 0.5s ease forwards;animation-delay:${i*0.1}s;${i<3?'border:2px solid rgba(212,168,67,0.2)':'border:1px solid rgba(212,168,67,0.08)'};${i<3?(i===0?'background:rgba(212,168,67,0.06)':i===1?'background:rgba(160,160,160,0.04)':'background:rgba(184,118,42,0.05)'):'background:rgba(0,0,0,0.15)'}">
+            <div style="position:absolute;top:14px;left:14px;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;${i<3?bdg[i]:'background:rgba(212,168,67,0.08);border:1px solid rgba(212,168,67,0.15);color:#d4a843'}">${i<3?`<i class="fas ${icn[i]}"></i>`:i+1}</div>
+            <div style="padding:18px 18px 18px 64px">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap">
+                <span style="font-size:11px;font-weight:600;${i<3?tcl[i]:'color:rgba(212,168,67,0.5)'}">${g.lb}</span>
+                <span style="font-size:10px;padding:2px 8px;border-radius:6px;${ig2?'background:rgba(212,168,67,0.08);color:#d4a843;border:1px solid rgba(212,168,67,0.12)':'background:rgba(59,130,246,0.05);color:#60a5fa;border:1px solid rgba(59,130,246,0.1)'}">${ig2?'Grupo':'Individual'}</span>
+                ${i===0?'<i class="fas fa-sparkles" style="color:#d4a843;font-size:11px"></i>':''}
               </div>
-              <h3 class="font-cinzel text-lg font-bold mb-2 ${i===0?'golden-text':'text-amber-100'}">${g.participante.nombre}</h3>
-              <span class="text-[11px] flex items-center gap-1.5 bg-black/30 text-amber-200/60 px-2.5 py-1 rounded-md border border-amber-500/10 inline-flex">
-                <i class="fas fa-clock text-amber-400 text-[10px]"></i>${c.tiempoPorPresentacion} minutos
-              </span>
+              <h3 class="font-cinzel" style="font-size:16px;font-weight:700;margin-bottom:6px"><span class="${i===0?'golden-text':''}" style="${i!==0?'color:#f5ebd0':''}">${g.p.n}</span></h3>
+              <span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;background:rgba(0,0,0,0.2);color:rgba(212,168,67,0.5);padding:4px 10px;border-radius:6px;border:1px solid rgba(212,168,67,0.08)"><i class="fas fa-clock" style="color:#d4a843;font-size:9px"></i>${c.tp} minutos</span>
             </div>
-            ${i<3 ? `<div class="h-1 bg-gradient-to-r ${i===0?'from-amber-400/20 to-amber-600/10':i===1?'from-gray-400/10 to-gray-500/5':'from-amber-600/10 to-amber-700/5'}"></div>` : ''}
+            ${i<3?`<div style="height:3px;background:linear-gradient(to right,${i===0?'rgba(212,168,67,0.3),rgba(184,118,42,0.1)':i===1?'rgba(160,160,160,0.15),rgba(100,100,100,0.05)':'rgba(184,118,42,0.2),rgba(120,80,20,0.05)'})"></div>`:''}
           </div>`;
         }).join('')}
       </div>
@@ -679,203 +597,104 @@ function renderResults() {
   }
 
   return `
-  <div class="min-h-screen flex flex-col">
-    <header class="pt-6 pb-4 px-4 text-center relative">
-      <div class="animate-fadeUp">
-        <div class="flex justify-center mb-3"><i class="fas fa-trophy text-5xl text-amber-400 trophy-shine"></i></div>
-        <h1 class="font-cinzel text-3xl md:text-4xl font-bold golden-text mb-2">Resultados del Sorteo</h1>
-        <p class="text-amber-200/50 text-sm">Orden de presentacion para ambas fechas</p>
+  <div class="page-content" style="min-height:100vh;display:flex;flex-direction:column">
+    <header style="padding:24px 16px 16px;text-align:center">
+      <div style="animation:fadeUp 0.6s ease forwards">
+        <div style="display:flex;justify-content:center;margin-bottom:12px"><i class="fas fa-trophy trophy-shine" style="font-size:48px;color:#d4a843"></i></div>
+        <h1 class="font-cinzel golden-text" style="font-size:28px;font-weight:700;margin-bottom:6px">Resultados del Sorteo</h1>
+        <p style="color:rgba(212,168,67,0.4);font-size:13px">Orden de presentacion para ambas fechas</p>
       </div>
     </header>
 
-    <main class="flex-grow px-4 pb-8 max-w-2xl mx-auto w-full">
-      <!-- Stats -->
-      <div class="flex flex-wrap justify-center gap-3 mb-6 animate-fadeUp" style="animation-delay:0.1s">
-        <div class="bg-black/20 border border-amber-500/10 rounded-lg px-4 py-2 text-center">
-          <p class="text-lg font-bold text-amber-400">${all.length}</p><p class="text-[10px] text-amber-200/40 uppercase tracking-wider">Premiados</p>
+    <main style="flex-grow:1;padding:0 16px 60px;max-width:680px;margin:0 auto;width:100%">
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:24px;animation:fadeUp 0.5s ease forwards;animation-delay:0.1s">
+        <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(212,168,67,0.08);border-radius:10px;padding:10px 16px;text-align:center">
+          <p style="font-size:18px;font-weight:700;color:#d4a843">${al.length}</p><p style="font-size:9px;color:rgba(212,168,67,0.35);text-transform:uppercase;letter-spacing:1px">Premiados</p>
         </div>
-        <div class="bg-black/20 border border-amber-500/10 rounded-lg px-4 py-2 text-center">
-          <p class="text-lg font-bold text-amber-400">${f1.length} + ${f2.length}</p><p class="text-[10px] text-amber-200/40 uppercase tracking-wider">Fecha 1 + Fecha 2</p>
+        <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(212,168,67,0.08);border-radius:10px;padding:10px 16px;text-align:center">
+          <p style="font-size:18px;font-weight:700;color:#d4a843">${f1.length}+${f2.length}</p><p style="font-size:9px;color:rgba(212,168,67,0.35);text-transform:uppercase;letter-spacing:1px">F1 + F2</p>
         </div>
-        ${countInd > 0 ? `<div class="bg-black/20 border border-blue-500/10 rounded-lg px-4 py-2 text-center"><p class="text-lg font-bold text-blue-400">${countInd}</p><p class="text-[10px] text-blue-200/40 uppercase tracking-wider">Individuales</p></div>` : ''}
-        ${countGrupos > 0 ? `<div class="bg-black/20 border border-amber-600/20 rounded-lg px-4 py-2 text-center"><p class="text-lg font-bold text-amber-500">${countGrupos}</p><p class="text-[10px] text-amber-200/40 uppercase tracking-wider">Grupos</p></div>` : ''}
-        <div class="bg-black/20 border border-amber-500/10 rounded-lg px-4 py-2 text-center">
-          <p class="text-lg font-bold text-amber-400">${tiempoTotal}m</p><p class="text-[10px] text-amber-200/40 uppercase tracking-wider">Duracion total</p>
+        ${ci>0?`<div style="background:rgba(0,0,0,0.2);border:1px solid rgba(59,130,246,0.08);border-radius:10px;padding:10px 16px;text-align:center"><p style="font-size:18px;font-weight:700;color:#60a5fa">${ci}</p><p style="font-size:9px;color:rgba(96,165,250,0.4);text-transform:uppercase;letter-spacing:1px">Individuales</p></div>`:''}
+        ${cg2>0?`<div style="background:rgba(0,0,0,0.2);border:1px solid rgba(212,168,67,0.12);border-radius:10px;padding:10px 16px;text-align:center"><p style="font-size:18px;font-weight:700;color:#d4a843">${cg2}</p><p style="font-size:9px;color:rgba(212,168,67,0.35);text-transform:uppercase;letter-spacing:1px">Grupos</p></div>`:''}
+        <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(212,168,67,0.08);border-radius:10px;padding:10px 16px;text-align:center">
+          <p style="font-size:18px;font-weight:700;color:#d4a843">${ttm}m</p><p style="font-size:9px;color:rgba(212,168,67,0.35);text-transform:uppercase;letter-spacing:1px">Duracion</p>
         </div>
       </div>
 
-      <!-- Fecha 1 -->
-      ${f1.length > 0 ? renderGanadorList(f1, 1, c.fecha1) : ''}
+      ${f1.length>0?rgl(f1,1,c.f1):''}
+      ${f1.length>0&&f2.length>0?`<div style="display:flex;align-items:center;gap:16px;margin:24px 0"><div style="flex:1;height:1px;background:rgba(212,168,67,0.08)"></div><div style="width:36px;height:36px;border-radius:50%;background:rgba(212,168,67,0.06);border:1px solid rgba(212,168,67,0.12);display:flex;align-items:center;justify-content:center"><i class="fas fa-chevron-right" style="color:rgba(212,168,67,0.4);font-size:12px"></i></div><div style="flex:1;height:1px;background:rgba(212,168,67,0.08)"></div></div>`:''}
+      ${f2.length>0?rgl(f2,2,c.f2):''}
 
-      <!-- Separator -->
-      ${f1.length > 0 && f2.length > 0 ? `
-      <div class="flex items-center gap-4 my-8">
-        <div class="flex-1 h-px bg-amber-500/10"></div>
-        <div class="w-10 h-10 rounded-full bg-amber-500/10 border border-amber-500/20 flex items-center justify-center"><i class="fas fa-chevron-right text-amber-400/60"></i></div>
-        <div class="flex-1 h-px bg-amber-500/10"></div>
-      </div>` : ''}
-
-      <!-- Fecha 2 -->
-      ${f2.length > 0 ? renderGanadorList(f2, 2, c.fecha2) : ''}
-
-      <!-- Timeline -->
-      <div class="mt-8 glass p-5 animate-fadeUp" style="animation-delay:0.6s">
-        <h3 class="font-cinzel text-sm font-semibold text-amber-300 mb-4 flex items-center gap-2"><i class="fas fa-timeline"></i> Resumen del Cronograma</h3>
-        <div class="mb-4">
-          <p class="text-[10px] text-amber-400/60 mb-2 font-cinzel">Fecha 1 &middot; ${formatFechaFull(c.fecha1)}</p>
-          <div class="flex gap-2 overflow-x-auto pb-2">
-            ${f1.map((g,i) => `<div class="flex items-center gap-1.5 flex-shrink-0"><div class="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold ${i===0?'bg-amber-400 text-black':i===1?'bg-gray-300 text-black':i===2?'bg-amber-600 text-white':'bg-amber-500/15 text-amber-400 border border-amber-500/20'}">${i+1}</div><span class="text-[10px] text-amber-200/50 max-w-[60px] truncate">${g.participante.nombre.split(' ')[0]}</span>${i<f1.length-1?'<div class="w-3 h-px bg-amber-500/15"></div>':''}</div>`).join('')}
+      <div class="glass" style="padding:20px;margin-top:24px;animation:fadeUp 0.5s ease forwards;animation-delay:0.5s">
+        <h3 class="font-cinzel" style="font-size:13px;font-weight:600;color:#d4a843;margin-bottom:16px;display:flex;align-items:center;gap:8px"><i class="fas fa-timeline"></i> Resumen del Cronograma</h3>
+        <div style="margin-bottom:16px">
+          <p class="font-cinzel" style="font-size:10px;color:rgba(212,168,67,0.4);margin-bottom:8px">Fecha 1 &middot; ${fff(c.f1)}</p>
+          <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px">
+            ${f1.map((g,i)=>`<div style="display:flex;align-items:center;gap:6px;flex-shrink:0" title="${g.p.n}"><div style="width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;${i===0?'background:#d4a843;color:#1a1410':i===1?'background:#a0a0a0;color:#1a1410':i===2?'background:#b8762a;color:#fff':'background:rgba(212,168,67,0.08);color:#d4a843;border:1px solid rgba(212,168,67,0.12)'}">${i+1}</div><span style="font-size:10px;color:rgba(212,168,67,0.4);white-space:nowrap;max-width:50px;overflow:hidden;text-overflow:ellipsis">${g.p.n.length>8?g.p.n.substring(0,7)+'...':g.p.n}</span>${i<f1.length-1?'<div style="width:12px;height:1px;background:rgba(212,168,67,0.1)"></div>':''}</div>`).join('')}
           </div>
         </div>
         <div>
-          <p class="text-[10px] text-amber-400/60 mb-2 font-cinzel">Fecha 2 &middot; ${formatFechaFull(c.fecha2)}</p>
-          <div class="flex gap-2 overflow-x-auto pb-2">
-            ${f2.map((g,i) => `<div class="flex items-center gap-1.5 flex-shrink-0"><div class="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-bold ${i===0?'bg-amber-400 text-black':i===1?'bg-gray-300 text-black':i===2?'bg-amber-600 text-white':'bg-amber-500/15 text-amber-400 border border-amber-500/20'}">${i+1}</div><span class="text-[10px] text-amber-200/50 max-w-[60px] truncate">${g.participante.nombre.split(' ')[0]}</span>${i<f2.length-1?'<div class="w-3 h-px bg-amber-500/15"></div>':''}</div>`).join('')}
+          <p class="font-cinzel" style="font-size:10px;color:rgba(212,168,67,0.4);margin-bottom:8px">Fecha 2 &middot; ${fff(c.f2)}</p>
+          <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px">
+            ${f2.map((g,i)=>`<div style="display:flex;align-items:center;gap:6px;flex-shrink:0" title="${g.p.n}"><div style="width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;${i===0?'background:#d4a843;color:#1a1410':i===1?'background:#a0a0a0;color:#1a1410':i===2?'background:#b8762a;color:#fff':'background:rgba(212,168,67,0.08);color:#d4a843;border:1px solid rgba(212,168,67,0.12)'}">${i+1}</div><span style="font-size:10px;color:rgba(212,168,67,0.4);white-space:nowrap;max-width:50px;overflow:hidden;text-overflow:ellipsis">${g.p.n.length>8?g.p.n.substring(0,7)+'...':g.p.n}</span>${i<f2.length-1?'<div style="width:12px;height:1px;background:rgba(212,168,67,0.1)"></div>':''}</div>`).join('')}
           </div>
         </div>
       </div>
 
-      <!-- Actions -->
-      <div class="mt-6 flex flex-col gap-3 animate-fadeUp" style="animation-delay:0.8s">
-        <button onclick="exportPDF()" class="btn-3d">
-          <i class="fas fa-file-pdf mr-2"></i> Generar PDF para Imprimir <i class="fas fa-print ml-2"></i>
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px;animation:fadeUp 0.5s ease forwards;animation-delay:0.6s">
+        <button onclick="epdf()" class="boton-resplandor" style="width:100%;justify-content:center;padding:18px;font-size:14px">
+          <i class="fas fa-file-pdf"></i> Generar PDF para Imprimir
         </button>
-        <button onclick="reset()" class="w-full py-3 border border-amber-500/30 text-amber-300 hover:bg-amber-500/10 rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2">
-          <i class="fas fa-rotate-left"></i> Nuevo Sorteo
-        </button>
-        <p class="text-center text-xs text-amber-200/30 mt-2 pb-8">
-          <button onclick="if(confirm('Limpiar TODO?'))clearAll()" class="hover:text-amber-200/50 transition-colors underline">Comenzar desde cero</button>
+        <button onclick="rst()" style="width:100%;padding:14px;background:none;border:1px solid rgba(212,168,67,0.2);color:#d4a843;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px" onmouseover="this.style.background='rgba(212,168,67,0.08)'" onmouseout="this.style.background='none'"><i class="fas fa-rotate-left"></i> Nuevo Sorteo</button>
+        <p style="text-align:center;font-size:11px;color:rgba(212,168,67,0.25);padding-bottom:8px">
+          <button onclick="if(confirm('\u00bfLimpiar TODO?'))clr()" style="background:none;border:none;color:rgba(212,168,67,0.3);cursor:pointer;text-decoration:underline;transition:color 0.2s" onmouseover="this.style.color='rgba(212,168,67,0.5)'" onmouseout="this.style.color='rgba(212,168,67,0.3)'">Comenzar desde cero</button>
         </p>
       </div>
     </main>
   </div>`;
 }
 
-function getQuote(pos, total) {
-  if (pos === 1) return '"El esfuerzo constante forja la gloria eterna"';
-  if (pos === 2) return '"La perseverancia es el camino hacia la excelencia"';
-  if (pos === 3) return '"Cada paso adelante es una victoria sobre uno mismo"';
-  if (pos === total) return '"El cierre es solo el comienzo de una nueva era"';
-  return '"El trabajo duro siempre encuentra su reconocimiento"';
-}
-
-function parseBulkNames(text) {
-  const lines = text.split('\n');
-  const names = [];
-  for (const line of lines) {
-    const t = line.trim();
-    if (!t) continue;
-    if (t.includes(',')) names.push(...t.split(',').map(s => s.trim()).filter(s => s));
-    else names.push(t);
-  }
-  return names.filter(n => n.length > 0);
-}
-
 // ═══════════════════════════════════════════════════
 //  PDF EXPORT
 // ═══════════════════════════════════════════════════
-function exportPDF() {
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-  const W = doc.internal.pageSize.getWidth();
-  const M = 18;
-  const c = state.config;
-  const f1 = state.f1Ganadores;
-  const f2 = state.f2Ganadores;
-  const all = [...f1, ...f2];
-
-  // Header
-  doc.setFillColor(20, 14, 8);
-  doc.rect(0, 0, W, 42, 'F');
-  doc.setDrawColor(212, 168, 67);
-  doc.setLineWidth(1);
-  doc.line(M, 42, W - M, 42);
-  doc.setTextColor(212, 168, 67);
-  doc.setFontSize(18);
-  doc.setFont('helvetica', 'bold');
-  doc.text('ORDEN DE PRESENTACION', W / 2, 16, { align: 'center' });
-  doc.setTextColor(220, 200, 160);
-  doc.setFontSize(9);
-  doc.setFont('helvetica', 'normal');
-  doc.text('Sorteo de Triunfo, Gloria y Esfuerzo', W / 2, 24, { align: 'center' });
-  const now = new Date();
-  doc.setTextColor(160, 140, 100);
-  doc.setFontSize(6.5);
-  doc.text('Fecha del sorteo: ' + now.toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' }), W / 2, 34, { align: 'center' });
-
-  // Summary
-  let y = 50;
-  doc.setFillColor(250, 247, 240);
-  doc.setDrawColor(212, 168, 67);
-  doc.roundedRect(M, y, W - M * 2, 16, 2, 2, 'FD');
-  doc.setTextColor(100, 80, 50);
-  doc.setFontSize(7.5);
-  doc.setFont('helvetica', 'bold');
-  doc.text('Fecha 1: ' + c.fecha1 + '  |  ' + f1.length + ' premiados', M + 4, y + 6);
-  doc.text('Fecha 2: ' + c.fecha2 + '  |  ' + f2.length + ' premiados', M + 4, y + 12);
-  doc.text('Total: ' + all.length + '  |  Tiempo: ' + (all.length * c.tiempoPorPresentacion) + ' min', W - M - 4, y + 9, { align: 'right' });
-
-  y = 72;
-
-  // Fecha 1 table
-  if (f1.length > 0) {
-    doc.setTextColor(212, 168, 67);
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'bold');
-    doc.text('FECHA 1 - ' + c.fecha1, M, y);
-    doc.autoTable({
-      startY: y + 4, head: [['#', 'Nombre / Grupo', 'Tipo', 'Tiempo', 'Orden']],
-      body: f1.map((g, i) => [`${i + 1}`, g.participante.nombre, g.participante.tipo === 'grupo' ? 'Grupo' : 'Individual', c.tiempoPorPresentacion + ' min', g.orderLabel]),
-      theme: 'plain',
-      headStyles: { fillColor: [25, 18, 10], textColor: [212, 168, 67], fontStyle: 'bold', fontSize: 7.5, halign: 'center', cellPadding: 3 },
-      bodyStyles: { fontSize: 7.5, cellPadding: 3.5, textColor: [40, 35, 30] },
-      columnStyles: { 0: { halign: 'center', cellWidth: 10 }, 1: { fontStyle: 'bold' }, 2: { halign: 'center', cellWidth: 26 }, 3: { halign: 'center', cellWidth: 20 }, 4: { halign: 'center', fontStyle: 'italic' } },
-      alternateRowStyles: { fillColor: [250, 247, 240] },
-      margin: { left: M, right: M },
-    });
-    y = doc.lastAutoTable.finalY + 8;
+function epdf(){
+  const {jsPDF}=window.jspdf,doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'}),W=doc.internal.pageSize.getWidth(),M=18,c=S.cfg,f1=S.g1,f2=S.g2,al=[...f1,...f2];
+  doc.setFillColor(12,8,4);doc.rect(0,0,W,38,'F');
+  doc.setDrawColor(212,168,67);doc.setLineWidth(1);doc.line(M,38,W-M,38);
+  doc.setTextColor(212,168,67);doc.setFontSize(17);doc.setFont('helvetica','bold');
+  doc.text('ORDEN DE PRESENTACION',W/2,14,{align:'center'});
+  doc.setTextColor(200,180,140);doc.setFontSize(9);doc.setFont('helvetica','normal');
+  doc.text('Sorteo de Triunfo, Gloria y Esfuerzo',W/2,22,{align:'center'});
+  const n=new Date();doc.setTextColor(140,120,90);doc.setFontSize(6.5);
+  doc.text('Fecha: '+n.toLocaleDateString('es-ES',{weekday:'long',year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}),W/2,32,{align:'center'});
+  let y=48;doc.setFillColor(250,247,240);doc.setDrawColor(212,168,67);doc.roundedRect(M,y,W-M*2,14,2,2,'FD');
+  doc.setTextColor(90,70,40);doc.setFontSize(7.5);doc.setFont('helvetica','bold');
+  doc.text('Fecha 1: '+c.f1+' | '+f1.length+' premiados',M+4,y+6);
+  doc.text('Fecha 2: '+c.f2+' | '+f2.length+' premiados',M+4,y+12);
+  doc.text('Total: '+al.length+' | Tiempo: '+(al.length*c.tp)+' min',W-M-4,y+9,{align:'right'});
+  y=68;
+  function mt(gs,fn,fs){
+    if(y>250){doc.addPage();y=18}
+    doc.setTextColor(212,168,67);doc.setFontSize(10);doc.setFont('helvetica','bold');
+    doc.text('FECHA '+fn+' - '+fs,M,y);
+    doc.autoTable({startY:y+4,head:[['#','Nombre / Grupo','Tipo','Tiempo','Orden']],
+      body:gs.map((g,i)=>[`${i+1}`,g.p.n,g.p.t==='grupo'?'Grupo':'Individual',c.tp+' min',g.lb]),
+      theme:'plain',headStyles:{fillColor:[12,8,4],textColor:[212,168,67],fontStyle:'bold',fontSize:7.5,halign:'center',cellPadding:3},
+      bodyStyles:{fontSize:7.5,cellPadding:3.5,textColor:[35,30,25]},
+      columnStyles:{0:{halign:'center',cellWidth:10},1:{fontStyle:'bold'},2:{halign:'center',cellWidth:26},3:{halign:'center',cellWidth:20},4:{halign:'center',fontStyle:'italic'}},
+      alternateRowStyles:{fillColor:[250,247,240]},margin:{left:M,right:M}});
+    y=doc.lastAutoTable.finalY+8;
   }
-
-  // Fecha 2 table
-  if (f2.length > 0) {
-    if (y > 240) { doc.addPage(); y = 18; }
-    doc.setTextColor(212, 168, 67);
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'bold');
-    doc.text('FECHA 2 - ' + c.fecha2, M, y);
-    doc.autoTable({
-      startY: y + 4, head: [['#', 'Nombre / Grupo', 'Tipo', 'Tiempo', 'Orden']],
-      body: f2.map((g, i) => [`${i + 1}`, g.participante.nombre, g.participante.tipo === 'grupo' ? 'Grupo' : 'Individual', c.tiempoPorPresentacion + ' min', g.orderLabel]),
-      theme: 'plain',
-      headStyles: { fillColor: [25, 18, 10], textColor: [212, 168, 67], fontStyle: 'bold', fontSize: 7.5, halign: 'center', cellPadding: 3 },
-      bodyStyles: { fontSize: 7.5, cellPadding: 3.5, textColor: [40, 35, 30] },
-      columnStyles: { 0: { halign: 'center', cellWidth: 10 }, 1: { fontStyle: 'bold' }, 2: { halign: 'center', cellWidth: 26 }, 3: { halign: 'center', cellWidth: 20 }, 4: { halign: 'center', fontStyle: 'italic' } },
-      alternateRowStyles: { fillColor: [250, 247, 240] },
-      margin: { left: M, right: M },
-    });
-  }
-
-  // Footer
-  const pages = doc.internal.pages.length;
-  for (let i = 1; i <= pages; i++) {
-    doc.setPage(i);
-    const by = doc.internal.pageSize.getHeight() - 10;
-    doc.setDrawColor(212, 168, 67);
-    doc.setLineWidth(0.5);
-    doc.line(M, by - 4, W - M, by - 4);
-    doc.setTextColor(140, 130, 110);
-    doc.setFontSize(6);
-    doc.text('Sorteo de Triunfo y Gloria - Que el esfuerzo y la dedicacion brillen en cada presentacion', W / 2, by, { align: 'center' });
-  }
-
-  doc.save('sorteo-presentacion-' + new Date().toISOString().split('T')[0] + '.pdf');
+  if(f1.length>0)mt(f1,1,c.f1);
+  if(f2.length>0)mt(f2,2,c.f2);
+  for(let i=1;i<=doc.internal.pages.length;i++){doc.setPage(i);const by=doc.internal.pageSize.getHeight()-10;doc.setDrawColor(212,168,67);doc.setLineWidth(0.5);doc.line(M,by-4,W-M,by-4);doc.setTextColor(130,115,85);doc.setFontSize(6);doc.text('Docente: Mg Mario Quiroz | Curso: Semi\u00f3tica de la Imagen 2026 | Sorteo de Triunfo y Gloria',W/2,by,{align:'center'});}
+  doc.save('sorteo-presentacion-'+new Date().toISOString().split('T')[0]+'.pdf');
 }
 
 // ═══════════════════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════════════════
-createParticles();
-render();
+mkp();rdr();
 </script>
 </body>
 </html>
