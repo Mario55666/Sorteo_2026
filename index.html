@@ -127,8 +127,8 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 <div id="app" class="page-content" style="position:relative;z-index:1"></div>
 <div id="fallback-controls" style="position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:10001;display:none;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center;background:rgba(10,7,5,0.92);border:1px solid rgba(212,168,67,0.28);border-radius:14px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,0.45)">
   <button id="fallback-reveal" type="button" style="padding:12px 18px;border-radius:10px;border:1px solid rgba(212,168,67,0.3);background:#d4a843;color:#1a1410;font-family:Cinzel,serif;font-weight:700;cursor:pointer">REVELAR</button>
-  <button id="fallback-next" type="button" style="padding:12px 18px;border-radius:10px;border:1px solid rgba(212,168,67,0.3);background:rgba(212,168,67,0.16);color:#f5ebd0;font-family:Cinzel,serif;font-weight:700;cursor:pointer">PRIMERA FECHA</button>
-  <button id="fallback-next-2" type="button" style="padding:12px 18px;border-radius:10px;border:1px solid rgba(212,168,67,0.18);background:rgba(255,255,255,0.06);color:rgba(245,235,208,0.92);font-family:Cinzel,serif;font-weight:700;cursor:pointer">SEGUNDA FECHA</button>
+  <button id="fallback-next" type="button" style="padding:12px 18px;border-radius:10px;border:1px solid rgba(96,165,250,0.35);background:rgba(59,130,246,0.18);color:#dbeafe;font-family:Cinzel,serif;font-weight:700;cursor:pointer">PRIMERA FECHA</button>
+  <button id="fallback-next-2" type="button" style="padding:12px 18px;border-radius:10px;border:1px solid rgba(192,132,252,0.35);background:rgba(168,85,247,0.18);color:#f3e8ff;font-family:Cinzel,serif;font-weight:700;cursor:pointer">SEGUNDA FECHA</button>
 </div>
 <div class="footer-docente">D3magindesign @</div>
 
@@ -138,13 +138,14 @@ function sv(d){try{localStorage.setItem(SK,JSON.stringify(d))}catch(e){}}
 function ld(){try{const r=localStorage.getItem(SK);return r?JSON.parse(r):null}catch(e){return null}}
 function cl(){localStorage.removeItem(SK)}
 
-let S=ld()||{scr:'setup',P:[],cfg:{f1:'',f2:'',tp:10,p1:1,p2:1},g1:[],g2:[],ri:0,rf:1,irv:false,em:'ind',nm:'',tp2:'ind',bt:'',btp:'ind',err:'',sc:true,showHelp:true};
+let S=ld()||{scr:'setup',P:[],cfg:{f1:'',f2:'',tp:10,p1:1,p2:1,useF2:true},g1:[],g2:[],ri:0,rf:1,irv:false,em:'ind',nm:'',tp2:'ind',bt:'',btp:'ind',err:'',sc:true,showHelp:true};
 function ps(){sv(S)}
 
 function ol(p,t){if(p===1)return'PRIMER LUGAR';if(p===2)return'SEGUNDO LUGAR';if(p===3)return'TERCER LUGAR';if(p===t)return'Cierre de Presentaciones';return'Presentacion #'+p}
 function ff(s){if(!s)return'Sin fecha';const d=new Date(s+'T00:00:00');return d.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'short',year:'numeric'})}
 function fff(s){if(!s)return'Sin fecha';const d=new Date(s+'T00:00:00');return d.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}
 function gq(p,t){if(p===1)return'El esfuerzo constante forja la gloria eterna';if(p===2)return'La perseverancia es el camino hacia la excelencia';if(p===3)return'Cada paso adelante es una victoria sobre uno mismo';if(p===t)return'El cierre es solo el comienzo de una nueva era';return'El trabajo duro siempre encuentra su reconocimiento'}
+function nc(i,n){const c=['#fca5a5','#fdba74','#fcd34d','#86efac','#67e8f9','#93c5fd','#c4b5fd','#f9a8d4','#fda4af','#bef264'];return c[Math.abs((i*7+n.length)%c.length)]}
 function pb(t){const l=t.split('\n'),n=[];for(const ln of l){const tr=ln.trim();if(!tr)continue;if(tr.includes(','))n.push(...tr.split(',').map(s=>s.trim()).filter(s=>s));else n.push(tr)}return n.filter(s=>s.length>0)}
 function cg(){return S.rf===1?S.g1:S.g2}
 function cg2(){const g=cg();return g&&g.length>S.ri?g[S.ri]:null}
@@ -167,7 +168,7 @@ function sem(m){S.em=m;S.err='';rdr()}
 function stp(t){S.tp2=t;rdr()}
 function sbtp(t){S.btp=t;rdr()}
 
-function go(){if(!vc()){rdr();return}sm('sort');setTimeout(()=>{const sh=[...S.P];for(let i=sh.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sh[i],sh[j]]=[sh[j],sh[i]]}const a1=sh.slice(0,S.cfg.p1),a2=sh.slice(S.cfg.p1,S.cfg.p1+S.cfg.p2);S.g1=a1.map((p,i)=>({p:p,pos:i+1,lb:ol(i+1,a1.length)}));S.g2=a2.map((p,i)=>({p:p,pos:i+1,lb:ol(i+1,a2.length)}));S.ri=0;S.rf=1;S.irv=false;sm('rev')},4000)}
+function go(){if(!vc()){rdr();return}sm('sort');setTimeout(()=>{const sh=[...S.P];for(let i=sh.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sh[i],sh[j]]=[sh[j],sh[i]]}const p2=S.cfg.useF2?S.cfg.p2:0;const a1=sh.slice(0,S.cfg.p1),a2=sh.slice(S.cfg.p1,S.cfg.p1+p2);S.g1=a1.map((p,i)=>({p:p,pos:i+1,lb:ol(i+1,a1.length)}));S.g2=S.cfg.useF2?a2.map((p,i)=>({p:p,pos:i+1,lb:ol(i+1,a2.length)})):[];S.ri=0;S.rf=1;S.irv=false;sm('rev')},4000)}
 
 function rv(){if(S.irv)return;const g=cg2();if(!g){S.err='No hay ganador para revelar';rdr();return}S.irv=true;ps();var d=document.createElement('div');d.className='cam-flash';document.body.appendChild(d);setTimeout(function(){d.remove()},800);setTimeout(function(){if(g&&g.pos<=3)fc(80,100);else fc(35,60)},500);rdr()}
 
@@ -175,15 +176,15 @@ function nx(){var g=cg();if(!g||!g.length){sm('res');return}if(S.ri<g.length-1){
 function bindActionDelegates(){var h=function(ev){var b=ev.target.closest('button');if(!b)return;var oc=(b.getAttribute('onclick')||'').replace(/\s+/g,' ').trim();var act=(b.getAttribute('data-action')||'').trim();if(oc==='nx()'||act==='next'){ev.preventDefault();ev.stopPropagation();try{nx()}catch(e){console.error(e)}}else if(oc==='rv()'||act==='reveal'){ev.preventDefault();ev.stopPropagation();try{rv()}catch(e){console.error(e)}}};document.addEventListener('click',h,{capture:true});document.addEventListener('pointerup',h,{capture:true})}
 function sk(){fg();sm('res')}
 function rst(){S.scr='setup';S.g1=[];S.g2=[];S.ri=0;S.rf=1;S.irv=false;ps();rdr()}
-function clr(){S={scr:'setup',P:[],cfg:{f1:'',f2:'',tp:10,p1:1,p2:1},g1:[],g2:[],ri:0,rf:1,irv:false,em:'ind',nm:'',tp2:'ind',bt:'',btp:'ind',err:'',sc:true,showHelp:true};cl();rdr()}
+function clr(){S={scr:'setup',P:[],cfg:{f1:'',f2:'',tp:10,p1:1,p2:1,useF2:true},g1:[],g2:[],ri:0,rf:1,irv:false,em:'ind',nm:'',tp2:'ind',bt:'',btp:'ind',err:'',sc:true,showHelp:true};cl();rdr()}
 
 function rs(){
-  var c=S.cfg,P=S.P,tt=c.p1+c.p2,fa=Math.max(0,tt-P.length),cG=P.filter(function(x){return x.t==='grupo'}).length,cI=P.filter(function(x){return x.t==='ind'}).length;
+  var c=S.cfg,P=S.P,p2=c.useF2?c.p2:0,tt=c.p1+p2,fa=Math.max(0,tt-P.length),cG=P.filter(function(x){return x.t==='grupo'}).length,cI=P.filter(function(x){return x.t==='ind'}).length;
   var h='<div class="page-content" style="min-height:100vh;display:flex;flex-direction:column">';
   h+='<header style="position:relative;padding:24px 16px 16px;text-align:center"><div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(212,168,67,0.03),transparent)"></div>';
   h+='<div style="position:relative;z-index:10;animation:fadeUp 0.6s ease forwards"><div style="display:flex;justify-content:center;margin-bottom:12px"><i class="fas fa-trophy trophy-shine" style="font-size:52px;color:#d4a843"></i></div>';
   h+='<h1 class="font-cinzel golden-text" style="font-size:30px;font-weight:700;margin-bottom:4px">Sorteo de Triunfo</h1>';
-  h+='<p style="color:rgba(212,168,67,0.45);font-size:13px;letter-spacing:1px;margin-bottom:14px">Dos fechas. Un solo destino de gloria.</p>';
+  h+='<p style="color:rgba(212,168,67,0.45);font-size:13px;letter-spacing:1px;margin-bottom:14px">Una o dos fechas. Un solo destino de gloria.</p>';
   if(P.length>0||c.f1||c.f2)h+='<button onclick="if(confirm(&apos;Estas seguro de limpiar TODOS los datos?&apos;))clr()" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:10px;border:1px solid rgba(239,68,68,0.3);background:rgba(239,68,68,0.08);color:rgba(239,68,68,0.7);font-size:11px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background=&apos;rgba(239,68,68,0.15)&apos;;this.style.color=&apos;rgba(239,68,68,0.9)&apos;" onmouseout="this.style.background=&apos;rgba(239,68,68,0.08)&apos;;this.style.color=&apos;rgba(239,68,68,0.7)&apos;"><i class="fas fa-eraser"></i> Limpiar Todo</button>';
   h+='</div></header>';
 
@@ -225,18 +226,23 @@ function rs(){
   h+='<button onclick="S.sc=!S.sc;rdr()" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;color:#d4a843;cursor:pointer;margin-bottom:12px;font-family:Cinzel,serif;font-size:13px;font-weight:600"><span><i class="fas fa-cog" style="margin-right:8px"></i>Configuracion del Sorteo</span><i class="fas fa-chevron-down" style="font-size:10px;transition:transform 0.3s;transform:rotate('+(S.sc?180:0)+'deg)"></i></button>';
   if(S.sc){
     h+='<div style="display:flex;flex-direction:column;gap:12px">';
-    h+='<div style="background:rgba(212,168,67,0.04);border:1px solid rgba(212,168,67,0.1);border-radius:12px;padding:14px">';
-    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="width:24px;height:24px;border-radius:50%;background:rgba(212,168,67,0.15);color:#d4a843;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid rgba(212,168,67,0.25);font-family:Cinzel,serif">1</span><span style="font-size:12px;font-weight:600;color:#d4a843">Fecha de Presentacion 1</span></div>';
+    h+='<div style="background:rgba(59,130,246,0.08);border:1px solid rgba(96,165,250,0.24);border-radius:12px;padding:14px">';
+    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="width:24px;height:24px;border-radius:50%;background:rgba(59,130,246,0.18);color:#93c5fd;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid rgba(96,165,250,0.35);font-family:Cinzel,serif">1</span><span style="font-size:12px;font-weight:600;color:#93c5fd">Fecha de Presentacion 1</span></div>';
     h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
     h+='<div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px">Fecha</label><input type="date" value="'+c.f1+'" onchange="uc({f1:this.value})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>';
     h+='<div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px">Premiados</label><input type="number" min="1" max="50" value="'+c.p1+'" onchange="uc({p1:parseInt(this.value)||1})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>';
     h+='</div></div>';
-    h+='<div style="background:rgba(212,168,67,0.04);border:1px solid rgba(212,168,67,0.1);border-radius:12px;padding:14px">';
-    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="width:24px;height:24px;border-radius:50%;background:rgba(212,168,67,0.15);color:#d4a843;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid rgba(212,168,67,0.25);font-family:Cinzel,serif">2</span><span style="font-size:12px;font-weight:600;color:#d4a843">Fecha de Presentacion 2</span></div>';
-    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
-    h+='<div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px">Fecha</label><input type="date" value="'+c.f2+'" onchange="uc({f2:this.value})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>';
-    h+='<div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px">Premiados</label><input type="number" min="1" max="50" value="'+c.p2+'" onchange="uc({p2:parseInt(this.value)||1})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>';
-    h+='</div></div>';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;margin-bottom:12px;background:rgba(168,85,247,0.08);border:1px solid rgba(192,132,252,0.24);border-radius:12px">';
+    h+='<div style="display:flex;align-items:center;gap:8px"><span style="width:24px;height:24px;border-radius:50%;background:rgba(168,85,247,0.18);color:#d8b4fe;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid rgba(192,132,252,0.35);font-family:Cinzel,serif">2</span><span style="font-size:12px;font-weight:600;color:#d8b4fe">Fecha de Presentacion 2</span></div>';
+    h+='<label style="display:inline-flex;align-items:center;gap:8px;color:#f3e8ff;font-size:11px;cursor:pointer"><input type="checkbox" '+(c.useF2?'checked':'')+' onchange="uc({useF2:this.checked})" style="accent-color:#a855f7"> Activar</label>';
+    h+='</div>';
+    if(c.useF2){
+      h+='<div style="background:rgba(168,85,247,0.08);border:1px solid rgba(192,132,252,0.24);border-radius:12px;padding:14px">';
+      h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
+      h+='<div><label style="font-size:10px;color:rgba(216,180,254,0.8);display:block;margin-bottom:3px">Fecha</label><input type="date" value="'+c.f2+'" onchange="uc({f2:this.value})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(192,132,252,0.28);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>';
+      h+='<div><label style="font-size:10px;color:rgba(216,180,254,0.8);display:block;margin-bottom:3px">Premiados</label><input type="number" min="1" max="50" value="'+c.p2+'" onchange="uc({p2:parseInt(this.value)||1})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(192,132,252,0.28);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>';
+      h+='</div></div>';
+    }
     h+='<div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px"><i class="fas fa-clock" style="font-size:9px;margin-right:4px"></i>Tiempo por presentacion (min)</label><input type="number" min="1" max="120" value="'+c.tp+'" onchange="uc({tp:parseInt(this.value)||10})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>';
     h+='<div style="display:flex;align-items:center;justify-content:space-between;font-size:11px;background:rgba(0,0,0,0.2);border-radius:8px;padding:10px;border:1px solid rgba(212,168,67,0.1)"><span style="color:rgba(212,168,67,0.5)">Total premiados: <strong style="color:#d4a843">'+tt+'</strong></span>'+(fa>0?'<span style="color:#ef4444;font-size:10px">Faltan '+fa+' participantes</span>':(P.length>0?'<span style="color:#22c55e;font-size:10px">Listo para sortear</span>':''))+'</div>';
     h+='</div>';
@@ -284,7 +290,7 @@ function rs(){
       h+='<div style="display:flex;align-items:center;gap:10px;min-width:0;flex:1">';
       h+='<span style="font-size:11px;color:rgba(212,168,67,0.4);width:24px;text-align:center;flex-shrink:0;font-family:Cinzel,serif">#'+(pi+1)+'</span>';
       h+='<div style="min-width:0;flex:1"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
-      h+='<span style="font-size:13px;font-weight:600;color:#f5ebd0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+p.n+'</span>';
+      h+='<span style="font-size:13px;font-weight:700;color:'+nc(pi,p.n)+';white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 0 10px rgba(255,255,255,0.05)">'+p.n+'</span>';
       h+='<span style="font-size:10px;padding:2px 8px;border-radius:6px;flex-shrink:0;'+(p.t==='grupo'?'background:rgba(212,168,67,0.1);color:#d4a843;border:1px solid rgba(212,168,67,0.15)':'background:rgba(59,130,246,0.06);color:#60a5fa;border:1px solid rgba(59,130,246,0.12)')+'">'+(p.t==='grupo'?'Grupo':'Individual')+'</span>';
       h+='</div></div></div>';
       h+='<button onclick="rm(&apos;&apos;+p.id+&apos;&apos;)" style="background:none;border:none;color:rgba(239,68,68,0.3);cursor:pointer;padding:6px;border-radius:6px;transition:all 0.2s;flex-shrink:0" onmouseover="this.style.color=&apos;#ef4444&apos;;this.style.background=&apos;rgba(239,68,68,0.08)&apos;" onmouseout="this.style.color=&apos;rgba(239,68,68,0.3)&apos;;this.style.background=&apos;none&apos;"><i class="fas fa-trash" style="font-size:12px"></i></button>';
@@ -405,19 +411,16 @@ function rr(){
   h+='</div>';
 
   if(S.irv){
-    h+='<div style="margin-top:40px;animation:fadeUp 0.6s ease forwards;display:flex;flex-direction:column;align-items:center;gap:14px">';
-    h+='<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">';
-    h+='<span style="padding:12px 18px;border-radius:10px;border:1px solid rgba(212,168,67,0.28);background:rgba(212,168,67,0.12);color:#f5ebd0;font-family:Cinzel,serif;font-size:14px;letter-spacing:1px">PRIMERA FECHA</span>';
-    h+='<span style="padding:12px 18px;border-radius:10px;border:1px solid rgba(212,168,67,0.18);background:rgba(255,255,255,0.04);color:rgba(245,235,208,0.85);font-family:Cinzel,serif;font-size:14px;letter-spacing:1px">SEGUNDA FECHA</span>';
-    h+='</div>';
+    h+='<div style="margin-top:24px;animation:fadeUp 0.6s ease forwards;display:flex;flex-direction:column;align-items:center;gap:12px">';
+    h+='<button onclick="nx()" class="boton-3d" style="min-width:320px;font-size:16px;padding:16px 28px">'+(ls?(nf?'<i class="fas fa-calendar-days"></i> SIGUIENTE FECHA':'<i class="fas fa-trophy"></i> VER RESULTADOS FINALES'):'<i class="fas fa-forward"></i> SIGUIENTE GANADOR')+'</button>';
     if(t3){
       h+='<p style="color:rgba(212,168,67,0.5);font-size:12px;letter-spacing:1px;font-family:Cinzel,serif;margin-top:4px"><i class="fas fa-sparkles" style="margin-right:6px"></i>'+(g.pos===1?'Gloria al Primer Lugar':g.pos===2?'Honor al Segundo Lugar':'Reconocimiento al Tercer Lugar')+'</p>';
     }
     h+='</div>';
   }else{
-    h+='<div style="margin-top:24px;animation:fadeUp 0.5s ease forwards;display:flex;flex-direction:column;align-items:center;gap:10px">';
-    h+='<button onclick="rv()" class="boton-revelar"><i class="fas fa-eye"></i> REVELAR PREMIADO</button>';
-    h+='<p style="color:rgba(212,168,67,0.2);font-size:11px;font-family:Cinzel,serif;letter-spacing:1px">Presentacion '+(S.ri+1)+' de '+gs.length+'</p>';
+    h+='<div style="margin-top:24px;animation:fadeUp 0.5s ease forwards;display:flex;flex-direction:column;align-items:center;gap:12px">';
+    h+='<button onclick="rv()" class="boton-revelar" style="min-width:320px;box-shadow:0 0 0 1px rgba(212,168,67,0.2),0 12px 30px rgba(212,168,67,0.18)"><i class="fas fa-eye"></i> REVELAR PREMIADO</button>';
+    h+='<p style="color:rgba(212,168,67,0.35);font-size:11px;font-family:Cinzel,serif;letter-spacing:1px">Presentacion '+(S.ri+1)+' de '+gs.length+'</p>';
     h+='</div>';
   }
 
@@ -580,9 +583,11 @@ function updateFallbackControls(){
   box.style.display='flex';
   br.style.display=S.irv?'none':'inline-flex';
   bn.style.display=S.irv?'inline-flex':'none';
-  b2.style.display=S.irv?'inline-flex':'none';
-  bn.textContent='PRIMERA FECHA';
-  b2.textContent='SEGUNDA FECHA';
+  b2.style.display='none';
+  var g=cg();
+  var ls=g&&g.length?S.ri===g.length-1:false;
+  var nf=S.rf===1&&S.g2.length>0;
+  bn.textContent=ls?(nf?'SIGUIENTE FECHA':'VER RESULTADOS FINALES'):'SIGUIENTE GANADOR';
 }
 function bindFallbackControls(){
   var br=document.getElementById('fallback-reveal');
