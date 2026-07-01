@@ -13,22 +13,15 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{font-family:'Inter',sans-serif;background:#0a0705;color:#f5ebd0;overflow-x:hidden;min-height:100vh}
 .font-cinzel{font-family:'Cinzel',serif}
-
-/* Golden text */
 .golden-text{background:linear-gradient(90deg,#d4a843,#fff5cc,#d4a843,#fff5cc,#d4a843);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 3s linear infinite}
 @keyframes shimmer{0%,100%{background-position:-200% center}50%{background-position:200% center}}
-
-/* Glass */
 .glass{background:rgba(30,22,12,0.8);backdrop-filter:blur(12px);border:1px solid rgba(212,168,67,0.12);border-radius:16px}
-
-/* Scrollbar */
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:#0a0705}
 ::-webkit-scrollbar-thumb{background:rgba(212,168,67,0.3);border-radius:3px}
 input[type="date"]{color-scheme:dark}
 input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 
-/* Animations */
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes slideInLeft{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:translateX(0)}}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
@@ -39,186 +32,113 @@ input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-
 @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes progressFill{from{width:0%}to{width:100%}}}
 
-/* ════════════════════════════════════════════
-   EFECTO 1: REVELACION MISTERIOSA
-   ════════════════════════════════════════════ */
-.tarjeta-revelacion {
-  position: relative;
-  width: 100%;
-  max-width: 480px;
-  min-height: 360px;
-  border-radius: 16px;
-  overflow: hidden;
-  text-align: center;
-  margin: 0 auto;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-}
-.contenido-oculto, .cubierta {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.6s ease;
-  padding: 2rem;
-}
-.contenido-oculto {
-  background: linear-gradient(135deg, #1e1608 0%, #2a1e0a 100%);
-  color: #f5ebd0;
-  border: 1px solid rgba(212,168,67,0.2);
-  border-radius: 16px;
-}
-.cubierta {
-  background: linear-gradient(135deg, #1a1410 0%, #2d2010 50%, #1a1410 100%);
-  color: #d4a843;
-  transform: translateY(0);
-  border: 2px solid rgba(212,168,67,0.35);
-  border-radius: 16px;
-  cursor: pointer;
-  z-index: 5;
-}
-/* Al pasar el cursor, la cubierta se desplaza hacia arriba */
-.tarjeta-revelacion:hover .cubierta {
-  transform: translateY(-100%);
-}
+/* ═══════════════════════════════════════════════════
+   EFECTO 1: REVELACION CINEMATOGRAFICA
+   ═══════════════════════════════════════════════════ */
 
-/* ════════════════════════════════════════════
-   EFECTO 2: BOTON 3D TACTIL
-   ════════════════════════════════════════════ */
-.boton-3d {
-  background-color: #d4a843;
-  color: #1a1410;
-  padding: 16px 40px;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  font-family: 'Cinzel', serif;
-  letter-spacing: 1px;
-  box-shadow: 0px 8px 0px #8a6a1f;
-  transition: all 0.12s ease;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-/* Efecto de presionado al pasar el cursor */
-.boton-3d:hover {
-  transform: translateY(4px);
-  box-shadow: 0px 4px 0px #8a6a1f;
-}
-.boton-3d:active {
-  transform: translateY(8px);
-  box-shadow: 0px 0px 0px #8a6a1f;
-}
+.tarjeta-revelacion {position:relative;width:100%;max-width:540px;height:auto;min-height:420px;border-radius:20px;overflow:hidden;text-align:center;margin:0 auto;box-shadow:0 12px 48px rgba(0,0,0,0.6)}
 
-/* ════════════════════════════════════════════
-   EFECTO 3: RESPLANDOR LUMINOSO
-   ════════════════════════════════════════════ */
-.boton-resplandor {
-  background-color: transparent;
-  color: #d4a843;
-  padding: 15px 40px;
-  border: 2px solid #d4a843;
-  border-radius: 10px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-family: 'Cinzel', serif;
-  letter-spacing: 1px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-/* El resplandor se activa al interactuar */
-.boton-resplandor:hover {
-  background-color: rgba(212, 168, 67, 0.15);
-  color: #fff5cc;
-  box-shadow: 0 0 10px #d4a843,
-              0 0 40px #d4a843,
-              0 0 80px #d4a843;
-  border-color: #fff5cc;
-}
+/* FASE 0: CAPA DE OSCURIDAD ABSOLUTA */
+.capa-oscuridad {position:absolute;inset:0;background:#050300;z-index:50;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:1}
+.tarjeta-revelacion.revealed .capa-oscuridad {animation:fadeOutDark 2.5s ease forwards;pointer-events:none}
+@keyframes fadeOutDark {0%{opacity:1}100%{opacity:0}}
 
-/* Resplandor tarjeta */
-.resplandor-tarjeta {
-  border: 2px solid #d4a843;
-  border-radius: 16px;
-  transition: all 0.3s ease;
-}
-.resplandor-tarjeta:hover {
-  background-color: rgba(212, 168, 67, 0.08);
-  box-shadow: 0 0 10px #d4a843,
-              0 0 40px rgba(212, 168, 67, 0.5),
-              0 0 80px rgba(212, 168, 67, 0.2);
-}
+.punto-luz {position:absolute;width:5px;height:5px;border-radius:50%;background:rgba(212,168,67,0.4);box-shadow:0 0 6px rgba(212,168,67,0.2);animation:puntoPulse 2s ease-in-out infinite}
+@keyframes puntoPulse {0%,100%{opacity:0.3;transform:scale(1)}50%{opacity:1;transform:scale(2.5)}}
 
-/* ════════════════════════════════════════════
-   FOOTER DOCENTE - SIEMPRE VISIBLE
-   ════════════════════════════════════════════ */
-.footer-docente {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 100;
-  background: rgba(10, 7, 5, 0.95);
-  border-top: 1px solid rgba(212,168,67,0.15);
-  text-align: center;
-  padding: 12px 16px;
-  font-family: 'Cinzel', serif;
-  font-size: 11px;
-  color: rgba(212,168,67,0.5);
-  letter-spacing: 1px;
-}
-.footer-docente strong {
-  color: #d4a843;
-  font-weight: 600;
-}
+.silueta-misterio {font-size:80px;opacity:0.3;filter:blur(1px);animation:siluetaFade 3s ease-in-out infinite}
+@keyframes siluetaFade {0%,100%{opacity:0.2}50%{opacity:0.45}}
 
-/* Page container with footer padding */
-.page-content {
-  padding-bottom: 50px;
-}
+.texto-suspenso {font-family:'Cinzel',serif;font-size:15px;color:rgba(212,168,67,0.6);letter-spacing:4px;text-transform:uppercase;margin-top:24px;animation:textoSuspenso 2.5s ease-in-out infinite}
+@keyframes textoSuspenso {0%,100%{opacity:0.4;letter-spacing:4px}50%{opacity:0.9;letter-spacing:7px}}
+
+.puntos-animados::after {content:'';animation:puntosAnim 1.5s steps(4) infinite}
+@keyframes puntosAnim {0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}100%{content:''}}
+
+/* FASE 1: RAYOS DE LUZ DORADA */
+.rayos-luz {position:absolute;inset:0;z-index:40;border-radius:20px;opacity:0}
+.tarjeta-revelacion.revealed .rayos-luz {animation:rayosEntrar 2.5s ease-out forwards}
+
+.rayo {position:absolute;top:50%;left:50%;width:2px;height:0;background:linear-gradient(to bottom,transparent,rgba(212,168,67,0.3),transparent);transform-origin:center top}
+.tarjeta-revelacion.revealed .rayo {animation:rayoGrow 2s ease-out forwards}
+.rayo:nth-child(1){transform:translate(-50%,0) rotate(-30deg);animation-delay:0.2s}
+.rayo:nth-child(2){transform:translate(-50%,0) rotate(-15deg);animation-delay:0.4s}
+.rayo:nth-child(3){transform:translate(-50%,0) rotate(0deg);animation-delay:0.1s}
+.rayo:nth-child(4){transform:translate(-50%,0) rotate(15deg);animation-delay:0.5s}
+.rayo:nth-child(5){transform:translate(-50%,0) rotate(30deg);animation-delay:0.3s}
+.rayo:nth-child(6){transform:translate(-50%,0) rotate(-45deg);animation-delay:0.6s}
+.rayo:nth-child(7){transform:translate(-50%,0) rotate(45deg);animation-delay:0.35s}
+
+@keyframes rayosEntrar {0%{opacity:0}30%{opacity:0.8}100%{opacity:0.4}}
+@keyframes rayoGrow {0%{height:0}100%{height:220px}}
+
+/* FASE 2: DESTELLO CENTRAL */
+.destello-central {position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(0);width:60px;height:60px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,0.8),rgba(212,168,67,0.3),transparent 70%);z-index:35;opacity:0}
+.tarjeta-revelacion.revealed .destello-central {animation:destelloExpande 2s ease-out 0.3s forwards}
+@keyframes destelloExpande {0%{transform:translate(-50%,-50%) scale(0);opacity:0}20%{transform:translate(-50%,-50%) scale(3);opacity:1}60%{transform:translate(-50%,-50%) scale(8);opacity:0.6}100%{transform:translate(-50%,-50%) scale(15);opacity:0}}
+
+/* FASE 3: CONTENIDO QUE EMERGE */
+.contenido-revelado {display:none;flex-direction:column;justify-content:flex-start;align-items:center;padding:2.5rem 2rem 2rem;position:relative;z-index:30;background:linear-gradient(135deg,#1e1608,#2a1e0a);border:1px solid rgba(212,168,67,0.2);border-radius:20px;min-height:420px}
+.tarjeta-revelacion.revealed .contenido-revelado {display:flex;animation:contenidoEmergencia 2s ease-out 0.8s forwards}
+@keyframes contenidoEmergencia {0%{opacity:0;filter:brightness(0.1) blur(10px)}40%{opacity:0.5;filter:brightness(0.5) blur(5px)}100%{opacity:1;filter:brightness(1) blur(0)}}
+
+/* FASE 4: BRILLO FINAL AURORA */
+.aurora-brilho {position:absolute;inset:0;z-index:25;border-radius:20px;background:radial-gradient(ellipse at 50% 30%,rgba(212,168,67,0.15),transparent 60%);opacity:0}
+.tarjeta-revelacion.revealed .aurora-brilho {animation:auroraAparece 3s ease-out 1s forwards}
+@keyframes auroraAparece {0%{opacity:0}50%{opacity:1}100%{opacity:0.6}}
+
+.nombre-brilho {position:relative}
+.nombre-brilho::after {content:'';position:absolute;inset:-10px;background:radial-gradient(ellipse at center,rgba(212,168,67,0.2),transparent 70%);z-index:-1;opacity:0;border-radius:50%}
+.tarjeta-revelacion.revealed .nombre-brilho::after {animation:brilhoNombre 2.5s ease-out 1.5s forwards}
+@keyframes brilhoNombre {0%{opacity:0;transform:scale(0.8)}50%{opacity:1;transform:scale(1.2)}100%{opacity:0.3;transform:scale(1)}}
+
+.particula-sorteo {position:absolute;width:3px;height:3px;border-radius:50%;background:rgba(212,168,67,0.6);z-index:45;opacity:0}
+.tarjeta-revelacion.revealed .particula-sorteo {animation:particulaVuela 2.5s ease-out forwards}
+@keyframes particulaVuela {0%{opacity:0;transform:translate(0,0) scale(0)}20%{opacity:1}100%{opacity:0;transform:translate(var(--px),var(--py)) scale(0.5)}}
+
+.mensaje-revelacion {position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:55;font-family:'Cinzel',serif;font-size:11px;color:rgba(212,168,67,0.35);letter-spacing:2px;text-transform:uppercase;white-space:nowrap;transition:opacity 0.5s}
+.tarjeta-revelacion.revealed .mensaje-revelacion {opacity:0}
+
+.tarjeta-revelacion:not(.revealed):hover {animation:vibracionTarjeta 0.3s ease-in-out}
+@keyframes vibracionTarjeta {0%,100%{transform:translateX(0)}20%{transform:translateX(-1px)}40%{transform:translateX(1px)}60%{transform:translateX(-1px)}80%{transform:translateX(1px)}}
+
+.boton-revelar {background:linear-gradient(to right,#d4a843,#b8892a);color:#1a1410;padding:14px 36px;border:none;border-radius:10px;font-size:14px;font-weight:bold;cursor:pointer;font-family:'Cinzel',serif;letter-spacing:1px;margin-top:24px;box-shadow:0 4px 12px rgba(212,168,67,0.3);transition:all 0.2s;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.boton-revelar:hover {transform:translateY(-2px);box-shadow:0 6px 16px rgba(212,168,67,0.4)}
+.boton-revelar:active {transform:translateY(1px)}
+
+.boton-3d {background-color:#d4a843;color:#1a1410;padding:16px 40px;border:none;border-radius:10px;font-size:16px;font-weight:bold;cursor:pointer;font-family:'Cinzel',serif;letter-spacing:1px;box-shadow:0px 8px 0px #8a6a1f;transition:all 0.12s ease;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.boton-3d:hover {transform:translateY(4px);box-shadow:0px 4px 0px #8a6a1f}
+.boton-3d:active {transform:translateY(8px);box-shadow:0px 0px 0px #8a6a1f}
+
+.boton-resplandor {background-color:transparent;color:#d4a843;padding:15px 40px;border:2px solid #d4a843;border-radius:10px;font-size:16px;font-weight:bold;cursor:pointer;transition:all 0.3s ease;font-family:'Cinzel',serif;letter-spacing:1px;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.boton-resplandor:hover {background-color:rgba(212,168,67,0.15);color:#fff5cc;box-shadow:0 0 10px #d4a843,0 0 40px #d4a843,0 0 80px #d4a843;border-color:#fff5cc}
+
+.resplandor-tarjeta {border:2px solid rgba(212,168,67,0.3);border-radius:16px;transition:all 0.3s ease}
+.resplandor-tarjeta:hover {background-color:rgba(212,168,67,0.08);box-shadow:0 0 10px rgba(212,168,67,0.3),0 0 40px rgba(212,168,67,0.15),0 0 80px rgba(212,168,67,0.08)}
+
+.footer-docente {position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(10,7,5,0.95);border-top:1px solid rgba(212,168,67,0.15);text-align:center;padding:12px 16px;font-family:'Cinzel',serif;font-size:11px;color:rgba(212,168,67,0.5);letter-spacing:1px}
+.footer-docente strong {color:#d4a843}
+.page-content {padding-bottom:50px}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 </style>
 </head>
 <body>
-
-<!-- Ambient particles -->
 <div id="particles" style="position:fixed;inset:0;pointer-events:none;z-index:0"></div>
-
-<!-- Main app -->
 <div id="app" class="page-content" style="position:relative;z-index:1"></div>
-
-<!-- FOOTER DOCENTE - SIEMPRE VISIBLE EN TODAS LAS PANTALLAS -->
-<div class="footer-docente">
-  <strong>Docente:</strong> Mg Mario Quiroz &nbsp;|&nbsp; <strong>Curso:</strong> Semiotica de la Imagen &middot; 2026
+<div id="fallback-controls" style="position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:10001;display:none;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center;background:rgba(10,7,5,0.92);border:1px solid rgba(212,168,67,0.28);border-radius:14px;padding:10px 12px;box-shadow:0 10px 30px rgba(0,0,0,0.45)">
+  <button id="fallback-reveal" type="button" style="padding:12px 18px;border-radius:10px;border:1px solid rgba(212,168,67,0.3);background:#d4a843;color:#1a1410;font-family:Cinzel,serif;font-weight:700;cursor:pointer">REVELAR</button>
+  <button id="fallback-next" type="button" style="padding:12px 18px;border-radius:10px;border:1px solid rgba(212,168,67,0.3);background:rgba(212,168,67,0.16);color:#f5ebd0;font-family:Cinzel,serif;font-weight:700;cursor:pointer">PRIMERA FECHA</button>
+  <button id="fallback-next-2" type="button" style="padding:12px 18px;border-radius:10px;border:1px solid rgba(212,168,67,0.18);background:rgba(255,255,255,0.06);color:rgba(245,235,208,0.92);font-family:Cinzel,serif;font-weight:700;cursor:pointer">SEGUNDA FECHA</button>
 </div>
+<div class="footer-docente">D3magindesign @</div>
 
 <script>
-// ═══════════════════════════════════════════════════
-//  STORAGE
-// ═══════════════════════════════════════════════════
-const SK = 'sorteo-triunfo-v2';
+const SK='sorteo-triunfo-v2';
 function sv(d){try{localStorage.setItem(SK,JSON.stringify(d))}catch(e){}}
 function ld(){try{const r=localStorage.getItem(SK);return r?JSON.parse(r):null}catch(e){return null}}
 function cl(){localStorage.removeItem(SK)}
 
-// ═══════════════════════════════════════════════════
-//  STATE
-// ═══════════════════════════════════════════════════
-let S = ld() || {
-  scr:'setup',P:[],cfg:{f1:'',f2:'',tp:10,p1:1,p2:1},
-  g1:[],g2:[],ri:0,rf:1,irv:false,
-  em:'ind',nm:'',tp2:'ind',bt:'',btp:'ind',err:'',sc:true
-};
+let S=ld()||{scr:'setup',P:[],cfg:{f1:'',f2:'',tp:10,p1:1,p2:1},g1:[],g2:[],ri:0,rf:1,irv:false,em:'ind',nm:'',tp2:'ind',bt:'',btp:'ind',err:'',sc:true,showHelp:true};
 function ps(){sv(S)}
 
 function ol(p,t){if(p===1)return'PRIMER LUGAR';if(p===2)return'SEGUNDO LUGAR';if(p===3)return'TERCER LUGAR';if(p===t)return'Cierre de Presentaciones';return'Presentacion #'+p}
@@ -227,42 +147,16 @@ function fff(s){if(!s)return'Sin fecha';const d=new Date(s+'T00:00:00');return d
 function gq(p,t){if(p===1)return'El esfuerzo constante forja la gloria eterna';if(p===2)return'La perseverancia es el camino hacia la excelencia';if(p===3)return'Cada paso adelante es una victoria sobre uno mismo';if(p===t)return'El cierre es solo el comienzo de una nueva era';return'El trabajo duro siempre encuentra su reconocimiento'}
 function pb(t){const l=t.split('\n'),n=[];for(const ln of l){const tr=ln.trim();if(!tr)continue;if(tr.includes(','))n.push(...tr.split(',').map(s=>s.trim()).filter(s=>s));else n.push(tr)}return n.filter(s=>s.length>0)}
 function cg(){return S.rf===1?S.g1:S.g2}
-function cg2(){const g=cg();return g[S.ri]}
+function cg2(){const g=cg();return g&&g.length>S.ri?g[S.ri]:null}
 
-// ═══════════════════════════════════════════════════
-//  PARTICLES
-// ═══════════════════════════════════════════════════
-function mkp(){
-  const c=document.getElementById('particles');
-  c.innerHTML='';
-  for(let i=0;i<18;i++){
-    const d=document.createElement('div');
-    d.style.cssText=`position:absolute;left:${Math.random()*100}%;top:${Math.random()*100}%;width:3px;height:3px;border-radius:50%;background:rgba(212,168,67,${0.06+Math.random()*0.1});animation:float ${3+Math.random()*4}s ease-in-out infinite;animation-delay:${Math.random()*3}s;`;
-    c.appendChild(d);
-  }
-}
+function mkp(){const c=document.getElementById('particles');c.innerHTML='';for(let i=0;i<18;i++){const d=document.createElement('div');d.style.cssText='position:absolute;left:'+(Math.random()*100)+'%;top:'+(Math.random()*100)+'%;width:3px;height:3px;border-radius:50%;background:rgba(212,168,67,'+(0.06+Math.random()*0.1)+');animation:float '+(3+Math.random()*4)+'s ease-in-out infinite;animation-delay:'+(Math.random()*3)+'s;';c.appendChild(d)}}
 
-// ═══════════════════════════════════════════════════
-//  CONFETTI
-// ═══════════════════════════════════════════════════
-function fc(n,s){confetti({particleCount:n||40,spread:s||70,origin:{y:0.6},colors:['#d4a843','#fff5cc','#e8c868','#b8860b','#ffd700'],disableForReducedMotion:true})}
-function fg(){const e=Date.now()+3000,c=['#d4a843','#fff5cc','#e8c868','#b8860b','#ffd700','#daa520'];const f=()=>{confetti({particleCount:10,spread:130,origin:{y:0.5},colors:c,disableForReducedMotion:true});if(Date.now()<e)requestAnimationFrame(f)};f()}
+function fc(n,s){try{if(typeof confetti!=='function')return;confetti({particleCount:n||40,spread:s||70,origin:{y:0.6},colors:['#d4a843','#fff5cc','#e8c868','#b8860b','#ffd700'],disableForReducedMotion:true})}catch(e){}}
+function fg(){try{if(typeof confetti!=='function')return;const e=Date.now()+3000,c=['#d4a843','#fff5cc','#e8c868','#b8860b','#ffd700','#daa520'];const f=()=>{try{confetti({particleCount:10,spread:130,origin:{y:0.5},colors:c,disableForReducedMotion:true})}catch(err){return}if(Date.now()<e)requestAnimationFrame(f)};f()}catch(e){}}
 
-// ═══════════════════════════════════════════════════
-//  ACTIONS
-// ═══════════════════════════════════════════════════
-function rdr(){const a=document.getElementById('app');const s=S.scr;if(s==='setup')a.innerHTML=rs();else if(s==='sort')a.innerHTML=rsort();else if(s==='rev')a.innerHTML=rr();else if(s==='res')a.innerHTML=rres();mkp()}
+function rdr(){const a=document.getElementById('app');const s=S.scr;if(s==='setup')a.innerHTML=rs();else if(s==='sort')a.innerHTML=rsort();else if(s==='rev')a.innerHTML=rr();else if(s==='res')a.innerHTML=rres();mkp();updateFallbackControls()}
 
-function vc(){
-  const c=S.cfg;
-  if(!c.f1){S.err='Selecciona la Fecha 1';return false}
-  if(!c.f2){S.err='Selecciona la Fecha 2';return false}
-  if(c.p1<1){S.err='Minimo 1 premiado Fecha 1';return false}
-  if(c.p2<1){S.err='Minimo 1 premiado Fecha 2';return false}
-  const t=c.p1+c.p2;
-  if(t>S.P.length){S.err=`Necesitas al menos ${t} participantes`;return false}
-  return true;
-}
+function vc(){const c=S.cfg;if(!c.f1){S.err='Selecciona la Fecha 1';return false}if(!c.f2){S.err='Selecciona la Fecha 2';return false}if(c.p1<1){S.err='Minimo 1 premiado Fecha 1';return false}if(c.p2<1){S.err='Minimo 1 premiado Fecha 2';return false}const t=c.p1+c.p2;if(t>S.P.length){S.err='Necesitas al menos '+t+' participantes';return false}return true}
 
 function addI(){const n=S.nm.trim();if(!n){S.err='Ingresa el nombre';rdr();return}S.P.push({id:crypto.randomUUID(),n:n,t:S.tp2});S.nm='';S.err='';ps();rdr()}
 function addB(){const ns=pb(S.bt);if(!ns.length){S.err='No se encontraron nombres';rdr();return}for(const n of ns)if(n)S.P.push({id:crypto.randomUUID(),n:n,t:S.btp});S.bt='';S.err='';ps();rdr()}
@@ -273,401 +167,389 @@ function sem(m){S.em=m;S.err='';rdr()}
 function stp(t){S.tp2=t;rdr()}
 function sbtp(t){S.btp=t;rdr()}
 
-function go(){
-  if(!vc()){rdr();return}
-  sm('sort');
-  setTimeout(()=>{
-    const sh=[...S.P];
-    for(let i=sh.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sh[i],sh[j]]=[sh[j],sh[i]]}
-    const a1=sh.slice(0,S.cfg.p1),a2=sh.slice(S.cfg.p1,S.cfg.p1+S.cfg.p2);
-    S.g1=a1.map((p,i)=>({p:p,pos:i+1,lb:ol(i+1,a1.length)}));
-    S.g2=a2.map((p,i)=>({p:p,pos:i+1,lb:ol(i+1,a2.length)}));
-    S.ri=0;S.rf=1;S.irv=false;
-    sm('rev');
-  },4000);
-}
+function go(){if(!vc()){rdr();return}sm('sort');setTimeout(()=>{const sh=[...S.P];for(let i=sh.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sh[i],sh[j]]=[sh[j],sh[i]]}const a1=sh.slice(0,S.cfg.p1),a2=sh.slice(S.cfg.p1,S.cfg.p1+S.cfg.p2);S.g1=a1.map((p,i)=>({p:p,pos:i+1,lb:ol(i+1,a1.length)}));S.g2=a2.map((p,i)=>({p:p,pos:i+1,lb:ol(i+1,a2.length)}));S.ri=0;S.rf=1;S.irv=false;sm('rev')},4000)}
 
-function rv(){
-  if(S.irv)return;
-  S.irv=true;rdr();
-  const d=document.createElement('div');d.className='cam-flash';document.body.appendChild(d);
-  setTimeout(()=>d.remove(),800);
-  setTimeout(()=>{const g=cg2();if(g&&g.pos<=3)fc(80,100);else fc(35,60)},500);
-}
+function rv(){if(S.irv)return;const g=cg2();if(!g){S.err='No hay ganador para revelar';rdr();return}S.irv=true;ps();var d=document.createElement('div');d.className='cam-flash';document.body.appendChild(d);setTimeout(function(){d.remove()},800);setTimeout(function(){if(g&&g.pos<=3)fc(80,100);else fc(35,60)},500);rdr()}
 
-function nx(){
-  const g=cg();
-  if(S.ri<g.length-1){S.ri++;S.irv=false}
-  else if(S.rf===1&&S.g2.length>0){S.rf=2;S.ri=0;S.irv=false}
-  else{sm('res');return}
-  ps();rdr();
-}
-
+function nx(){var g=cg();if(!g||!g.length){sm('res');return}if(S.ri<g.length-1){S.ri++;S.irv=false}else if(S.rf===1&&S.g2.length>0){S.rf=2;S.ri=0;S.irv=false}else{sm('res');return}ps();rdr()}
+function bindActionDelegates(){var h=function(ev){var b=ev.target.closest('button');if(!b)return;var oc=(b.getAttribute('onclick')||'').replace(/\s+/g,' ').trim();var act=(b.getAttribute('data-action')||'').trim();if(oc==='nx()'||act==='next'){ev.preventDefault();ev.stopPropagation();try{nx()}catch(e){console.error(e)}}else if(oc==='rv()'||act==='reveal'){ev.preventDefault();ev.stopPropagation();try{rv()}catch(e){console.error(e)}}};document.addEventListener('click',h,{capture:true});document.addEventListener('pointerup',h,{capture:true})}
 function sk(){fg();sm('res')}
 function rst(){S.scr='setup';S.g1=[];S.g2=[];S.ri=0;S.rf=1;S.irv=false;ps();rdr()}
-function clr(){
-  S={scr:'setup',P:[],cfg:{f1:'',f2:'',tp:10,p1:1,p2:1},g1:[],g2:[],ri:0,rf:1,irv:false,em:'ind',nm:'',tp2:'ind',bt:'',btp:'ind',err:'',sc:true};
-  cl();rdr();
-}
+function clr(){S={scr:'setup',P:[],cfg:{f1:'',f2:'',tp:10,p1:1,p2:1},g1:[],g2:[],ri:0,rf:1,irv:false,em:'ind',nm:'',tp2:'ind',bt:'',btp:'ind',err:'',sc:true,showHelp:true};cl();rdr()}
 
-// ═══════════════════════════════════════════════════
-//  RENDER: SETUP
-// ═══════════════════════════════════════════════════
 function rs(){
-  const c=S.cfg,P=S.P,tt=c.p1+c.p2,fa=Math.max(0,tt-P.length),cG=P.filter(x=>x.t==='grupo').length,cI=P.filter(x=>x.t==='ind').length;
-  return `
-  <div class="page-content" style="min-height:100vh;display:flex;flex-direction:column">
-    <header style="position:relative;padding:24px 16px 16px;text-align:center">
-      <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(212,168,67,0.03),transparent)"></div>
-      <div style="position:relative;z-index:10;animation:fadeUp 0.6s ease forwards">
-        <div style="display:flex;justify-content:center;margin-bottom:12px"><i class="fas fa-trophy trophy-shine" style="font-size:52px;color:#d4a843"></i></div>
-        <h1 class="font-cinzel golden-text" style="font-size:30px;font-weight:700;margin-bottom:4px">Sorteo de Triunfo</h1>
-        <p style="color:rgba(212,168,67,0.45);font-size:13px;letter-spacing:1px;margin-bottom:14px">Dos fechas. Un solo destino de gloria.</p>
-        ${(P.length>0||c.f1||c.f2)?`<button onclick="if(confirm('\u00bfEst\u00e1s seguro de limpiar TODOS los datos?'))clr()" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:10px;border:1px solid rgba(239,68,68,0.3);background:rgba(239,68,68,0.08);color:rgba(239,68,68,0.7);font-size:11px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background='rgba(239,68,68,0.15)';this.style.color='rgba(239,68,68,0.9)'" onmouseout="this.style.background='rgba(239,68,68,0.08)';this.style.color='rgba(239,68,68,0.7)'"><i class="fas fa-eraser"></i> Limpiar Todo</button>`:''}
-      </div>
-    </header>
+  var c=S.cfg,P=S.P,tt=c.p1+c.p2,fa=Math.max(0,tt-P.length),cG=P.filter(function(x){return x.t==='grupo'}).length,cI=P.filter(function(x){return x.t==='ind'}).length;
+  var h='<div class="page-content" style="min-height:100vh;display:flex;flex-direction:column">';
+  h+='<header style="position:relative;padding:24px 16px 16px;text-align:center"><div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(to bottom,rgba(212,168,67,0.03),transparent)"></div>';
+  h+='<div style="position:relative;z-index:10;animation:fadeUp 0.6s ease forwards"><div style="display:flex;justify-content:center;margin-bottom:12px"><i class="fas fa-trophy trophy-shine" style="font-size:52px;color:#d4a843"></i></div>';
+  h+='<h1 class="font-cinzel golden-text" style="font-size:30px;font-weight:700;margin-bottom:4px">Sorteo de Triunfo</h1>';
+  h+='<p style="color:rgba(212,168,67,0.45);font-size:13px;letter-spacing:1px;margin-bottom:14px">Dos fechas. Un solo destino de gloria.</p>';
+  if(P.length>0||c.f1||c.f2)h+='<button onclick="if(confirm(&apos;Estas seguro de limpiar TODOS los datos?&apos;))clr()" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:10px;border:1px solid rgba(239,68,68,0.3);background:rgba(239,68,68,0.08);color:rgba(239,68,68,0.7);font-size:11px;cursor:pointer;transition:all 0.2s" onmouseover="this.style.background=&apos;rgba(239,68,68,0.15)&apos;;this.style.color=&apos;rgba(239,68,68,0.9)&apos;" onmouseout="this.style.background=&apos;rgba(239,68,68,0.08)&apos;;this.style.color=&apos;rgba(239,68,68,0.7)&apos;"><i class="fas fa-eraser"></i> Limpiar Todo</button>';
+  h+='</div></header>';
 
-    <main style="flex-grow:1;padding:0 16px 60px;max-width:1100px;margin:0 auto;width:100%">
-      <div style="display:grid;grid-template-columns:1fr;gap:16px">
-        <!-- LEFT COLUMN -->
-        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;animation:fadeUp 0.6s ease forwards;animation-delay:0.15s">
+  h+='<section style="padding:0 16px 20px;max-width:1100px;margin:0 auto;width:100%">';
+  h+='<div class="glass" style="padding:20px;animation:fadeUp 0.6s ease forwards;animation-delay:0.05s">';
+  h+='<button onclick="S.showHelp=!S.showHelp;ps();rdr()" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;color:#d4a843;cursor:pointer;margin-bottom:0;font-family:Cinzel,serif;font-size:13px;font-weight:600"><span><i class="fas fa-circle-info" style="margin-right:8px"></i>Como Funciona el Sorteo</span><i class="fas fa-chevron-down" style="font-size:10px;transition:transform 0.3s;transform:rotate('+(S.showHelp?180:0)+'deg)"></i></button>';
+  if(S.showHelp!==false){
+    h+='<div style="margin-top:16px;display:flex;flex-direction:column;gap:14px">';
+    h+='<p style="font-size:12px;color:rgba(212,168,67,0.5);line-height:1.6">Este sorteo define el orden de presentacion de participantes o grupos en dos fechas distintas, generando suspenso y expectativa con una revelacion cinematografica.</p>';
+    h+='<div style="display:flex;gap:12px;align-items:flex-start">';
+    h+='<span style="width:28px;height:28px;border-radius:50%;background:rgba(212,168,67,0.12);color:#d4a843;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid rgba(212,168,67,0.2);font-family:Cinzel,serif;flex-shrink:0;margin-top:2px">1</span>';
+    h+='<div><h4 style="font-size:12px;font-weight:600;color:#d4a843;margin-bottom:3px">Configura las Fechas y Premiados</h4><p style="font-size:11px;color:rgba(212,168,67,0.4);line-height:1.5">Selecciona las dos fechas de presentacion y cuantos premiados sortearas en cada una. Define el tiempo de exposicion por participante.</p></div>';
+    h+='</div>';
+    h+='<div style="display:flex;gap:12px;align-items:flex-start">';
+    h+='<span style="width:28px;height:28px;border-radius:50%;background:rgba(212,168,67,0.12);color:#d4a843;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid rgba(212,168,67,0.2);font-family:Cinzel,serif;flex-shrink:0;margin-top:2px">2</span>';
+    h+='<div><h4 style="font-size:12px;font-weight:600;color:#d4a843;margin-bottom:3px">Agrega Participantes o Grupos</h4><p style="font-size:11px;color:rgba(212,168,67,0.4);line-height:1.5">Ingresa nombres uno por uno (Individual o Grupo) o pega una lista completa separada por comas o saltos de linea. Debes tener al menos tantos participantes como premiados totales.</p></div>';
+    h+='</div>';
+    h+='<div style="display:flex;gap:12px;align-items:flex-start">';
+    h+='<span style="width:28px;height:28px;border-radius:50%;background:rgba(212,168,67,0.12);color:#d4a843;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid rgba(212,168,67,0.2);font-family:Cinzel,serif;flex-shrink:0;margin-top:2px">3</span>';
+    h+='<div><h4 style="font-size:12px;font-weight:600;color:#d4a843;margin-bottom:3px">Inicia el Sorteo</h4><p style="font-size:11px;color:rgba(212,168,67,0.4);line-height:1.5">Presiona <strong style="color:#d4a843">INICIAR SORTEO</strong>. El sistema mezclara todos los participantes aleatoriamente y asignara el orden para ambas fechas.</p></div>';
+    h+='</div>';
+    h+='<div style="display:flex;gap:12px;align-items:flex-start">';
+    h+='<span style="width:28px;height:28px;border-radius:50%;background:rgba(212,168,67,0.12);color:#d4a843;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid rgba(212,168,67,0.2);font-family:Cinzel,serif;flex-shrink:0;margin-top:2px">4</span>';
+    h+='<div><h4 style="font-size:12px;font-weight:600;color:#d4a843;margin-bottom:3px">La Revelacion Cinematografica</h4><p style="font-size:11px;color:rgba(212,168,67,0.4);line-height:1.5">Cada premiado se revela con una transicion de <strong style="color:#d4a843">oscuridad a luz</strong>: una pantalla negra con misterio, rayos de luz dorada, destello central, y finalmente el nombre completo con brillo dorado, fecha de presentacion y tiempo de exposicion.</p></div>';
+    h+='</div>';
 
-          <!-- CONFIG -->
-          <div class="glass" style="padding:20px">
-            <button onclick="S.sc=!S.sc;ps();rdr()" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;color:#d4a843;cursor:pointer;margin-bottom:12px">
-              <span class="font-cinzel" style="font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px"><i class="fas fa-cog"></i> Configuracion del Sorteo</span>
-              <i class="fas fa-chevron-down" style="font-size:10px;transition:transform 0.3s;transform:rotate(${S.sc?180:0}deg)"></i>
-            </button>
-            ${S.sc?`
-            <div style="display:flex;flex-direction:column;gap:12px">
-              <div style="background:rgba(212,168,67,0.04);border:1px solid rgba(212,168,67,0.1);border-radius:12px;padding:14px">
-                <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
-                  <span class="font-cinzel" style="width:24px;height:24px;border-radius:50%;background:rgba(212,168,67,0.15);color:#d4a843;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid rgba(212,168,67,0.25)">1</span>
-                  <span style="font-size:12px;font-weight:600;color:#d4a843">Fecha de Presentacion 1</span>
-                </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-                  <div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px">Fecha</label><input type="date" value="${c.f1}" onchange="uc({f1:this.value})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>
-                  <div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px">Premiados</label><input type="number" min="1" max="50" value="${c.p1}" onchange="uc({p1:parseInt(this.value)||1})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>
-                </div>
-              </div>
-              <div style="background:rgba(212,168,67,0.04);border:1px solid rgba(212,168,67,0.1);border-radius:12px;padding:14px">
-                <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
-                  <span class="font-cinzel" style="width:24px;height:24px;border-radius:50%;background:rgba(212,168,67,0.15);color:#d4a843;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid rgba(212,168,67,0.25)">2</span>
-                  <span style="font-size:12px;font-weight:600;color:#d4a843">Fecha de Presentacion 2</span>
-                </div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-                  <div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px">Fecha</label><input type="date" value="${c.f2}" onchange="uc({f2:this.value})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>
-                  <div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px">Premiados</label><input type="number" min="1" max="50" value="${c.p2}" onchange="uc({p2:parseInt(this.value)||1})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>
-                </div>
-              </div>
-              <div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px"><i class="fas fa-clock" style="font-size:9px;margin-right:4px"></i>Tiempo por presentacion (min)</label><input type="number" min="1" max="120" value="${c.tp}" onchange="uc({tp:parseInt(this.value)||10})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>
-              <div style="display:flex;align-items:center;justify-content:space-between;font-size:11px;background:rgba(0,0,0,0.2);border-radius:8px;padding:10px;border:1px solid rgba(212,168,67,0.1)">
-                <span style="color:rgba(212,168,67,0.5)">Total premiados: <strong style="color:#d4a843">${tt}</strong></span>
-                ${fa>0?`<span style="color:#ef4444;font-size:10px">Faltan ${fa} participantes</span>`:(P.length>0?`<span style="color:#22c55e;font-size:10px">Listo para sortear</span>`:'')}
-              </div>
-            </div>`:''}
-          </div>
+    h+='<div style="display:flex;gap:12px;align-items:flex-start">';
+    h+='<span style="width:28px;height:28px;border-radius:50%;background:rgba(212,168,67,0.12);color:#d4a843;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid rgba(212,168,67,0.2);font-family:Cinzel,serif;flex-shrink:0;margin-top:2px">6</span>';
+    h+='<div><h4 style="font-size:12px;font-weight:600;color:#d4a843;margin-bottom:3px">Resultados y PDF</h4><p style="font-size:11px;color:rgba(212,168,67,0.4);line-height:1.5">Al finalizar, podras ver todos los ganadores en orden y generar un <strong style="color:#d4a843">PDF para imprimir</strong> con el cronograma completo de presentaciones. Los datos se guardan automaticamente.</p></div>';
+    h+='</div>';
+    h+='</div>';
+  }
+  h+='</div></section>';
 
-          <!-- ADD PARTICIPANTS -->
-          <div class="glass" style="padding:20px">
-            <div style="display:flex;background:rgba(0,0,0,0.3);border-radius:10px;padding:4px;border:1px solid rgba(212,168,67,0.1);margin-bottom:16px">
-              <button onclick="sem('ind')" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:8px;font-size:11px;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;${S.em==='ind'?'background:rgba(212,168,67,0.15);color:#d4a843;border:1px solid rgba(212,168,67,0.25)':'background:transparent;color:rgba(212,168,67,0.4);border:1px solid transparent'}"><i class="fas fa-user"></i> Individual</button>
-              <button onclick="sem('bulk')" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:8px;font-size:11px;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;${S.em==='bulk'?'background:rgba(212,168,67,0.15);color:#d4a843;border:1px solid rgba(212,168,67,0.25)':'background:transparent;color:rgba(212,168,67,0.4);border:1px solid transparent'}"><i class="fas fa-file-lines"></i> Lista Completa</button>
-            </div>
+  h+='<main style="flex-grow:1;padding:0 16px 60px;max-width:1100px;margin:0 auto;width:100%">';
+  h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">';
 
-            ${S.err?`<div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#ef4444;background:rgba(239,68,68,0.08);padding:10px;border-radius:8px;border:1px solid rgba(239,68,68,0.2);margin-bottom:12px"><i class="fas fa-exclamation-circle"></i>${S.err}</div>`:''}
+  h+='<div class="glass" style="padding:20px;animation:fadeUp 0.6s ease forwards;animation-delay:0.15s">';
+  h+='<button onclick="S.sc=!S.sc;rdr()" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:none;border:none;color:#d4a843;cursor:pointer;margin-bottom:12px;font-family:Cinzel,serif;font-size:13px;font-weight:600"><span><i class="fas fa-cog" style="margin-right:8px"></i>Configuracion del Sorteo</span><i class="fas fa-chevron-down" style="font-size:10px;transition:transform 0.3s;transform:rotate('+(S.sc?180:0)+'deg)"></i></button>';
+  if(S.sc){
+    h+='<div style="display:flex;flex-direction:column;gap:12px">';
+    h+='<div style="background:rgba(212,168,67,0.04);border:1px solid rgba(212,168,67,0.1);border-radius:12px;padding:14px">';
+    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="width:24px;height:24px;border-radius:50%;background:rgba(212,168,67,0.15);color:#d4a843;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid rgba(212,168,67,0.25);font-family:Cinzel,serif">1</span><span style="font-size:12px;font-weight:600;color:#d4a843">Fecha de Presentacion 1</span></div>';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
+    h+='<div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px">Fecha</label><input type="date" value="'+c.f1+'" onchange="uc({f1:this.value})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>';
+    h+='<div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px">Premiados</label><input type="number" min="1" max="50" value="'+c.p1+'" onchange="uc({p1:parseInt(this.value)||1})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>';
+    h+='</div></div>';
+    h+='<div style="background:rgba(212,168,67,0.04);border:1px solid rgba(212,168,67,0.1);border-radius:12px;padding:14px">';
+    h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><span style="width:24px;height:24px;border-radius:50%;background:rgba(212,168,67,0.15);color:#d4a843;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;border:1px solid rgba(212,168,67,0.25);font-family:Cinzel,serif">2</span><span style="font-size:12px;font-weight:600;color:#d4a843">Fecha de Presentacion 2</span></div>';
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
+    h+='<div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px">Fecha</label><input type="date" value="'+c.f2+'" onchange="uc({f2:this.value})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>';
+    h+='<div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px">Premiados</label><input type="number" min="1" max="50" value="'+c.p2+'" onchange="uc({p2:parseInt(this.value)||1})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>';
+    h+='</div></div>';
+    h+='<div><label style="font-size:10px;color:rgba(212,168,67,0.45);display:block;margin-bottom:3px"><i class="fas fa-clock" style="font-size:9px;margin-right:4px"></i>Tiempo por presentacion (min)</label><input type="number" min="1" max="120" value="'+c.tp+'" onchange="uc({tp:parseInt(this.value)||10})" style="width:100%;height:34px;padding:0 10px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:8px;color:#f5ebd0;font-size:12px;outline:none"></div>';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between;font-size:11px;background:rgba(0,0,0,0.2);border-radius:8px;padding:10px;border:1px solid rgba(212,168,67,0.1)"><span style="color:rgba(212,168,67,0.5)">Total premiados: <strong style="color:#d4a843">'+tt+'</strong></span>'+(fa>0?'<span style="color:#ef4444;font-size:10px">Faltan '+fa+' participantes</span>':(P.length>0?'<span style="color:#22c55e;font-size:10px">Listo para sortear</span>':''))+'</div>';
+    h+='</div>';
+  }
+  h+='</div>';
 
-            ${S.em==='ind'?`
-            <div style="display:flex;flex-direction:column;gap:10px">
-              <div style="display:flex;gap:8px">
-                <button onclick="stp('ind')" style="flex:1;padding:8px;border-radius:8px;font-size:11px;border:none;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:4px;${S.tp2==='ind'?'border:1px solid rgba(212,168,67,0.4);background:rgba(212,168,67,0.1);color:#d4a843':'border:1px solid rgba(212,168,67,0.08);background:rgba(0,0,0,0.2);color:rgba(212,168,67,0.35)'}"><i class="fas fa-user"></i> Individual</button>
-                <button onclick="stp('grupo')" style="flex:1;padding:8px;border-radius:8px;font-size:11px;border:none;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:4px;${S.tp2==='grupo'?'border:1px solid rgba(212,168,67,0.4);background:rgba(212,168,67,0.1);color:#d4a843':'border:1px solid rgba(212,168,67,0.08);background:rgba(0,0,0,0.2);color:rgba(212,168,67,0.35)'}"><i class="fas fa-users"></i> Grupo</button>
-              </div>
-              <input type="text" placeholder="${S.tp2==='grupo'?'Nombre del Grupo':'Nombre completo'}" value="${S.nm}" oninput="S.nm=this.value;S.err=''" onkeydown="if(event.key==='Enter')addI()" style="width:100%;height:38px;padding:0 14px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:10px;color:#f5ebd0;font-size:13px;outline:none">
-              <button onclick="addI()" style="width:100%;padding:12px;background:rgba(212,168,67,0.12);color:#d4a843;border:1px solid rgba(212,168,67,0.25);border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:6px" onmouseover="this.style.background='rgba(212,168,67,0.2)'" onmouseout="this.style.background='rgba(212,168,67,0.12)'"><i class="fas fa-user-plus"></i> Agregar ${S.tp2==='grupo'?'Grupo':'Participante'}</button>
-            </div>`:`
-            <div style="display:flex;flex-direction:column;gap:10px">
-              <div style="display:flex;gap:8px">
-                <button onclick="sbtp('ind')" style="flex:1;padding:8px;border-radius:8px;font-size:11px;border:none;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:4px;${S.btp==='ind'?'border:1px solid rgba(212,168,67,0.4);background:rgba(212,168,67,0.1);color:#d4a843':'border:1px solid rgba(212,168,67,0.08);background:rgba(0,0,0,0.2);color:rgba(212,168,67,0.35)'}"><i class="fas fa-user"></i> Individuales</button>
-                <button onclick="sbtp('grupo')" style="flex:1;padding:8px;border-radius:8px;font-size:11px;border:none;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:4px;${S.btp==='grupo'?'border:1px solid rgba(212,168,67,0.4);background:rgba(212,168,67,0.1);color:#d4a843':'border:1px solid rgba(212,168,67,0.08);background:rgba(0,0,0,0.2);color:rgba(212,168,67,0.35)'}"><i class="fas fa-users"></i> Grupos</button>
-              </div>
-              <div>
-                <div style="display:flex;justify-content:space-between;margin-bottom:3px">
-                  <label style="font-size:10px;color:rgba(212,168,67,0.5)">Nombres (uno por linea o separados por coma)</label>
-                  <span style="font-size:10px;color:rgba(212,168,67,0.4)">${pb(S.bt).length} detectados</span>
-                </div>
-                <textarea placeholder="Ejemplo:\nMaria Gonzalez\nCarlos Perez\nAna Torres\n\nO separados por coma:\nMaria, Carlos, Ana, Pedro, Luisa" rows="6" style="width:100%;padding:12px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:10px;color:#f5ebd0;font-size:12px;outline:none;resize:none;line-height:1.6" oninput="S.bt=this.value;S.err='';rdr()">${S.bt}</textarea>
-                <p style="font-size:10px;color:rgba(212,168,67,0.25);margin-top:4px"><i class="fas fa-info-circle" style="margin-right:4px"></i>Escribe cada nombre en una linea nueva, o separalos con comas.</p>
-              </div>
-              <button onclick="addB()" style="width:100%;padding:12px;background:rgba(212,168,67,0.12);color:#d4a843;border:1px solid rgba(212,168,67,0.25);border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:6px" onmouseover="this.style.background='rgba(212,168,67,0.2)'" onmouseout="this.style.background='rgba(212,168,67,0.12)'"><i class="fas fa-users"></i> Agregar Participantes</button>
-            </div>`}
-          </div>
-        </div>
+  h+='<div class="glass" style="padding:20px;animation:fadeUp 0.6s ease forwards;animation-delay:0.2s">';
+  h+='<div style="display:flex;background:rgba(0,0,0,0.3);border-radius:10px;padding:4px;border:1px solid rgba(212,168,67,0.1);margin-bottom:16px">';
+  h+='<button onclick="sem(&apos;ind&apos;)" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:8px;font-size:11px;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;'+(S.em==='ind'?'background:rgba(212,168,67,0.15);color:#d4a843;border:1px solid rgba(212,168,67,0.25)':'background:transparent;color:rgba(212,168,67,0.4);border:1px solid transparent')+'"><i class="fas fa-user"></i> Individual</button>';
+  h+='<button onclick="sem(&apos;bulk&apos;)" style="flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px;border-radius:8px;font-size:11px;font-weight:600;border:none;cursor:pointer;transition:all 0.2s;'+(S.em==='bulk'?'background:rgba(212,168,67,0.15);color:#d4a843;border:1px solid rgba(212,168,67,0.25)':'background:transparent;color:rgba(212,168,67,0.4);border:1px solid transparent')+'"><i class="fas fa-file-lines"></i> Lista Completa</button>';
+  h+='</div>';
+  if(S.err)h+='<div style="display:flex;align-items:center;gap:8px;font-size:11px;color:#ef4444;background:rgba(239,68,68,0.08);padding:10px;border-radius:8px;border:1px solid rgba(239,68,68,0.2);margin-bottom:12px"><i class="fas fa-exclamation-circle"></i>'+S.err+'</div>';
+  if(S.em==='ind'){
+    h+='<div style="display:flex;flex-direction:column;gap:10px">';
+    h+='<div style="display:flex;gap:8px"><button onclick="stp(&apos;ind&apos;)" style="flex:1;padding:8px;border-radius:8px;font-size:11px;border:none;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:4px;'+(S.tp2==='ind'?'border:1px solid rgba(212,168,67,0.4);background:rgba(212,168,67,0.1);color:#d4a843':'border:1px solid rgba(212,168,67,0.08);background:rgba(0,0,0,0.2);color:rgba(212,168,67,0.35)')+'"><i class="fas fa-user"></i> Individual</button><button onclick="stp(&apos;grupo&apos;)" style="flex:1;padding:8px;border-radius:8px;font-size:11px;border:none;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:4px;'+(S.tp2==='grupo'?'border:1px solid rgba(212,168,67,0.4);background:rgba(212,168,67,0.1);color:#d4a843':'border:1px solid rgba(212,168,67,0.08);background:rgba(0,0,0,0.2);color:rgba(212,168,67,0.35)')+'"><i class="fas fa-users"></i> Grupo</button></div>';
+    h+='<input type="text" placeholder="'+(S.tp2==='grupo'?'Nombre del Grupo':'Nombre completo')+'" value="'+S.nm+'" oninput="S.nm=this.value;S.err=&apos;&apos;" onkeydown="if(event.key===&apos;Enter&apos;)addI()" style="width:100%;height:38px;padding:0 14px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:10px;color:#f5ebd0;font-size:13px;outline:none">';
+    h+='<button onclick="addI()" style="width:100%;padding:12px;background:rgba(212,168,67,0.12);color:#d4a843;border:1px solid rgba(212,168,67,0.25);border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:6px" onmouseover="this.style.background=&apos;rgba(212,168,67,0.2)&apos;" onmouseout="this.style.background=&apos;rgba(212,168,67,0.12)&apos;"><i class="fas fa-user-plus"></i> Agregar '+(S.tp2==='grupo'?'Grupo':'Participante')+'</button>';
+    h+='</div>';
+  }else{
+    h+='<div style="display:flex;flex-direction:column;gap:10px">';
+    h+='<div style="display:flex;gap:8px"><button onclick="sbtp(&apos;ind&apos;)" style="flex:1;padding:8px;border-radius:8px;font-size:11px;border:none;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:4px;'+(S.btp==='ind'?'border:1px solid rgba(212,168,67,0.4);background:rgba(212,168,67,0.1);color:#d4a843':'border:1px solid rgba(212,168,67,0.08);background:rgba(0,0,0,0.2);color:rgba(212,168,67,0.35)')+'"><i class="fas fa-user"></i> Individuales</button><button onclick="sbtp(&apos;grupo&apos;)" style="flex:1;padding:8px;border-radius:8px;font-size:11px;border:none;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:4px;'+(S.btp==='grupo'?'border:1px solid rgba(212,168,67,0.4);background:rgba(212,168,67,0.1);color:#d4a843':'border:1px solid rgba(212,168,67,0.08);background:rgba(0,0,0,0.2);color:rgba(212,168,67,0.35)')+'"><i class="fas fa-users"></i> Grupos</button></div>';
+    h+='<div><div style="display:flex;justify-content:space-between;margin-bottom:3px"><label style="font-size:10px;color:rgba(212,168,67,0.5)">Nombres (uno por linea o separados por coma)</label><span style="font-size:10px;color:rgba(212,168,67,0.4)">'+pb(S.bt).length+' detectados</span></div>';
+    h+='<textarea placeholder="Ejemplo:\nMaria Gonzalez\nCarlos Perez\nAna Torres\n\nO separados por coma:\nMaria, Carlos, Ana, Pedro, Luisa" rows="6" style="width:100%;padding:12px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.2);border-radius:10px;color:#f5ebd0;font-size:12px;outline:none;resize:none;line-height:1.6" oninput="S.bt=this.value;S.err=&apos;&apos;;rdr()">'+S.bt+'</textarea>';
+    h+='<p style="font-size:10px;color:rgba(212,168,67,0.25);margin-top:4px"><i class="fas fa-info-circle" style="margin-right:4px"></i>Escribe cada nombre en una linea nueva, o separalos con comas.</p></div>';
+    h+='<button onclick="addB()" style="width:100%;padding:12px;background:rgba(212,168,67,0.12);color:#d4a843;border:1px solid rgba(212,168,67,0.25);border-radius:10px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:6px" onmouseover="this.style.background=&apos;rgba(212,168,67,0.2)&apos;" onmouseout="this.style.background=&apos;rgba(212,168,67,0.12)&apos;"><i class="fas fa-users"></i> Agregar Participantes</button>';
+    h+='</div>';
+  }
+  h+='</div>';
 
-        <!-- RIGHT: PARTICIPANTS LIST -->
-        <div class="glass" style="padding:20px;min-height:400px;animation:fadeUp 0.6s ease forwards;animation-delay:0.25px">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">
-            <h2 class="font-cinzel" style="font-size:16px;font-weight:600;color:#d4a843;display:flex;align-items:center;gap:8px"><i class="fas fa-users"></i> Participantes</h2>
-            <div style="display:flex;gap:6px">
-              ${cI>0?`<span style="font-size:11px;background:rgba(59,130,246,0.08);color:#60a5fa;padding:4px 10px;border-radius:20px;border:1px solid rgba(59,130,246,0.15);display:flex;align-items:center;gap:4px"><i class="fas fa-user" style="font-size:9px"></i>${cI}</span>`:''}
-              ${cG>0?`<span style="font-size:11px;background:rgba(212,168,67,0.08);color:#d4a843;padding:4px 10px;border-radius:20px;border:1px solid rgba(212,168,67,0.15);display:flex;align-items:center;gap:4px"><i class="fas fa-users" style="font-size:9px"></i>${cG}</span>`:''}
-              <span style="font-size:11px;background:rgba(212,168,67,0.12);color:#d4a843;padding:4px 10px;border-radius:20px;border:1px solid rgba(212,168,67,0.2);font-weight:600">Total: ${P.length}</span>
-            </div>
-          </div>
-
-          ${P.length===0?`
-          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 0;color:rgba(212,168,67,0.2)">
-            <i class="fas fa-users" style="font-size:56px;margin-bottom:12px"></i>
-            <p style="font-size:14px">No hay participantes aun</p>
-            <p style="font-size:12px;margin-top:4px;text-align:center;max-width:280px">Agrega participantes individuales o pega una lista completa</p>
-          </div>`:`
-          <div style="display:flex;flex-direction:column;gap:8px;max-height:360px;overflow-y:auto;padding-right:4px">
-            ${P.map((p,i)=>`
-            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(0,0,0,0.2);border:1px solid rgba(212,168,67,0.08);border-radius:10px;padding:12px;transition:all 0.2s" onmouseover="this.style.borderColor='rgba(212,168,67,0.2)'" onmouseout="this.style.borderColor='rgba(212,168,67,0.08)'">
-              <div style="display:flex;align-items:center;gap:10px;min-width:0;flex:1">
-                <span class="font-cinzel" style="font-size:11px;color:rgba(212,168,67,0.4);width:24px;text-align:center;flex-shrink:0">#${i+1}</span>
-                <div style="min-width:0;flex:1">
-                  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-                    <span style="font-size:13px;font-weight:600;color:#f5ebd0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.n}</span>
-                    <span style="font-size:10px;padding:2px 8px;border-radius:6px;flex-shrink:0;${p.t==='grupo'?'background:rgba(212,168,67,0.1);color:#d4a843;border:1px solid rgba(212,168,67,0.15)':'background:rgba(59,130,246,0.06);color:#60a5fa;border:1px solid rgba(59,130,246,0.12)'}">${p.t==='grupo'?'Grupo':'Individual'}</span>
-                  </div>
-                </div>
-              </div>
-              <button onclick="rm('${p.id}')" style="background:none;border:none;color:rgba(239,68,68,0.3);cursor:pointer;padding:6px;border-radius:6px;transition:all 0.2s;flex-shrink:0" onmouseover="this.style.color='#ef4444';this.style.background='rgba(239,68,68,0.08)'" onmouseout="this.style.color='rgba(239,68,68,0.3)';this.style.background='none'"><i class="fas fa-trash" style="font-size:12px"></i></button>
-            </div>`).join('')}
-          </div>`}
-
-          ${P.length>=tt&&tt>=2?`
-          <div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(212,168,67,0.1);animation:fadeUp 0.5s ease forwards">
-            <div style="display:flex;align-items:center;justify-content:space-between;font-size:11px;color:rgba(212,168,67,0.4);margin-bottom:12px">
-              <span>${c.p1} premiados Fecha 1 + ${c.p2} premiados Fecha 2</span>
-              <span style="color:#22c55e">Listo para sortear</span>
-            </div>
-            <button onclick="go()" class="boton-3d" style="width:100%;font-size:15px;padding:18px">
-              <i class="fas fa-wand-magic-sparkles"></i> INICIAR SORTEO <i class="fas fa-chevron-right"></i>
-            </button>
-          </div>`:''}
-        </div>
-      </div>
-    </main>
-  </div>`;
+  h+='<div class="glass" style="padding:20px;min-height:400px;animation:fadeUp 0.6s ease forwards;animation-delay:0.25s">';
+  h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px">';
+  h+='<h2 style="font-size:16px;font-weight:600;color:#d4a843;display:flex;align-items:center;gap:8px;font-family:Cinzel,serif"><i class="fas fa-users"></i> Participantes</h2>';
+  h+='<div style="display:flex;gap:6px">';
+  if(cI>0)h+='<span style="font-size:11px;background:rgba(59,130,246,0.08);color:#60a5fa;padding:4px 10px;border-radius:20px;border:1px solid rgba(59,130,246,0.15);display:flex;align-items:center;gap:4px"><i class="fas fa-user" style="font-size:9px"></i>'+cI+'</span>';
+  if(cG>0)h+='<span style="font-size:11px;background:rgba(212,168,67,0.08);color:#d4a843;padding:4px 10px;border-radius:20px;border:1px solid rgba(212,168,67,0.15);display:flex;align-items:center;gap:4px"><i class="fas fa-users" style="font-size:9px"></i>'+cG+'</span>';
+  h+='<span style="font-size:11px;background:rgba(212,168,67,0.12);color:#d4a843;padding:4px 10px;border-radius:20px;border:1px solid rgba(212,168,67,0.2);font-weight:600">Total: '+P.length+'</span>';
+  h+='</div></div>';
+  if(P.length===0){
+    h+='<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 0;color:rgba(212,168,67,0.2)"><i class="fas fa-users" style="font-size:56px;margin-bottom:12px"></i><p style="font-size:14px">No hay participantes aun</p><p style="font-size:12px;margin-top:4px;text-align:center;max-width:280px">Agrega participantes individuales o pega una lista completa</p></div>';
+  }else{
+    h+='<div style="display:flex;flex-direction:column;gap:8px;max-height:360px;overflow-y:auto;padding-right:4px">';
+    for(var pi=0;pi<P.length;pi++){
+      var p=P[pi];
+      h+='<div style="display:flex;align-items:center;justify-content:space-between;gap:12px;background:rgba(0,0,0,0.2);border:1px solid rgba(212,168,67,0.08);border-radius:10px;padding:12px;transition:all 0.2s" onmouseover="this.style.borderColor=&apos;rgba(212,168,67,0.2)&apos;" onmouseout="this.style.borderColor=&apos;rgba(212,168,67,0.08)&apos;">';
+      h+='<div style="display:flex;align-items:center;gap:10px;min-width:0;flex:1">';
+      h+='<span style="font-size:11px;color:rgba(212,168,67,0.4);width:24px;text-align:center;flex-shrink:0;font-family:Cinzel,serif">#'+(pi+1)+'</span>';
+      h+='<div style="min-width:0;flex:1"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">';
+      h+='<span style="font-size:13px;font-weight:600;color:#f5ebd0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+p.n+'</span>';
+      h+='<span style="font-size:10px;padding:2px 8px;border-radius:6px;flex-shrink:0;'+(p.t==='grupo'?'background:rgba(212,168,67,0.1);color:#d4a843;border:1px solid rgba(212,168,67,0.15)':'background:rgba(59,130,246,0.06);color:#60a5fa;border:1px solid rgba(59,130,246,0.12)')+'">'+(p.t==='grupo'?'Grupo':'Individual')+'</span>';
+      h+='</div></div></div>';
+      h+='<button onclick="rm(&apos;&apos;+p.id+&apos;&apos;)" style="background:none;border:none;color:rgba(239,68,68,0.3);cursor:pointer;padding:6px;border-radius:6px;transition:all 0.2s;flex-shrink:0" onmouseover="this.style.color=&apos;#ef4444&apos;;this.style.background=&apos;rgba(239,68,68,0.08)&apos;" onmouseout="this.style.color=&apos;rgba(239,68,68,0.3)&apos;;this.style.background=&apos;none&apos;"><i class="fas fa-trash" style="font-size:12px"></i></button>';
+      h+='</div>';
+    }
+    h+='</div>';
+  }
+  if(P.length>=tt&&tt>=2){
+    h+='<div style="margin-top:16px;padding-top:16px;border-top:1px solid rgba(212,168,67,0.1);animation:fadeUp 0.5s ease forwards">';
+    h+='<div style="display:flex;align-items:center;justify-content:space-between;font-size:11px;color:rgba(212,168,67,0.4);margin-bottom:12px"><span>'+c.p1+' premiados Fecha 1 + '+c.p2+' premiados Fecha 2</span><span style="color:#22c55e">Listo para sortear</span></div>';
+    h+='<button onclick="go()" class="boton-3d" style="width:100%;font-size:15px;padding:18px"><i class="fas fa-wand-magic-sparkles"></i> INICIAR SORTEO <i class="fas fa-chevron-right"></i></button>';
+    h+='</div>';
+  }
+  h+='</div>';
+  h+='</div></main></div>';
+  return h;
 }
 
-// ═══════════════════════════════════════════════════
-//  RENDER: SORTING
-// ═══════════════════════════════════════════════════
 function rsort(){
-  const msgs=['Reuniendo la energia del esfuerzo...','Cargando determinacion y pasion...','Los suenos estan a punto de ordenarse...','La gloria espera a los valientes...','Cada esfuerzo sera reconocido...','El destino se entrelaza con el trabajo...','Preparando el escenario del triunfo...','Mezclando corazones y esperanzas...'];
-  return `
-  <div class="page-content" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 16px;position:relative">
-    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:rgba(212,168,67,0.04);border-radius:50%;filter:blur(60px);animation:pulse 3s ease-in-out infinite"></div>
-    <div style="position:relative;z-index:10;text-align:center;max-width:400px;width:100%">
-      <div style="animation:spin 3s linear infinite;margin-bottom:32px;display:inline-block"><i class="fas fa-trophy" style="font-size:60px;color:#d4a843;filter:drop-shadow(0 0 20px rgba(212,168,67,0.5))"></i></div>
-      <h2 class="font-cinzel golden-text" style="font-size:24px;font-weight:700;margin-bottom:8px">Definiendo el Orden del Triunfo</h2>
-      <p style="color:rgba(212,168,67,0.4);font-size:13px;margin-bottom:32px;height:20px" id="smg">${msgs[0]}</p>
-      <div style="width:100%;background:rgba(212,168,67,0.08);border-radius:20px;height:8px;overflow:hidden;border:1px solid rgba(212,168,67,0.1)">
-        <div style="height:100%;background:linear-gradient(to right,#d4a843,#b8892a);border-radius:20px;width:0%;animation:progressFill 3.8s linear forwards"></div>
-      </div>
-      <p style="font-size:11px;color:rgba(212,168,67,0.3);margin-top:8px">Mezclando participantes...</p>
-    </div>
-    <script>(function(){const m=${JSON.stringify(msgs)};let i=0;const el=document.getElementById('smg');const iv=setInterval(()=>{i=(i+1)%m.length;if(el)el.textContent=m[i];},450);setTimeout(()=>clearInterval(iv),4000);})();<\/script>
-  </div>`;
+  var msgs=['Reuniendo la energia del esfuerzo...','Cargando determinacion y pasion...','Los suenos estan a punto de ordenarse...','La gloria espera a los valientes...','Cada esfuerzo sera reconocido...','El destino se entrelaza con el trabajo...','Preparando el escenario del triunfo...','Mezclando corazones y esperanzas...'];
+  var h='<div class="page-content" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 16px;position:relative">';
+  h+='<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:rgba(212,168,67,0.04);border-radius:50%;filter:blur(60px);animation:pulse 3s ease-in-out infinite"></div>';
+  h+='<div style="position:relative;z-index:10;text-align:center;max-width:400px;width:100%">';
+  h+='<div style="animation:spin 3s linear infinite;margin-bottom:32px;display:inline-block"><i class="fas fa-trophy" style="font-size:60px;color:#d4a843;filter:drop-shadow(0 0 20px rgba(212,168,67,0.5))"></i></div>';
+  h+='<h2 class="font-cinzel golden-text" style="font-size:24px;font-weight:700;margin-bottom:8px">Definiendo el Orden del Triunfo</h2>';
+  h+='<p style="color:rgba(212,168,67,0.4);font-size:13px;margin-bottom:32px;height:20px" id="smg">'+msgs[0]+'</p>';
+  h+='<div style="width:100%;background:rgba(212,168,67,0.08);border-radius:20px;height:8px;overflow:hidden;border:1px solid rgba(212,168,67,0.1)"><div style="height:100%;background:linear-gradient(to right,#d4a843,#b8892a);border-radius:20px;width:0%;animation:progressFill 3.8s linear forwards"></div></div>';
+  h+='<p style="font-size:11px;color:rgba(212,168,67,0.3);margin-top:8px">Mezclando participantes...</p>';
+  h+='</div></div>';
+  setTimeout(function(){var i=0;var el=document.getElementById('smg');if(el){var iv=setInterval(function(){i=(i+1)%msgs.length;el.textContent=msgs[i];},450);setTimeout(function(){clearInterval(iv);},3800);}},100);
+  return h;
 }
 
-// ═══════════════════════════════════════════════════
-//  RENDER: REVEAL (EFECTO 1: Revelacion Misteriosa)
-// ═══════════════════════════════════════════════════
 function rr(){
-  const g=cg2();if(!g)return'';
-  const gs=cg();const t3=g.pos<=3;const ig=g.p.t==='grupo';
-  const ls=S.ri===gs.length-1;const nf=S.rf===1&&S.g2.length>0;
-  const fl=S.rf===1?S.cfg.f1:S.cfg.f2;
-  const icons=['fa-crown','fa-trophy','fa-award','fa-star','fa-sparkles'];
-  const cols=['#d4a843','#a0a0a0','#b8762a','rgba(212,168,67,0.6)','rgba(212,168,67,0.4)'];
-  const bgs=['rgba(212,168,67,0.15)','rgba(160,160,160,0.08)','rgba(184,118,42,0.1)','rgba(212,168,67,0.05)','rgba(212,168,67,0.05)'];
-  const pi=Math.min(g.pos-1,4);
+  var g=cg2();if(!g)return'';
+  var gs=cg();var t3=g.pos<=3;var ig=g.p.t==='grupo';
+  var ls=S.ri===gs.length-1;var nf=S.rf===1&&S.g2.length>0;
+  var fl=S.rf===1?S.cfg.f1:S.cfg.f2;
+  var icons=['fa-crown','fa-trophy','fa-award','fa-star','fa-sparkles'];
+  var cols=['#d4a843','#a0a0a0','#b8762a','rgba(212,168,67,0.6)','rgba(212,168,67,0.4)'];
+  var bgs=['rgba(212,168,67,0.15)','rgba(160,160,160,0.08)','rgba(184,118,42,0.1)','rgba(212,168,67,0.05)','rgba(212,168,67,0.05)'];
+  var pi=Math.min(g.pos-1,4);
+  var totalParticipantes=S.P.length;
 
-  return `
-  <div class="page-content" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 16px 100px;position:relative;background:radial-gradient(circle at 50% 50%,rgba(212,168,67,0.08) 0%,#0a0705 55%)">
-    ${S.irv?'<div class="cam-flash"></div>':''}
-    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:500px;height:500px;background:rgba(212,168,67,0.03);border-radius:50%;filter:blur(60px)"></div>
+  var h='<div class="page-content" style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 16px 100px;position:relative;background:radial-gradient(circle at 50% 50%,rgba(212,168,67,0.08) 0%,#0a0705 55%)">';
+  if(S.irv)h+='<div class="cam-flash"></div>';
+  h+='<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:rgba(212,168,67,0.03);border-radius:50%;filter:blur(100px)"></div>';
 
-    <button onclick="sk()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:rgba(212,168,67,0.3);cursor:pointer;font-size:11px;display:flex;align-items:center;gap:4px;z-index:20;transition:color 0.2s" onmouseover="this.style.color='rgba(212,168,67,0.6)'" onmouseout="this.style.color='rgba(212,168,67,0.3)'"><i class="fas fa-forward"></i> Saltar</button>
-    <div style="position:absolute;top:16px;left:16px;color:rgba(212,168,67,0.4);font-size:11px;z-index:20;display:flex;align-items:center;gap:8px">
-      <span style="background:rgba(212,168,67,0.08);padding:4px 10px;border-radius:20px;border:1px solid rgba(212,168,67,0.15)" class="font-cinzel">Fecha ${S.rf}</span>
-      <span>${S.ri+1} / ${gs.length}</span>
-    </div>
+  h+='<button onclick="sk()" style="position:absolute;top:16px;right:16px;background:none;border:none;color:rgba(212,168,67,0.3);cursor:pointer;font-size:11px;display:flex;align-items:center;gap:4px;z-index:20;transition:color 0.2s" onmouseover="this.style.color=&apos;rgba(212,168,67,0.6)&apos;" onmouseout="this.style.color=&apos;rgba(212,168,67,0.3)&apos;"><i class="fas fa-forward"></i> Saltar</button>';
 
-    <div style="position:relative;z-index:10;text-align:center;width:100%;max-width:520px;animation:fadeUp 0.5s ease forwards">
-      <div style="margin-bottom:16px">
-        <span style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:20px;font-size:11px;background:rgba(0,0,0,0.3);border:1px solid rgba(212,168,67,0.15);color:#d4a843" class="font-cinzel"><i class="fas fa-calendar" style="font-size:10px"></i> Fecha de Presentacion ${S.rf}</span>
-      </div>
+  h+='<div style="position:relative;z-index:10;text-align:center;width:100%;max-width:580px;animation:fadeUp 0.5s ease forwards">';
 
-      <!-- EFECTO 1: REVELACION MISTERIOSA (hover desliza cubierta) -->
-      <div class="tarjeta-revelacion">
+  h+='<div style="margin-bottom:20px;animation:fadeUp 0.6s ease forwards">';
+  h+='<div style="display:inline-flex;flex-direction:column;align-items:center;gap:10px">';
+  h+='<span style="display:inline-flex;align-items:center;gap:8px;padding:6px 16px;border-radius:20px;font-size:11px;background:rgba(0,0,0,0.4);border:1px solid rgba(212,168,67,0.15);color:#d4a843;font-family:Cinzel,serif"><i class="fas fa-calendar" style="font-size:10px"></i> Fecha de Presentacion '+S.rf+'</span>';
+  h+='<span style="font-size:13px;color:rgba(212,168,67,0.5);font-family:Cinzel,serif">Presentacion '+(S.ri+1)+' de '+gs.length+'</span>';
+  h+='<div style="width:200px;height:4px;background:rgba(212,168,67,0.1);border-radius:2px;overflow:hidden">';
+  h+='<div style="height:100%;background:linear-gradient(to right,#d4a843,#b8892a);border-radius:2px;transition:width 0.5s ease;width:'+(((S.ri+1)/gs.length)*100)+'%"></div>';
+  h+='</div></div></div>';
 
-        <!-- CONTENIDO OCULTO (premio) -->
-        <div class="contenido-oculto">
-          <div style="margin-bottom:12px">
-            <div style="display:inline-flex;align-items:center;justify-content:center;width:64px;height:64px;border-radius:50%;background:${bgs[pi]};border:2px solid ${t3?'rgba(212,168,67,0.4)':'rgba(212,168,67,0.1)'}">
-              <i class="fas ${icons[pi]}" style="font-size:28px;color:${cols[pi]}"></i>
-            </div>
-          </div>
-          <div style="margin-bottom:8px">
-            <span style="display:inline-flex;align-items:center;gap:6px;font-size:10px;padding:4px 12px;border-radius:20px;${ig?'background:rgba(212,168,67,0.1);color:#d4a843;border:1px solid rgba(212,168,67,0.15)':'background:rgba(59,130,246,0.06);color:#60a5fa;border:1px solid rgba(59,130,246,0.1)'}">
-              <i class="fas ${ig?'fa-users':'fa-user'}" style="font-size:9px"></i> ${ig?'Grupo de Trabajo':'Participante Individual'}
-            </span>
-          </div>
-          <h2 class="font-cinzel" style="font-size:26px;font-weight:700;margin-bottom:6px"><span class="golden-text">${g.p.n}</span></h2>
-          <p style="font-size:12px;color:rgba(212,168,67,0.45);font-style:italic;margin-bottom:16px">"${gq(g.pos,gs.length)}"</p>
-          <div style="padding:10px 20px;border:1px solid rgba(212,168,67,0.15);border-radius:12px;background:rgba(0,0,0,0.2);display:flex;flex-wrap:wrap;justify-content:center;gap:16px">
-            <span style="display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(212,168,67,0.6)"><i class="fas fa-calendar" style="color:#d4a843;font-size:10px"></i>${fff(fl)}</span>
-            <span style="display:flex;align-items:center;gap:6px;font-size:11px;color:rgba(212,168,67,0.6)"><i class="fas fa-clock" style="color:#d4a843;font-size:10px"></i>${S.cfg.tp} minutos</span>
-          </div>
-        </div>
+  h+='<div class="tarjeta-revelacion'+(S.irv?' revealed':'')+'">';
 
-        <!-- CUBIERTA (se desliza al hover) -->
-        <div class="cubierta">
-          <div style="position:relative;z-index:2">
-            <div style="margin-bottom:16px"><i class="fas fa-question-circle" style="font-size:56px;color:rgba(212,168,67,0.45)"></i></div>
-            <div style="display:inline-block;padding:6px 16px;border-radius:20px;font-size:12px;font-weight:700;margin-bottom:12px;background:linear-gradient(to right,#d4a843,#b8892a);color:#1a1410" class="font-cinzel">${g.lb}</div>
-            <h3 class="font-cinzel" style="font-size:20px;color:#f5ebd0;margin-bottom:8px;opacity:0.7">Quien sera...</h3>
-            <p style="font-size:12px;color:rgba(212,168,67,0.35);margin-bottom:20px">Pasa el cursor para descubrir al premiado</p>
-            <div style="display:flex;align-items:center;gap:8px;justify-content:center;color:rgba(212,168,67,0.35)">
-              <i class="fas fa-hand-pointer" style="font-size:12px"></i>
-              <span style="font-size:10px;letter-spacing:3px;text-transform:uppercase">Pasa el cursor</span>
-            </div>
-          </div>
-        </div>
+  h+='<div class="capa-oscuridad">';
+  for(var pl=0;pl<8;pl++){
+    h+='<div class="punto-luz" style="left:'+(15+Math.random()*70)+'%;top:'+(15+Math.random()*70)+'%;animation-delay:'+(Math.random()*2)+'s"></div>';
+  }
+  h+='<div class="silueta-misterio"><i class="fas fa-user-secret" style="color:#d4a843"></i></div>';
+  h+='<div class="texto-suspenso">Descubriendo<span class="puntos-animados"></span></div>';
+  h+='<div style="margin-top:12px;font-size:10px;color:rgba(212,168,67,0.15);font-family:Cinzel,serif;letter-spacing:1px">'+(S.ri+1)+' de '+gs.length+'</div>';
+  h+='</div>';
 
-      </div>
+  h+='<div class="rayos-luz">';
+  for(var rl=0;rl<7;rl++)h+='<div class="rayo"></div>';
+  h+='</div>';
 
-      <!-- EFECTO 2: BOTON 3D TACTIL -->
-      ${S.irv?`
-      <div style="margin-top:32px;animation:fadeUp 0.5s ease forwards">
-        <button onclick="nx()" class="boton-3d">
-          ${ls&&nf?'<i class="fas fa-sparkles"></i> Siguiente Fecha <i class="fas fa-chevron-right"></i>':ls&&!nf?'<i class="fas fa-trophy"></i> Ver Resultados Finales':'<i class="fas fa-sparkles"></i> Siguiente Premiado <i class="fas fa-chevron-right"></i>'}
-        </button>
-        ${t3?`<p style="color:rgba(212,168,67,0.4);font-size:10px;margin-top:12px;letter-spacing:1px" class="font-cinzel"><i class="fas fa-sparkles" style="margin-right:4px"></i>${g.pos===1?'Gloria al primer lugar':g.pos===2?'Honor al segundo lugar':'Reconocimiento al tercer lugar'}</p>`:''}
-      </div>`:`<p style="color:rgba(212,168,67,0.25);font-size:12px;margin-top:24px;animation:pulse 2s infinite">Pasa el cursor sobre la carta para revelar...</p>`}
-    </div>
-  </div>
+  h+='<div class="destello-central"></div>';
 
-  <style>@keyframes mysteryBounce{0%,100%{transform:translateY(0)rotate(0deg)}25%{transform:translateY(-12px)rotate(-5deg)}50%{transform:translateY(0)rotate(0deg)}75%{transform:translateY(-8px)rotate(5deg)}}@keyframes pulse{0%,100%{opacity:0.4}50%{opacity:1}}<\/style>`;
-}
+  h+='<div class="contenido-revelado">';
 
-// ═══════════════════════════════════════════════════
-//  RENDER: RESULTS
-// ═══════════════════════════════════════════════════
-function rres(){
-  const c=S.cfg,f1=S.g1,f2=S.g2,al=[...f1,...f2],ttm=al.length*c.tp,cg2=al.filter(x=>x.p.t==='grupo').length,ci=al.filter(x=>x.p.t==='ind').length;
-  const icn=['fa-crown','fa-trophy','fa-award'],bdg=['bg:#d4a843;color:#1a1410','bg:#a0a0a0;color:#1a1410','bg:#b8762a;color:#fff'],tcl=['color:#d4a843','color:#a0a0a0','color:#b8762a'];
-  setTimeout(()=>fg(),300);
+  h+='<div style="margin-bottom:18px;flex-shrink:0;animation:fadeUp 0.8s ease 1.2s both">';
+  h+='<div style="display:inline-flex;align-items:center;justify-content:center;width:76px;height:76px;border-radius:50%;background:'+bgs[pi]+';border:2px solid '+(t3?'rgba(212,168,67,0.6)':'rgba(212,168,67,0.2)')+';box-shadow:'+(t3?'0 0 20px rgba(212,168,67,0.2)':'none')+'">';
+  h+='<i class="fas '+icons[pi]+'" style="font-size:34px;color:'+cols[pi]+'"></i></div></div>';
 
-  function rgl(gs,fn,fs){
-    return `
-    <div style="margin-bottom:32px">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-        <div style="width:32px;height:32px;border-radius:50%;background:rgba(212,168,67,0.1);border:1px solid rgba(212,168,67,0.2);display:flex;align-items:center;justify-content:center;color:#d4a843;font-size:12px;font-weight:700" class="font-cinzel">${fn}</div>
-        <div>
-          <h3 class="font-cinzel" style="font-size:13px;font-weight:600;color:#d4a843">Fecha de Presentacion ${fn}</h3>
-          <p style="font-size:10px;color:rgba(212,168,67,0.35)"><i class="fas fa-calendar" style="font-size:8px"></i> ${fff(fs)} &middot; ${c.tp}min c/u</p>
-        </div>
-        <div style="margin-left:auto"><span style="font-size:11px;background:rgba(212,168,67,0.08);color:#d4a843;padding:4px 12px;border-radius:20px;border:1px solid rgba(212,168,67,0.15);font-weight:600">${gs.length} premiados</span></div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:10px">
-        ${gs.map((g,i)=>{
-          const ig2=g.p.t==='grupo';
-          return `<div style="position:relative;border-radius:16px;overflow:hidden;animation:slideInLeft 0.5s ease forwards;animation-delay:${i*0.1}s;${i<3?'border:2px solid rgba(212,168,67,0.2)':'border:1px solid rgba(212,168,67,0.08)'};${i<3?(i===0?'background:rgba(212,168,67,0.06)':i===1?'background:rgba(160,160,160,0.04)':'background:rgba(184,118,42,0.05)'):'background:rgba(0,0,0,0.15)'}">
-            <div style="position:absolute;top:14px;left:14px;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;${i<3?bdg[i]:'background:rgba(212,168,67,0.08);border:1px solid rgba(212,168,67,0.15);color:#d4a843'}">${i<3?`<i class="fas ${icn[i]}"></i>`:i+1}</div>
-            <div style="padding:18px 18px 18px 64px">
-              <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap">
-                <span style="font-size:11px;font-weight:600;${i<3?tcl[i]:'color:rgba(212,168,67,0.5)'}">${g.lb}</span>
-                <span style="font-size:10px;padding:2px 8px;border-radius:6px;${ig2?'background:rgba(212,168,67,0.08);color:#d4a843;border:1px solid rgba(212,168,67,0.12)':'background:rgba(59,130,246,0.05);color:#60a5fa;border:1px solid rgba(59,130,246,0.1)'}">${ig2?'Grupo':'Individual'}</span>
-                ${i===0?'<i class="fas fa-sparkles" style="color:#d4a843;font-size:11px"></i>':''}
-              </div>
-              <h3 class="font-cinzel" style="font-size:16px;font-weight:700;margin-bottom:6px"><span class="${i===0?'golden-text':''}" style="${i!==0?'color:#f5ebd0':''}">${g.p.n}</span></h3>
-              <span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;background:rgba(0,0,0,0.2);color:rgba(212,168,67,0.5);padding:4px 10px;border-radius:6px;border:1px solid rgba(212,168,67,0.08)"><i class="fas fa-clock" style="color:#d4a843;font-size:9px"></i>${c.tp} minutos</span>
-            </div>
-            ${i<3?`<div style="height:3px;background:linear-gradient(to right,${i===0?'rgba(212,168,67,0.3),rgba(184,118,42,0.1)':i===1?'rgba(160,160,160,0.15),rgba(100,100,100,0.05)':'rgba(184,118,42,0.2),rgba(120,80,20,0.05)'})"></div>`:''}
-          </div>`;
-        }).join('')}
-      </div>
-    </div>`;
+  h+='<div style="margin-bottom:14px;flex-shrink:0;animation:fadeUp 0.8s ease 1.3s both">';
+  h+='<span style="display:inline-block;padding:8px 22px;border-radius:20px;font-size:13px;font-weight:700;background:linear-gradient(to right,#d4a843,#b8892a);color:#1a1410;font-family:Cinzel,serif;letter-spacing:1px;box-shadow:0 4px 12px rgba(212,168,67,0.3)">'+g.lb+'</span></div>';
+
+  h+='<div style="margin-bottom:18px;flex-shrink:0;animation:fadeUp 0.8s ease 1.4s both">';
+  h+='<span style="display:inline-flex;align-items:center;gap:8px;font-size:12px;padding:6px 14px;border-radius:20px;'+(ig?'background:rgba(212,168,67,0.12);color:#d4a843;border:1px solid rgba(212,168,67,0.2)':'background:rgba(59,130,246,0.08);color:#60a5fa;border:1px solid rgba(59,130,246,0.15)')+'">';
+  h+='<i class="fas '+(ig?'fa-users':'fa-user')+'"></i> '+(ig?'Grupo de Trabajo':'Participante Individual')+'</span></div>';
+
+  h+='<div class="nombre-brilho" style="margin-bottom:14px;width:100%;padding:0 12px;flex-shrink:0;animation:fadeUp 0.8s ease 1.5s both">';
+  h+='<h2 style="font-size:clamp(22px,4.5vw,38px);font-weight:800;font-family:Cinzel,serif;color:#f5ebd0;line-height:1.3;word-break:break-word;text-wrap:balance;overflow-wrap:break-word;margin:0">';
+  h+='<span style="background:linear-gradient(90deg,#d4a843,#fff5cc,#d4a843);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">'+g.p.n+'</span>';
+  h+='</h2></div>';
+
+  h+='<p style="font-size:13px;color:rgba(212,168,67,0.55);font-style:italic;margin-bottom:22px;flex-shrink:0;padding:0 20px;line-height:1.6;animation:fadeUp 0.8s ease 1.7s both">&ldquo;'+gq(g.pos,gs.length)+'&rdquo;</p>';
+
+  h+='<div style="padding:14px 28px;border:1px solid rgba(212,168,67,0.18);border-radius:14px;background:rgba(0,0,0,0.3);display:inline-flex;flex-wrap:wrap;justify-content:center;gap:22px;flex-shrink:0;animation:fadeUp 0.8s ease 1.9s both">';
+  h+='<span style="display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(212,168,67,0.7)"><i class="fas fa-calendar" style="color:#d4a843;font-size:11px"></i>'+fff(fl)+'</span>';
+  h+='<span style="display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(212,168,67,0.7)"><i class="fas fa-clock" style="color:#d4a843;font-size:11px"></i>'+S.cfg.tp+' minutos</span>';
+  h+='<span style="display:flex;align-items:center;gap:8px;font-size:12px;color:rgba(212,168,67,0.7)"><i class="fas fa-users" style="color:#d4a843;font-size:11px"></i>'+totalParticipantes+' en competencia</span>';
+  h+='</div>';
+
+  h+='</div>';
+
+  h+='<div class="aurora-brilho"></div>';
+
+  for(var pf=0;pf<12;pf++){
+    var ang=(pf/12)*Math.PI*2;var dist=80+Math.random()*60;
+    var px=Math.cos(ang)*dist;var py=Math.sin(ang)*dist;
+    h+='<div class="particula-sorteo" style="left:50%;top:50%;--px:'+px+'px;--py:'+py+'px;animation-delay:'+(0.8+Math.random()*1.5)+'s"></div>';
   }
 
-  return `
-  <div class="page-content" style="min-height:100vh;display:flex;flex-direction:column">
-    <header style="padding:24px 16px 16px;text-align:center">
-      <div style="animation:fadeUp 0.6s ease forwards">
-        <div style="display:flex;justify-content:center;margin-bottom:12px"><i class="fas fa-trophy trophy-shine" style="font-size:48px;color:#d4a843"></i></div>
-        <h1 class="font-cinzel golden-text" style="font-size:28px;font-weight:700;margin-bottom:6px">Resultados del Sorteo</h1>
-        <p style="color:rgba(212,168,67,0.4);font-size:13px">Orden de presentacion para ambas fechas</p>
-      </div>
-    </header>
+  if(!S.irv){
+    h+='<div class="mensaje-revelacion"><i class="fas fa-hand-pointer" style="margin-right:6px"></i>Haz clic para descubrir</div>';
+  }
 
-    <main style="flex-grow:1;padding:0 16px 60px;max-width:680px;margin:0 auto;width:100%">
-      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:24px;animation:fadeUp 0.5s ease forwards;animation-delay:0.1s">
-        <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(212,168,67,0.08);border-radius:10px;padding:10px 16px;text-align:center">
-          <p style="font-size:18px;font-weight:700;color:#d4a843">${al.length}</p><p style="font-size:9px;color:rgba(212,168,67,0.35);text-transform:uppercase;letter-spacing:1px">Premiados</p>
-        </div>
-        <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(212,168,67,0.08);border-radius:10px;padding:10px 16px;text-align:center">
-          <p style="font-size:18px;font-weight:700;color:#d4a843">${f1.length}+${f2.length}</p><p style="font-size:9px;color:rgba(212,168,67,0.35);text-transform:uppercase;letter-spacing:1px">F1 + F2</p>
-        </div>
-        ${ci>0?`<div style="background:rgba(0,0,0,0.2);border:1px solid rgba(59,130,246,0.08);border-radius:10px;padding:10px 16px;text-align:center"><p style="font-size:18px;font-weight:700;color:#60a5fa">${ci}</p><p style="font-size:9px;color:rgba(96,165,250,0.4);text-transform:uppercase;letter-spacing:1px">Individuales</p></div>`:''}
-        ${cg2>0?`<div style="background:rgba(0,0,0,0.2);border:1px solid rgba(212,168,67,0.12);border-radius:10px;padding:10px 16px;text-align:center"><p style="font-size:18px;font-weight:700;color:#d4a843">${cg2}</p><p style="font-size:9px;color:rgba(212,168,67,0.35);text-transform:uppercase;letter-spacing:1px">Grupos</p></div>`:''}
-        <div style="background:rgba(0,0,0,0.2);border:1px solid rgba(212,168,67,0.08);border-radius:10px;padding:10px 16px;text-align:center">
-          <p style="font-size:18px;font-weight:700;color:#d4a843">${ttm}m</p><p style="font-size:9px;color:rgba(212,168,67,0.35);text-transform:uppercase;letter-spacing:1px">Duracion</p>
-        </div>
-      </div>
+  h+='</div>';
 
-      ${f1.length>0?rgl(f1,1,c.f1):''}
-      ${f1.length>0&&f2.length>0?`<div style="display:flex;align-items:center;gap:16px;margin:24px 0"><div style="flex:1;height:1px;background:rgba(212,168,67,0.08)"></div><div style="width:36px;height:36px;border-radius:50%;background:rgba(212,168,67,0.06);border:1px solid rgba(212,168,67,0.12);display:flex;align-items:center;justify-content:center"><i class="fas fa-chevron-right" style="color:rgba(212,168,67,0.4);font-size:12px"></i></div><div style="flex:1;height:1px;background:rgba(212,168,67,0.08)"></div></div>`:''}
-      ${f2.length>0?rgl(f2,2,c.f2):''}
+  if(S.irv){
+    h+='<div style="margin-top:40px;animation:fadeUp 0.6s ease forwards;display:flex;flex-direction:column;align-items:center;gap:14px">';
+    h+='<div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center">';
+    h+='<span style="padding:12px 18px;border-radius:10px;border:1px solid rgba(212,168,67,0.28);background:rgba(212,168,67,0.12);color:#f5ebd0;font-family:Cinzel,serif;font-size:14px;letter-spacing:1px">PRIMERA FECHA</span>';
+    h+='<span style="padding:12px 18px;border-radius:10px;border:1px solid rgba(212,168,67,0.18);background:rgba(255,255,255,0.04);color:rgba(245,235,208,0.85);font-family:Cinzel,serif;font-size:14px;letter-spacing:1px">SEGUNDA FECHA</span>';
+    h+='</div>';
+    if(t3){
+      h+='<p style="color:rgba(212,168,67,0.5);font-size:12px;letter-spacing:1px;font-family:Cinzel,serif;margin-top:4px"><i class="fas fa-sparkles" style="margin-right:6px"></i>'+(g.pos===1?'Gloria al Primer Lugar':g.pos===2?'Honor al Segundo Lugar':'Reconocimiento al Tercer Lugar')+'</p>';
+    }
+    h+='</div>';
+  }else{
+    h+='<div style="margin-top:24px;animation:fadeUp 0.5s ease forwards;display:flex;flex-direction:column;align-items:center;gap:10px">';
+    h+='<button onclick="rv()" class="boton-revelar"><i class="fas fa-eye"></i> REVELAR PREMIADO</button>';
+    h+='<p style="color:rgba(212,168,67,0.2);font-size:11px;font-family:Cinzel,serif;letter-spacing:1px">Presentacion '+(S.ri+1)+' de '+gs.length+'</p>';
+    h+='</div>';
+  }
 
-      <div class="glass" style="padding:20px;margin-top:24px;animation:fadeUp 0.5s ease forwards;animation-delay:0.5s">
-        <h3 class="font-cinzel" style="font-size:13px;font-weight:600;color:#d4a843;margin-bottom:16px;display:flex;align-items:center;gap:8px"><i class="fas fa-timeline"></i> Resumen del Cronograma</h3>
-        <div style="margin-bottom:16px">
-          <p class="font-cinzel" style="font-size:10px;color:rgba(212,168,67,0.4);margin-bottom:8px">Fecha 1 &middot; ${fff(c.f1)}</p>
-          <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px">
-            ${f1.map((g,i)=>`<div style="display:flex;align-items:center;gap:6px;flex-shrink:0" title="${g.p.n}"><div style="width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;${i===0?'background:#d4a843;color:#1a1410':i===1?'background:#a0a0a0;color:#1a1410':i===2?'background:#b8762a;color:#fff':'background:rgba(212,168,67,0.08);color:#d4a843;border:1px solid rgba(212,168,67,0.12)'}">${i+1}</div><span style="font-size:10px;color:rgba(212,168,67,0.4);white-space:nowrap;max-width:50px;overflow:hidden;text-overflow:ellipsis">${g.p.n.length>8?g.p.n.substring(0,7)+'...':g.p.n}</span>${i<f1.length-1?'<div style="width:12px;height:1px;background:rgba(212,168,67,0.1)"></div>':''}</div>`).join('')}
-          </div>
-        </div>
-        <div>
-          <p class="font-cinzel" style="font-size:10px;color:rgba(212,168,67,0.4);margin-bottom:8px">Fecha 2 &middot; ${fff(c.f2)}</p>
-          <div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px">
-            ${f2.map((g,i)=>`<div style="display:flex;align-items:center;gap:6px;flex-shrink:0" title="${g.p.n}"><div style="width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;${i===0?'background:#d4a843;color:#1a1410':i===1?'background:#a0a0a0;color:#1a1410':i===2?'background:#b8762a;color:#fff':'background:rgba(212,168,67,0.08);color:#d4a843;border:1px solid rgba(212,168,67,0.12)'}">${i+1}</div><span style="font-size:10px;color:rgba(212,168,67,0.4);white-space:nowrap;max-width:50px;overflow:hidden;text-overflow:ellipsis">${g.p.n.length>8?g.p.n.substring(0,7)+'...':g.p.n}</span>${i<f2.length-1?'<div style="width:12px;height:1px;background:rgba(212,168,67,0.1)"></div>':''}</div>`).join('')}
-          </div>
-        </div>
-      </div>
-
-      <div style="display:flex;flex-direction:column;gap:12px;margin-top:24px;animation:fadeUp 0.5s ease forwards;animation-delay:0.6s">
-        <button onclick="epdf()" class="boton-resplandor" style="width:100%;justify-content:center;padding:18px;font-size:14px">
-          <i class="fas fa-file-pdf"></i> Generar PDF para Imprimir
-        </button>
-        <button onclick="rst()" style="width:100%;padding:14px;background:none;border:1px solid rgba(212,168,67,0.2);color:#d4a843;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px" onmouseover="this.style.background='rgba(212,168,67,0.08)'" onmouseout="this.style.background='none'"><i class="fas fa-rotate-left"></i> Nuevo Sorteo</button>
-        <p style="text-align:center;font-size:11px;color:rgba(212,168,67,0.25);padding-bottom:8px">
-          <button onclick="if(confirm('\u00bfLimpiar TODO?'))clr()" style="background:none;border:none;color:rgba(212,168,67,0.3);cursor:pointer;text-decoration:underline;transition:color 0.2s" onmouseover="this.style.color='rgba(212,168,67,0.5)'" onmouseout="this.style.color='rgba(212,168,67,0.3)'">Comenzar desde cero</button>
-        </p>
-      </div>
-    </main>
-  </div>`;
+  h+='</div></div>';
+  return h;
 }
 
-// ═══════════════════════════════════════════════════
-//  PDF EXPORT
-// ═══════════════════════════════════════════════════
+function rres(){
+  var c=S.cfg;
+  var f1=S.g1;
+  var f2=S.g2;
+  var al=[];
+  for(var i=0;i<f1.length;i++)al.push(f1[i]);
+  for(var i=0;i<f2.length;i++)al.push(f2[i]);
+  var ttm=al.length*c.tp;
+  var nGrupos=0,nInd=0;
+  for(var i=0;i<al.length;i++)if(al[i].p.t==='grupo')nGrupos++;else nInd++;
+  setTimeout(function(){fg()},300);
+
+  var h='<div class="page-content" style="min-height:100vh;display:flex;flex-direction:column">';
+  h+='<header style="padding:24px 16px 16px;text-align:center"><div style="animation:fadeUp 0.6s ease forwards">';
+  h+='<div style="display:flex;justify-content:center;margin-bottom:12px"><i class="fas fa-trophy trophy-shine" style="font-size:48px;color:#d4a843"></i></div>';
+  h+='<h1 class="font-cinzel golden-text" style="font-size:28px;font-weight:700;margin-bottom:6px">Resultados del Sorteo</h1>';
+  h+='<p style="color:rgba(212,168,67,0.4);font-size:13px">Orden de presentacion para ambas fechas</p>';
+  h+='</div></header>';
+
+  h+='<main style="flex-grow:1;padding:0 16px 60px;max-width:720px;margin:0 auto;width:100%">';
+
+  h+='<div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:24px;animation:fadeUp 0.5s ease forwards;animation-delay:0.1s">';
+  h+='<div style="background:rgba(0,0,0,0.2);border:1px solid rgba(212,168,67,0.08);border-radius:10px;padding:10px 16px;text-align:center"><p style="font-size:18px;font-weight:700;color:#d4a843">'+al.length+'</p><p style="font-size:9px;color:rgba(212,168,67,0.35);text-transform:uppercase;letter-spacing:1px">Premiados</p></div>';
+  h+='<div style="background:rgba(0,0,0,0.2);border:1px solid rgba(212,168,67,0.08);border-radius:10px;padding:10px 16px;text-align:center"><p style="font-size:18px;font-weight:700;color:#d4a843">'+f1.length+'+'+f2.length+'</p><p style="font-size:9px;color:rgba(212,168,67,0.35);text-transform:uppercase;letter-spacing:1px">F1 + F2</p></div>';
+  if(nInd>0)h+='<div style="background:rgba(0,0,0,0.2);border:1px solid rgba(59,130,246,0.08);border-radius:10px;padding:10px 16px;text-align:center"><p style="font-size:18px;font-weight:700;color:#60a5fa">'+nInd+'</p><p style="font-size:9px;color:rgba(96,165,250,0.4);text-transform:uppercase;letter-spacing:1px">Individuales</p></div>';
+  if(nGrupos>0)h+='<div style="background:rgba(0,0,0,0.2);border:1px solid rgba(212,168,67,0.12);border-radius:10px;padding:10px 16px;text-align:center"><p style="font-size:18px;font-weight:700;color:#d4a843">'+nGrupos+'</p><p style="font-size:9px;color:rgba(212,168,67,0.35);text-transform:uppercase;letter-spacing:1px">Grupos</p></div>';
+  h+='<div style="background:rgba(0,0,0,0.2);border:1px solid rgba(212,168,67,0.08);border-radius:10px;padding:10px 16px;text-align:center"><p style="font-size:18px;font-weight:700;color:#d4a843">'+ttm+'m</p><p style="font-size:9px;color:rgba(212,168,67,0.35);text-transform:uppercase;letter-spacing:1px">Duracion</p></div>';
+  h+='</div>';
+
+  function renderFecha(gs, num, fecha){
+    if(!gs||!gs.length)return'';
+    var rh='<div style="margin-bottom:28px">';
+    rh+='<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">';
+    rh+='<div style="width:30px;height:30px;border-radius:50%;background:rgba(212,168,67,0.1);border:1px solid rgba(212,168,67,0.2);display:flex;align-items:center;justify-content:center;color:#d4a843;font-size:11px;font-weight:700;font-family:Cinzel,serif">'+num+'</div>';
+    rh+='<div><h3 style="font-size:13px;font-weight:600;color:#d4a843;font-family:Cinzel,serif">Fecha de Presentacion '+num+'</h3><p style="font-size:10px;color:rgba(212,168,67,0.35)"><i class="fas fa-calendar" style="font-size:8px"></i> '+fff(fecha)+' &middot; '+c.tp+'min c/u</p></div>';
+    rh+='<div style="margin-left:auto"><span style="font-size:11px;background:rgba(212,168,67,0.08);color:#d4a843;padding:4px 10px;border-radius:20px;border:1px solid rgba(212,168,67,0.15);font-weight:600">'+gs.length+' premiados</span></div>';
+    rh+='</div>';
+    rh+='<div>';
+    for(var i=0;i<gs.length;i++){
+      var g=gs[i];
+      var ig=g.p.t==='grupo';
+      var isTop3=i<3;
+      var cardBg=isTop3?(i===0?'rgba(212,168,67,0.06)':i===1?'rgba(160,160,160,0.04)':'rgba(184,118,42,0.05)'):'rgba(0,0,0,0.15)';
+      var cardBorder=isTop3?(i===0?'rgba(212,168,67,0.25)':i===1?'rgba(160,160,160,0.2)':'rgba(184,118,42,0.2)'):'rgba(212,168,67,0.08)';
+      var rankColor=i===0?'#d4a843':i===1?'#a0a0a0':i===2?'#b8762a':'#d4a843';
+      var rankBg=i===0?'#d4a843':i===1?'#a0a0a0':i===2?'#b8762a':'rgba(212,168,67,0.08)';
+      var rankText=i===0||i===1?'#1a1410':i===2?'#fff':'#d4a843';
+      var rankBorder=i<3?'none':'1px solid rgba(212,168,67,0.15)';
+      var icons=['fa-crown','fa-trophy','fa-award'];
+      var barGrad=isTop3?(i===0?'rgba(212,168,67,0.3),rgba(184,118,42,0.1)':i===1?'rgba(160,160,160,0.15),rgba(100,100,100,0.05)':'rgba(184,118,42,0.2),rgba(120,80,20,0.05)'):'';
+      rh+='<div style="position:relative;border-radius:14px;overflow:hidden;margin-bottom:10px;animation:slideInLeft 0.5s ease forwards;animation-delay:'+(i*0.1)+'s;border:1px solid '+cardBorder+';background:'+cardBg+'">';
+      rh+='<div style="padding:16px 16px 16px 60px;position:relative;">';
+      rh+='<div style="position:absolute;top:12px;left:12px;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;background:'+rankBg+';color:'+rankText+';border:'+rankBorder+'">'+(i<3?'<i class="fas '+icons[i]+'"></i>':(i+1))+'</div>';
+      rh+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap;">';
+      rh+='<span style="font-size:11px;font-weight:700;font-family:Cinzel,serif;color:'+(isTop3?rankColor:'rgba(212,168,67,0.5)')+'">'+g.lb+'</span>';
+      rh+='<span style="font-size:10px;padding:2px 8px;border-radius:6px;'+(ig?'background:rgba(212,168,67,0.1);color:#d4a843;border:1px solid rgba(212,168,67,0.15)':'background:rgba(59,130,246,0.05);color:#60a5fa;border:1px solid rgba(59,130,246,0.1)')+'">'+(ig?'Grupo':'Individual')+'</span>';
+      if(i===0)rh+='<i class="fas fa-sparkles" style="color:#d4a843;font-size:10px"></i>';
+      rh+='</div>';
+      rh+='<h3 style="font-size:16px;font-weight:700;margin-bottom:6px;font-family:Cinzel,serif;color:#f5ebd0">'+g.p.n+'</h3>';
+      rh+='<span style="display:inline-flex;align-items:center;gap:6px;font-size:11px;background:rgba(0,0,0,0.2);color:rgba(212,168,67,0.5);padding:4px 10px;border-radius:6px;border:1px solid rgba(212,168,67,0.08)"><i class="fas fa-clock" style="color:#d4a843;font-size:9px"></i>'+c.tp+' minutos</span>';
+      rh+='</div>';
+      if(isTop3)rh+='<div style="height:3px;background:linear-gradient(to right,'+barGrad+')"></div>';
+      rh+='</div>';
+    }
+    rh+='</div></div>';
+    return rh;
+  }
+
+  h+=renderFecha(f1,1,c.f1);
+
+  if(f1.length>0&&f2.length>0){
+    h+='<div style="display:flex;align-items:center;gap:16px;margin:24px 0"><div style="flex:1;height:1px;background:rgba(212,168,67,0.08)"></div><div style="width:36px;height:36px;border-radius:50%;background:rgba(212,168,67,0.06);border:1px solid rgba(212,168,67,0.12);display:flex;align-items:center;justify-content:center"><i class="fas fa-chevron-right" style="color:rgba(212,168,67,0.4);font-size:12px"></i></div><div style="flex:1;height:1px;background:rgba(212,168,67,0.08)"></div></div>';
+  }
+
+  h+=renderFecha(f2,2,c.f2);
+
+  h+='<div class="glass" style="padding:20px;margin-top:24px;animation:fadeUp 0.5s ease forwards;animation-delay:0.5s">';
+  h+='<h3 style="font-size:13px;font-weight:600;color:#d4a843;margin-bottom:16px;display:flex;align-items:center;gap:8px;font-family:Cinzel,serif"><i class="fas fa-timeline"></i> Resumen del Cronograma</h3>';
+  if(f1.length>0){
+    h+='<div style="margin-bottom:16px"><p style="font-size:10px;color:rgba(212,168,67,0.4);margin-bottom:8px;font-family:Cinzel,serif">Fecha 1 &middot; '+fff(c.f1)+'</p><div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px">';
+    for(var i=0;i<f1.length;i++){
+      var colors=['background:#d4a843;color:#1a1410','background:#a0a0a0;color:#1a1410','background:#b8762a;color:#fff','background:rgba(212,168,67,0.08);color:#d4a843;border:1px solid rgba(212,168,67,0.12)'];
+      var sty=i<3?colors[i]:colors[3];
+      var label=f1[i].p.n.length>8?f1[i].p.n.substring(0,7)+'..':f1[i].p.n;
+      h+='<div style="display:flex;align-items:center;gap:6px;flex-shrink:0" title="'+f1[i].p.n+'"><div style="width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;'+sty+'">'+(i+1)+'</div><span style="font-size:10px;color:rgba(212,168,67,0.4);white-space:nowrap;max-width:55px;overflow:hidden;text-overflow:ellipsis">'+label+'</span>'+(i<f1.length-1?'<div style="width:10px;height:1px;background:rgba(212,168,67,0.1)"></div>':'')+'</div>';
+    }
+    h+='</div></div>';
+  }
+  if(f2.length>0){
+    h+='<div><p style="font-size:10px;color:rgba(212,168,67,0.4);margin-bottom:8px;font-family:Cinzel,serif">Fecha 2 &middot; '+fff(c.f2)+'</p><div style="display:flex;gap:8px;overflow-x:auto;padding-bottom:8px">';
+    for(var i=0;i<f2.length;i++){
+      var colors=['background:#d4a843;color:#1a1410','background:#a0a0a0;color:#1a1410','background:#b8762a;color:#fff','background:rgba(212,168,67,0.08);color:#d4a843;border:1px solid rgba(212,168,67,0.12)'];
+      var sty=i<3?colors[i]:colors[3];
+      var label=f2[i].p.n.length>8?f2[i].p.n.substring(0,7)+'..':f2[i].p.n;
+      h+='<div style="display:flex;align-items:center;gap:6px;flex-shrink:0" title="'+f2[i].p.n+'"><div style="width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;'+sty+'">'+(i+1)+'</div><span style="font-size:10px;color:rgba(212,168,67,0.4);white-space:nowrap;max-width:55px;overflow:hidden;text-overflow:ellipsis">'+label+'</span>'+(i<f2.length-1?'<div style="width:10px;height:1px;background:rgba(212,168,67,0.1)"></div>':'')+'</div>';
+    }
+    h+='</div></div>';
+  }
+  h+='</div>';
+
+  h+='<div style="display:flex;flex-direction:column;gap:12px;margin-top:24px;animation:fadeUp 0.5s ease forwards;animation-delay:0.6s">';
+  h+='<button onclick="epdf()" class="boton-resplandor" style="width:100%;justify-content:center;padding:18px;font-size:14px"><i class="fas fa-file-pdf"></i> Generar PDF para Imprimir</button>';
+  h+='<button onclick="rst()" style="width:100%;padding:14px;background:none;border:1px solid rgba(212,168,67,0.2);color:#d4a843;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:8px" onmouseover="this.style.background=&apos;rgba(212,168,67,0.08)&apos;" onmouseout="this.style.background=&apos;none&apos;"><i class="fas fa-rotate-left"></i> Nuevo Sorteo</button>';
+  h+='<p style="text-align:center;font-size:11px;color:rgba(212,168,67,0.25);padding-bottom:8px"><button onclick="if(confirm(&apos;Limpiar TODO?&apos;))clr()" style="background:none;border:none;color:rgba(212,168,67,0.3);cursor:pointer;text-decoration:underline;transition:color 0.2s" onmouseover="this.style.color=&apos;rgba(212,168,67,0.5)&apos;" onmouseout="this.style.color=&apos;rgba(212,168,67,0.3)&apos;">Comenzar desde cero</button></p>';
+  h+='</div>';
+
+  h+='</main></div>';
+  return h;
+}
+
 function epdf(){
-  const {jsPDF}=window.jspdf,doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'}),W=doc.internal.pageSize.getWidth(),M=18,c=S.cfg,f1=S.g1,f2=S.g2,al=[...f1,...f2];
+  var jsPDF=window.jspdf.jsPDF;
+  var doc=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+  var W=doc.internal.pageSize.getWidth(),M=18;
+  var c=S.cfg,f1=S.g1,f2=S.g2;
+  var al=[];for(var i=0;i<f1.length;i++)al.push(f1[i]);for(var i=0;i<f2.length;i++)al.push(f2[i]);
   doc.setFillColor(12,8,4);doc.rect(0,0,W,38,'F');
   doc.setDrawColor(212,168,67);doc.setLineWidth(1);doc.line(M,38,W-M,38);
   doc.setTextColor(212,168,67);doc.setFontSize(17);doc.setFont('helvetica','bold');
   doc.text('ORDEN DE PRESENTACION',W/2,14,{align:'center'});
   doc.setTextColor(200,180,140);doc.setFontSize(9);doc.setFont('helvetica','normal');
   doc.text('Sorteo de Triunfo, Gloria y Esfuerzo',W/2,22,{align:'center'});
-  const n=new Date();doc.setTextColor(140,120,90);doc.setFontSize(6.5);
+  var n=new Date();doc.setTextColor(140,120,90);doc.setFontSize(6.5);
   doc.text('Fecha: '+n.toLocaleDateString('es-ES',{weekday:'long',year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'}),W/2,32,{align:'center'});
-  let y=48;doc.setFillColor(250,247,240);doc.setDrawColor(212,168,67);doc.roundedRect(M,y,W-M*2,14,2,2,'FD');
+  var y=48;doc.setFillColor(250,247,240);doc.setDrawColor(212,168,67);doc.roundedRect(M,y,W-M*2,14,2,2,'FD');
   doc.setTextColor(90,70,40);doc.setFontSize(7.5);doc.setFont('helvetica','bold');
   doc.text('Fecha 1: '+c.f1+' | '+f1.length+' premiados',M+4,y+6);
   doc.text('Fecha 2: '+c.f2+' | '+f2.length+' premiados',M+4,y+12);
@@ -677,24 +559,41 @@ function epdf(){
     if(y>250){doc.addPage();y=18}
     doc.setTextColor(212,168,67);doc.setFontSize(10);doc.setFont('helvetica','bold');
     doc.text('FECHA '+fn+' - '+fs,M,y);
-    doc.autoTable({startY:y+4,head:[['#','Nombre / Grupo','Tipo','Tiempo','Orden']],
-      body:gs.map((g,i)=>[`${i+1}`,g.p.n,g.p.t==='grupo'?'Grupo':'Individual',c.tp+' min',g.lb]),
-      theme:'plain',headStyles:{fillColor:[12,8,4],textColor:[212,168,67],fontStyle:'bold',fontSize:7.5,halign:'center',cellPadding:3},
-      bodyStyles:{fontSize:7.5,cellPadding:3.5,textColor:[35,30,25]},
-      columnStyles:{0:{halign:'center',cellWidth:10},1:{fontStyle:'bold'},2:{halign:'center',cellWidth:26},3:{halign:'center',cellWidth:20},4:{halign:'center',fontStyle:'italic'}},
-      alternateRowStyles:{fillColor:[250,247,240]},margin:{left:M,right:M}});
+    var body=[];for(var i=0;i<gs.length;i++)body.push([''+(i+1),gs[i].p.n,gs[i].p.t==='grupo'?'Grupo':'Individual',c.tp+' min',gs[i].lb]);
+    doc.autoTable({startY:y+4,head:[['#','Nombre / Grupo','Tipo','Tiempo','Orden']],body:body,theme:'plain',headStyles:{fillColor:[12,8,4],textColor:[212,168,67],fontStyle:'bold',fontSize:7.5,halign:'center',cellPadding:3},bodyStyles:{fontSize:7.5,cellPadding:3.5,textColor:[35,30,25]},columnStyles:{0:{halign:'center',cellWidth:10},1:{fontStyle:'bold'},2:{halign:'center',cellWidth:26},3:{halign:'center',cellWidth:20},4:{halign:'center',fontStyle:'italic'}},alternateRowStyles:{fillColor:[250,247,240]},margin:{left:M,right:M}});
     y=doc.lastAutoTable.finalY+8;
   }
   if(f1.length>0)mt(f1,1,c.f1);
   if(f2.length>0)mt(f2,2,c.f2);
-  for(let i=1;i<=doc.internal.pages.length;i++){doc.setPage(i);const by=doc.internal.pageSize.getHeight()-10;doc.setDrawColor(212,168,67);doc.setLineWidth(0.5);doc.line(M,by-4,W-M,by-4);doc.setTextColor(130,115,85);doc.setFontSize(6);doc.text('Docente: Mg Mario Quiroz | Curso: Semi\u00f3tica de la Imagen 2026 | Sorteo de Triunfo y Gloria',W/2,by,{align:'center'});}
+  for(var i=1;i<=doc.internal.pages.length;i++){doc.setPage(i);var by=doc.internal.pageSize.getHeight()-10;doc.setDrawColor(212,168,67);doc.setLineWidth(0.5);doc.line(M,by-4,W-M,by-4);doc.setTextColor(130,115,85);doc.setFontSize(6);doc.text('Docente: Mg Mario Quiroz | Curso: Semiótica de la Imagen 2026 | Sorteo de Triunfo y Gloria',W/2,by,{align:'center'});}
   doc.save('sorteo-presentacion-'+new Date().toISOString().split('T')[0]+'.pdf');
 }
 
-// ═══════════════════════════════════════════════════
-//  INIT
-// ═══════════════════════════════════════════════════
-mkp();rdr();
+bindActionDelegates();
+function updateFallbackControls(){
+  var box=document.getElementById('fallback-controls');
+  var br=document.getElementById('fallback-reveal');
+  var bn=document.getElementById('fallback-next');
+  var b2=document.getElementById('fallback-next-2');
+  if(!box||!br||!bn||!b2)return;
+  if(S.scr!=='rev'){box.style.display='none';return}
+  box.style.display='flex';
+  br.style.display=S.irv?'none':'inline-flex';
+  bn.style.display=S.irv?'inline-flex':'none';
+  b2.style.display=S.irv?'inline-flex':'none';
+  bn.textContent='PRIMERA FECHA';
+  b2.textContent='SEGUNDA FECHA';
+}
+function bindFallbackControls(){
+  var br=document.getElementById('fallback-reveal');
+  var bn=document.getElementById('fallback-next');
+  var b2=document.getElementById('fallback-next-2');
+  if(br)br.onclick=function(ev){ev.preventDefault();try{rv()}catch(e){console.error(e)}};
+  if(bn)bn.onclick=function(ev){ev.preventDefault();try{nx()}catch(e){console.error(e)}};
+  if(b2)b2.onclick=function(ev){ev.preventDefault();try{nx()}catch(e){console.error(e)}};
+}
+
+mkp();bindFallbackControls();rdr();
 </script>
 </body>
 </html>
